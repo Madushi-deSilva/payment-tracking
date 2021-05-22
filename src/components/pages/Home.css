@@ -1,0 +1,19 @@
+/* .homeDiv {
+  margin-left: 10px;
+  width: 80%;
+  background-color: yellow;
+  margin: 0px;
+} */
+
+.btnView {
+  margin-right: 10px;
+}
+
+@media screen and (max-width: 600px) {
+  .homeDiv {
+    width: auto;
+  }
+  .btnView {
+    margin-bottom: 10px;
+  }
+}

@@ -1,0 +1,29 @@
+.signupContainer {
+  padding: 4rem 2rem;
+  border-radius: 0.3rem;
+}
+
+.btn-primary.custom-btn1 {
+  background-color: #d453ce;
+  border: none;
+  width: 200px;
+  font-size: 18px;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+.btn-primary.custom-btn2 {
+  background-color: #53d4a9;
+  border: none;
+  width: 200px;
+  font-size: 18px;
+  border-radius: 5px;
+}
+@media screen and (max-width: 600px) {
+  .btn-primary.custom-btn1 {
+    margin-right: 0px;
+    margin-bottom: 10px;
+  }
+}
+.editContainer {
+  padding: 4rem 2rem;
+}
