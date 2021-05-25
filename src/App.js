@@ -13,6 +13,7 @@ import OverduePayments from './components/pages/OverduePayments';
 import ReceivedPayments from './components/pages/ReceivedPayments';
 import Reports from './components/pages/Reports';
 import EditDuepayment from './components/pages/EditDuepayment';
+import EditOverduepayment from './components/pages/EditOverduepayment';
 // import Sidebar from './components/Sidebar';
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
           <Route path='/due-payments' component={DuePayements}/>
           <Route path='/edit-due' component={EditDuepayment}/>
           <Route path='/overdue-payments' component={OverduePayments}/>
+          <Route path='/edit-overdue' component={EditOverduepayment}/>
           <Route path='/received-payments' component={ReceivedPayments}/>
           <Route path='/reports' component={Reports}/>
           <Route path='/edit-user' component={Edituser}/> 

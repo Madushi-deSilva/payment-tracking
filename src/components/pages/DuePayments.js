@@ -22,6 +22,22 @@ class DuePayments extends Component {
                             <h1 style={{fontFamily:'serif', padding:'10px'}}>DUE PAYMENTS</h1>
                         </div>
                         <div className="row" style={{margin:'10px'}}>
+                            <div className="col">
+                            <div className="form-group row formGroup">
+                                    <label for="name" className="col-6 col-md-6 col-xl-6 " >Filtered By</label>
+                                    <input type="date" className="form-control form-control-sm col-6 col-md-6 col-xl-6" id="dueDate"
+                                        name="dueDate" required/>
+                                </div> 
+                            </div>
+                            <div className="col">
+                                <div className="row form-group mx-3 formGroup">
+                                    <Link>
+                                        <button name="send" value="send" type="submit" className="btn btn-success ml-1">Send Notification</button>
+                                    </Link>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="row" style={{margin:'10px'}}>
                             <Table responsive>
                                 <thead style={{backgroundColor:'pink', borderTop:'2px solid black'}}> 
                                     <tr>
@@ -32,6 +48,7 @@ class DuePayments extends Component {
                                         <th>Company Email</th>
                                         <th>Amount</th>
                                         <th>Collected</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -42,6 +59,7 @@ class DuePayments extends Component {
                                         <td>011-1832811</td>
                                         <td>jkh@gmail.com</td>
                                         <td>30,000.00</td>
+                                        <td><input type="checkbox" id="" name="" style={{width:'20px', height:'20px'}}/></td>
                                         <td>
                                             <Link to="/edit-due">
                                                 <button name="view" value="view" type="submit" className="btn btn-primary ml-1 btnView">VIEW</button>
@@ -58,6 +76,7 @@ class DuePayments extends Component {
                                         <td>011-1832811</td>
                                         <td>jkh@gmail.com</td>
                                         <td>20,000.00</td>
+                                        <td><input type="checkbox" id="" name="" style={{width:'20px', height:'20px'}}/></td>
                                         <td>
                                             <Link to="/edit-due">
                                                 <button name="view" value="view" type="submit" className="btn btn-primary ml-1 btnView">VIEW</button>
@@ -74,6 +93,7 @@ class DuePayments extends Component {
                                         <td>011-1832811</td>
                                         <td>jkh@gmail.com</td>
                                         <td>23,000.00</td>
+                                        <td><input type="checkbox" id="" name="" style={{width:'20px', height:'20px'}}/></td>
                                         <td>
                                             <Link to="/edit-due">
                                                 <button name="view" value="view" type="submit" className="btn btn-primary ml-1 btnView">VIEW</button>
