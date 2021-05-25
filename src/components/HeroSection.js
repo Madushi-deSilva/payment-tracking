@@ -24,14 +24,14 @@ class HeroSection extends Component {
                             </span>
                         </div>
                         <form className="mt-3 loginForm">
-                            <div className="form-group row mx-3">
-                                <label for="name" className="col-4 col-md-4 col-xl-4 col-sm-4 col-lg-4 text-light">USERNAME</label>
-                                <input type="text" className="form-control form-control-sm col-8 col-md-8 col-xl-8 col-sm-8 col-lg-8" id="username" name="username"
-                                    placeholder="Username"/>
+                        <div class="form-group row mx-3">
+                                <label for="name" class="col-12 col-md-4 col-xl-4 text-light">USERNAME</label>
+                                <input type="text" class="form-control form-control-sm col-12 col-md-8 col-xl-8" id="username"
+                                    name="username" placeholder="Username"/>
                             </div>
                             <div className="form-group row mx-3">
-                                <label for="name" className="col-4 col-md-4 col-xl-4 col-sm-4 col-lg-4 text-light">PASSWORD</label>
-                                <input type="password" className="form-control form-control-sm col-8 col-md-8 col-xl-8 col-sm-8 col-lg-8" id="password" name="password"
+                                <label for="name" className="col-12 col-md-4 col-xl-4 text-light">PASSWORD</label>
+                                <input type="password" className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="password" name="password"
                                     placeholder="Password"/>
                             </div>
                             <div className="row form-group mx-3 text-center">

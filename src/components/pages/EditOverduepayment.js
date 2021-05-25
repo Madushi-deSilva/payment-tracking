@@ -4,14 +4,14 @@ import { Link } from 'react-router-dom'
 import Homenav from '../Homenav';
 import './EditPayments.css'
 
-class EditDuepayment extends Component {
+class EditOverduepayment extends Component {
     render() {
         return ( 
             <div>
                 {/* ---------home navigation componenet---------- */}
                 <Homenav/>
                 <div className="row" style={{maxWidth:'100%'}}>
-                    {/* ---------------edit duepayments------------ */}
+                    {/* ---------------edit overduepayments------------ */}
 
                     <div className="homeDiv" >
                 <div className="container  bg-white shadow mt-3 col-9 editContainer">
@@ -19,7 +19,7 @@ class EditDuepayment extends Component {
                     <div className="card-header bg-white">
                         <div className="row">
                             <i className="fas fa-user mx-2 my-auto fa-2x" style={{width:'auto'}}></i>
-                            <h4 className="ml-2 my-auto" style={{width:'auto'}}>Edit Due Payment</h4>
+                            <h5 className="ml-2 my-auto" style={{width:'auto'}}>Edit Overdue Payment</h5>
                         </div>
                     </div>
                     <div className="card-body">
@@ -29,9 +29,9 @@ class EditDuepayment extends Component {
                             <div className="col colunm">
 
                                 <div className="form-group row formGroup ">
-                                    <label for="name" className="col-12 col-md-4 col-xl-4">Due ID</label>
-                                    <input type="text" className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="dueID"
-                                        name="dueID"required/>
+                                    <label for="name" className="col-12 col-md-4 col-xl-4">Overdue ID</label>
+                                    <input type="text" className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="overdueID"
+                                        name="overdueID"required/>
                                 </div>
 
                                 <div className="form-group row formGroup">
@@ -91,17 +91,12 @@ class EditDuepayment extends Component {
                                     <label className="lblCheck form-control form-control-sm col-12 col-md-8 col-xl-8">
                                         <div className="form-check">
                                             <label className="form-check-label" for="radio1">
-                                                <input type="radio" className="form-check-input" id="radio1" name="optradio" value="option1" checked/>Ready for payment
+                                                <input type="radio" className="form-check-input" id="radio1" name="optradio" value="option1" checked/>Replied
                                             </label>
                                         </div>
                                         <div className="form-check">
                                             <label className="form-check-label" for="radio2">
                                                 <input type="radio" className="form-check-input" id="radio2" name="optradio" value="option2"/>Not replied
-                                            </label>
-                                        </div>
-                                        <div className="form-check">
-                                            <label className="form-check-label" for="radio3">
-                                                <input type="radio" className="form-check-input" id="radio3" name="optradio" value="option3"/>Request to extend
                                             </label>
                                         </div>
                                     </label>
@@ -113,7 +108,7 @@ class EditDuepayment extends Component {
                                 <Link to="/">
                                     <button name="View" value="View" type="submit" className="btn btn-primary custom-btn3 ml-1">VIEW CLIENT</button>
                                 </Link>
-                                <Link to="/due-payments">
+                                <Link to="/overdue-payments">
                                     <button name="Update" value="Update" type="submit" className="btn btn-primary custom-btn4 ml-1">UPDATE</button>
                                 </Link>
                                 <button name="Cancel" value="Cancel" type="submit" className="btn btn-primary custom-btn5 ml-1">CANCEL</button>
@@ -131,4 +126,4 @@ class EditDuepayment extends Component {
     }
 }
  
-export default EditDuepayment;
+export default EditOverduepayment;
