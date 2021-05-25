@@ -12,26 +12,22 @@ class Homenav extends Component {
     render() {
         return (
             <div className="row" style={{margin:'0px'}}>
-                <Nav style={{backgroundColor: 'rgb(28, 27, 27)'}}>
-                    <NavMenu>
-                        <img className='navbar-brand col' src='/images/geoid1.png' style={{width:'200px', height:'50px', alt:"logo"}}/>
-                        <NavLink to='/events' activeStyle style={{color:'white'}}> Events</NavLink>
-                    </NavMenu>
-                    <div class="dropdown">
-                        {/* <span className="fa-stack fa-2x mx-auto my-3">
-                                <i className="fas fa-circle fa-stack-2x"></i>
-                                <i className="fas fa-user fa-stack-1x fa-inverse"></i>
-                        </span> */}
-                        <button class="dropbtn">Account Officer 
-                        <i class="fa fa-caret-down"></i>
-                        </button>
-                        <div class="dropdown-content">
-                        <a href="edit-user">Edit Profile</a>
-                        <a href="#">Log out</a>
-                        </div>
-                    </div> 
-                </Nav>
-            </div>
+                    <Nav style={{backgroundColor: 'rgb(28, 27, 27)'}}>
+                        <NavMenu>
+                            <img className='navbar-brand col' src='/images/geoid1.png' style={{width:'200px', height:'50px', alt:"logo"}}/>
+                            <NavLink to='/events' activeStyle style={{color:'white'}}> Events</NavLink>
+                        </NavMenu>
+                        <div class="dropdown">
+                            <button class="dropbtn">Account Officer 
+                            <i class="fa fa-caret-down"></i>
+                            </button>
+                            <div class="dropdown-content">
+                            <a href="edit-user">Edit Profile</a>
+                            <a href="#">Log out</a>
+                            </div>
+                        </div> 
+                    </Nav>
+                </div>
         );
     }
 }

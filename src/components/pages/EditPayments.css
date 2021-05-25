@@ -1,10 +1,5 @@
 .editContainer {
   border-radius: 0.3rem;
-  /* padding: 4rem 2rem; */
-}
-.editCard {
-  margin-top: -20px;
-  margin-bottom: -30px;
 }
 .lblCheck {
   height: auto;
@@ -15,7 +10,7 @@
 .btn-primary.custom-btn3 {
   background-color: #2bd90f;
   border: none;
-  width: 150px;
+  width: 200px;
   font-size: 18px;
   border-radius: 5px;
   margin-right: 10px;
@@ -23,7 +18,7 @@
 .btn-primary.custom-btn4 {
   background-color: #6835ff;
   border: none;
-  width: 150px;
+  width: 200px;
   font-size: 18px;
   border-radius: 5px;
   margin-right: 10px;
@@ -31,7 +26,7 @@
 .btn-primary.custom-btn5 {
   background-color: #ff7600;
   border: none;
-  width: 150px;
+  width: 200px;
   font-size: 18px;
   border-radius: 5px;
 }
@@ -44,9 +39,6 @@
   .homeDiv {
     width: auto;
   }
-  .editContainer {
-    margin-bottom: 10px;
-  }
   .btn-primary.custom-btn3,
   .btn-primary.custom-btn4 {
     margin-bottom: 10px;
@@ -58,5 +50,6 @@
   .column {
     width: 100%;
     display: block;
+    margin-bottom: 20px;
   }
 }
