@@ -14,6 +14,7 @@ import ReceivedPayments from './components/pages/ReceivedPayments';
 import Reports from './components/pages/Reports';
 import EditDuepayment from './components/pages/EditDuepayment';
 import EditOverduepayment from './components/pages/EditOverduepayment';
+import EditClient from './components/pages/EditClient';
 // import Sidebar from './components/Sidebar';
 
 function App() {
@@ -23,7 +24,8 @@ function App() {
         <Switch>
           {/* <Route path='/' exact component={CreditCollector}/> */}
           <Route path='/home-main' component={Home}/>
-          <Route path='/clients' component={Clients}/>  
+          <Route path='/clients' component={Clients}/>
+          <Route path='/edit-client' component={EditClient}/>  
           <Route path='/' exact component={Navbar}/>
           <Route path='/sign-up' component={Signup} />
           
@@ -43,3 +45,4 @@ function App() {
 }
 
 export default App;
+

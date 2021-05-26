@@ -7,7 +7,7 @@ import {
     CDBSidebarMenu,
     CDBSidebarMenuItem,
   } from 'cdbreact';
-// import '../App.css'
+import '../App.css'
 import './pages/Home.css';
 
 
@@ -16,7 +16,7 @@ class Sidebar extends Component {
         
         return ( 
             // -------sidebar------- 
-            <div style={{ display: 'flex', height: '88vh', overflow: 'scroll initial', marginLeft:'0px'}} className="col-2">
+            <div className="col-2 sidebarComponent">
             <CDBSidebar textColor="#fff" backgroundColor="#333" >
                 <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
                     <a href="/" className="text-decoration-none" style={{ color: 'inherit' }}>

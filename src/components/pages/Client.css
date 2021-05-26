@@ -1,0 +1,13 @@
+@media screen and (max-width: 600px) {
+  h4 {
+    text-align: left;
+  }
+
+  .lblClient {
+    text-align: justify;
+  }
+  .btnSubmit,
+  .btnCancel {
+    margin-left: -30px;
+  }
+}

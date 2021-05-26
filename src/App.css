@@ -56,6 +56,13 @@
   display: block;
 }
 
+.sidebarComponent {
+  display: flex;
+  height: 88vh;
+  overflow: scroll initial;
+  margin-left: 0px;
+}
+
 @media screen and (max-width: 600px) {
   .dropdown .dropbtn {
     display: none;
@@ -77,5 +84,8 @@
     display: block;
     width: 100%;
     text-align: left;
+  }
+  .sidebarComponent {
+    height: 140vh;
   }
 }

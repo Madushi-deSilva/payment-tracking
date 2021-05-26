@@ -1,70 +1,189 @@
-import React, {Component} from 'react';
-// import '../../App.css'
-import {Tabs, Tab, TabContent, TabPane,Nav} from 'react-bootstrap'
-import {Link} from 'react-router-dom'
-import { CDBNav, CDBTabLink, CDBTabContent, CDBTabPane, CDBContainer } from "cdbreact";
+import React, {useState} from 'react';
+import { Link } from 'react-router-dom'
+import '../../App.css'
 import './Home.css'
+import Table from 'react-bootstrap/Table'
 import Homenav from '../Homenav';
 import Sidebar from '../Sidebar'
-// import Middle from '../Middle';
 
-class Home extends Component {
-    render() {
-        return ( 
-            <div>
-                <Homenav/>
-                <div className="row" style={{maxWidth:'100%'}}>
-                    <Sidebar/>
-                    <div className="homeDiv col-9" style={{height:'88vh',marginLeft:'20px'}}>
-                        <div className="row">
-                            <h1>Hiiii</h1>
+function Home(){
+
+    const [toggleState, setToggleState] = useState(1);
+
+    const toggleTab = (index) => {
+        setToggleState(index);
+    };
+
+    return ( 
+        <div>
+
+            {/* ----------navigation bar inserted---------------- */}
+            <Homenav/>
+            <div className="row" style={{maxWidth:'100%'}}>
+
+                {/* ----------sidebar inserted---------------- */}
+                <Sidebar/>
+                {/* ---------------home page------------ */}
+                <div className="homeDiv col-10 text-center" style={{height:'88vh'}}>
+                    <div className="row">
+                            <h1 style={{fontFamily:'serif', padding:'10px'}}>DAILY DUE/ OVERDUE PAYMENTS</h1>
+                    </div>
+                    <div className="row" style={{margin:'10px', marginTop:'20px'}}>
+
+                        {/* ----------tab headings--------------- */}
+                        <div className="bloc-tabs">
+                            <button
+                            className={toggleState === 1 ? "tabs active-tabs" : "tabs"}
+                            onClick={() => toggleTab(1)}
+                            >
+                            <h3>Due Payments</h3>
+                            </button>
+                            <button
+                            className={toggleState === 2 ? "tabs active-tabs" : "tabs"}
+                            onClick={() => toggleTab(2)}
+                            >
+                            <h3>Overdue Payments</h3>
+                            </button>
+                            
                         </div>
-                        <div className="row">
-                            <CDBContainer>
-                            <Nav className="nav-tabs mt-5">
-                                <Link to="#"
-                                // active={this.state.activeItem === "1"}
-                                // onClick={this.toggle("1")}
-                                role="tab"
-                                >
-                                Due Payments
-                                </Link>
 
-                                <Link to="#"
-                                // active={this.state.activeItem === "2"}
-                                // onClick={this.toggle("2")}
-                                role="tab"
-                                >
-                                Overdue Payments
-                                </Link>
-                            </Nav>
-                            <TabContent >
-                                <TabPane tabId="1" role="tabpanel">
-                                <p className="mt-2">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                    Nihil odit magnam minima, soluta doloribus reiciendis
-                                    molestiae placeat unde eos molestias. Quisquam aperiam,
-                                    pariatur. Tempora, placeat ratione porro voluptate odit
-                                    minima.
-                                </p>
-                                </TabPane>
-                                <TabPane tabId="2" role="tabpanel">
-                                <p className="mt-2">
-                                    Quisquam aperiam, pariatur. Tempora, placeat ratione porro
-                                    voluptate odit minima. Lorem ipsum dolor sit amet,
-                                    consectetur adipisicing elit. Nihil odit magnam minima,
-                                    soluta doloribus reiciendis molestiae placeat unde eos
-                                    molestias.
-                                </p>
-                                </TabPane>
-                            </TabContent>
-                            </CDBContainer>
-                        </div> 
+                        {/* ----------tab content---------------- */}
+                        <div className="content-tabs">
+
+                            {/* ----------daily due payments---------------- */}
+                            <div
+                            className={toggleState === 1 ? "content  active-content" : "content"}
+                            >
+                            <Table responsive>
+                                <thead style={{backgroundColor:'pink', borderTop:'2px solid black'}}> 
+                                    <tr>
+                                        <th>Due ID</th>
+                                        <th>Company Name</th>
+                                        <th>Invoice</th>
+                                        <th>Contact Person Name</th>
+                                        <th>Mobile No.</th>
+                                        <th>Company Email</th>
+                                        <th>Amount</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>D001</td>
+                                        <td>John Keels Holdings</td>
+                                        <td>001</td>
+                                        <td>Nihal Perera</td>
+                                        <td>077-3422811</td>
+                                        <td>jkh@gmail.com</td>
+                                        <td>30,000.00</td>
+                                        <td>
+                                            <Link to="/edit-due">
+                                                <button name="view" value="view" type="submit" className="btn btn-primary ml-1">VIEW</button>
+                                            </Link>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>D002</td>
+                                        <td>John Keels Holdings</td>
+                                        <td>002</td>
+                                        <td>Nihal Perera</td>
+                                        <td>077-3422811</td>
+                                        <td>jkh@gmail.com</td>
+                                        <td>20,000.00</td>
+                                        <td>
+                                            <Link to="/edit-due">
+                                                <button name="view" value="view" type="submit" className="btn btn-primary ml-1">VIEW</button>
+                                            </Link>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>D003</td>
+                                        <td>John Keels Holdings</td>
+                                        <td>005</td>
+                                        <td>Nihal Perera</td>
+                                        <td>077-3422811</td>
+                                        <td>jkh@gmail.com</td>
+                                        <td>23,000.00</td>
+                                        <td>
+                                            <Link to="/edit-due">
+                                                <button name="view" value="view" type="submit" className="btn btn-primary ml-1">VIEW</button>
+                                            </Link>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </Table>
+                            </div>
+
+                            {/* ----------daily overdue payments---------------- */}
+                            <div
+                            className={toggleState === 2 ? "content  active-content" : "content"}
+                            >
+                            <Table responsive>
+                                <thead style={{backgroundColor:'pink', borderTop:'2px solid black'}}> 
+                                    <tr>
+                                        <th>Overdue ID</th>
+                                        <th>Company Name</th>
+                                        <th>Invoice</th>
+                                        <th>Contact Person Name</th>
+                                        <th>Mobile No.</th>
+                                        <th>Company Email</th>
+                                        <th>Amount</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>OD001</td>
+                                        <td>John Keels Holdings</td>
+                                        <td>001</td>
+                                        <td>Nihal Perera</td>
+                                        <td>077-3422811</td>
+                                        <td>jkh@gmail.com</td>
+                                        <td>30,000.00</td>
+                                        <td>
+                                            <Link to="/edit-overdue">
+                                                <button name="view" value="view" type="submit" className="btn btn-primary ml-1 ">VIEW</button>
+                                            </Link>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>OD002</td>
+                                        <td>John Keels Holdings</td>
+                                        <td>002</td>
+                                        <td>Nihal Perera</td>
+                                        <td>077-3422811</td>
+                                        <td>jkh@gmail.com</td>
+                                        <td>20,000.00</td>
+                                        <td>
+                                            <Link to="/edit-overdue">
+                                                <button name="view" value="view" type="submit" className="btn btn-primary ml-1 ">VIEW</button>
+                                            </Link>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>OD003</td>
+                                        <td>John Keels Holdings</td>
+                                        <td>005</td>
+                                        <td>Nihal Perera</td>
+                                        <td>077-3422811</td>
+                                        <td>jkh@gmail.com</td>
+                                        <td>23,000.00</td>
+                                        <td>
+                                            <Link to="/edit-overdue">
+                                                <button name="view" value="view" type="submit" className="btn btn-primary ml-1 ">VIEW</button>
+                                            </Link>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </Table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-         );
-    }
+        </div>
+    );
 }
+
  
 export default Home;
