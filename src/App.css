@@ -8,6 +8,9 @@
   color: #3ea031;
   background-color: #333;
 }
+/* .react-datepicker-wrapper > .row {
+  width: 75%;
+} */
 .dropdown {
   float: left;
   overflow: hidden;
@@ -58,7 +61,7 @@
 
 .sidebarComponent {
   display: flex;
-  height: 88vh;
+  height: 120vh;
   overflow: scroll initial;
   margin-left: 0px;
 }

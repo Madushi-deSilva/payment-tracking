@@ -1,28 +1,21 @@
 import React from 'react';
-import {
-Nav,
-// NavLink,
-NavMenu,
-NavBtn,
-NavBtnLink,
-} from './NavbarElements';
-import '../App.css'
+// import '../App.css'
+import { Link } from 'react-router-dom'
 import HeroSection from './HeroSection'
 
 const Navbar = () => {
 return (
 	<>
-        <Nav style={{backgroundColor: 'rgb(28, 27, 27)'}}>
-            <NavMenu>
+        <nav className="navbar navbar-expand-lg navbar-fixed background-color-purple" id="topnav" style={{backgroundColor:'black', color:'white'}}>
+            <div className="mx-auto" style={{display:'flex'}}>
                 <img className='navbar-brand col' src='/images/geoid1.png' style={{width:'300px', height:'60px', alt:"logo"}}/>
-                {/* <NavLink to='/events' activeStyle style={{color:'white'}}>
-                    Events
-                </NavLink> */}
-            </NavMenu>
-            <NavBtn>
-                <NavBtnLink to='/sign-up' style={{backgroundColor: 'blue', color:'white', textDecoration:'none'}}>Sign Up</NavBtnLink>
-            </NavBtn>
-        </Nav>
+            </div>
+            <Link to='/sign-up' class="mx-auto">
+                <button className="btn btn-primary">
+                    SIGN UP
+                </button>
+            </Link>
+        </nav>
         {/* load login form */}
         <HeroSection/>
 	</>

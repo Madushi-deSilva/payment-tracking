@@ -1,18 +1,20 @@
-import React, {Component} from 'react';
+import React, { Component } from "react";
 import { Link } from 'react-router-dom'
-// import '../../App.css
+// import '../../App.css'
 import Homenav from '../Homenav';
 import Sidebar from '../Sidebar'
 import './Home.css';
 
 class Reports extends Component {
     render() {
+    
+    
         return ( 
             <div>
                 <Homenav/>
                 <div className="row" style={{maxWidth:'100%'}}>
                     <Sidebar/>
-                    {/* ---------------received payments------------ */}
+                    {/* ---------------reports page------------ */}
                     
                     <div className="homeDiv col-10 text-center" style={{height:'88vh'}}>
                         <div className="row">
@@ -41,6 +43,7 @@ class Reports extends Component {
                                     <label for="name" className="col-12 col-md-4 col-xl-4 lblRight">To</label>
                                     <input type="date" className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="to"
                                         name="to" required/>
+         
                                 </div>
                             </div>
                         

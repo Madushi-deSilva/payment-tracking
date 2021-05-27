@@ -11,7 +11,7 @@ class HeroSection extends Component {
 
                 {/* login form */}
                 <div className="card col-12 col-md-6 col-lg-5 mx-auto my-auto shadow loginForm" 
-                    style={{backgroundColor:'rgba(27, 28, 28,0.5)', border: 'solid #53cdd4 5px', borderRadius:'30px'}}>
+                    style={{backgroundColor:'rgba(27, 28, 28, 0.5)', border: 'solid #53cdd4 5px', borderRadius:'30px'}}>
                     <div className="card-body">
                         <div className="row my-3" style={{textAlign:'center'}}>
                             <h3 className="mx-auto text-light">WELCOME</h3>
@@ -24,7 +24,14 @@ class HeroSection extends Component {
                             </span>
                         </div>
                         <form className="mt-3 loginForm">
-                        <div class="form-group row mx-3">
+                            <div class="form-group row mx-3">
+                                <label for="name" class="col-12 col-md-4 col-xl-4 text-light">JOB ROLE</label>
+                                <select className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="job_role">
+                                        <option value="accountOfficer">Account Officer</option>
+                                        <option value="creditCollector">Credit Collector</option>
+                                </select>
+                            </div>
+                            <div class="form-group row mx-3">
                                 <label for="name" class="col-12 col-md-4 col-xl-4 text-light">USERNAME</label>
                                 <input type="text" class="form-control form-control-sm col-12 col-md-8 col-xl-8" id="username"
                                     name="username" placeholder="Username"/>
