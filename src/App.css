@@ -91,4 +91,8 @@
   .sidebarComponent {
     height: 140vh;
   }
+  .homenavDropdown {
+    margin-top: 10px;
+    margin-left: 250px;
+  }
 }

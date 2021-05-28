@@ -1,4 +1,8 @@
-import React, {Component} from 'react';
+import React from 'react';
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import { Link } from 'react-router-dom'
 // import '../../App.css
 import Table from 'react-bootstrap/Table'
@@ -6,8 +10,17 @@ import Homenav from '../Homenav'
 import Sidebar from '../Sidebar'
 import './Home.css';
 
-class DuePayments extends Component {
-    render() {
+function DuePayments() {
+    const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+    
         return ( 
             <div>
                 {/* ---------home navigation componenet---------- */}
@@ -64,9 +77,23 @@ class DuePayments extends Component {
                                             <Link to="/edit-due">
                                                 <button name="view" value="view" type="submit" className="btn btn-primary ml-1 btnView">VIEW</button>
                                             </Link>
-                                            <Link to="/home-main">
-                                                <button name="delete" value="delete" type="submit" className="btn btn-danger ml-1">DELETE</button>
-                                            </Link>
+                                            <button onClick={handleClickOpen} name="delete" value="delete" type="submit" className="btn btn-danger ml-1">DELETE</button>
+                                            <Dialog
+                                                open={open}
+                                                onClose={handleClose}
+                                                aria-labelledby="alert-dialog-title"
+                                                aria-describedby="alert-dialog-description"
+                                            >
+                                                <DialogTitle id="alert-dialog-title">{"Do you want to delete?"}</DialogTitle>
+                                                <DialogActions>
+                                                <Button onClick={handleClose} color="primary" autoFocus>
+                                                    YES
+                                                </Button>
+                                                <Button onClick={handleClose} color="primary">
+                                                    NO
+                                                </Button>
+                                                </DialogActions>
+                                            </Dialog>
                                         </td>
                                     </tr>
                                     <tr>
@@ -81,9 +108,23 @@ class DuePayments extends Component {
                                             <Link to="/edit-due">
                                                 <button name="view" value="view" type="submit" className="btn btn-primary ml-1 btnView">VIEW</button>
                                             </Link>
-                                            <Link to="/home-main">
-                                                <button name="delete" value="delete" type="submit" className="btn btn-danger ml-1">DELETE</button>
-                                            </Link>
+                                            <button onClick={handleClickOpen} name="delete" value="delete" type="submit" className="btn btn-danger ml-1">DELETE</button>
+                                            <Dialog
+                                                open={open}
+                                                onClose={handleClose}
+                                                aria-labelledby="alert-dialog-title"
+                                                aria-describedby="alert-dialog-description"
+                                            >
+                                                <DialogTitle id="alert-dialog-title">{"Do you want to delete?"}</DialogTitle>
+                                                <DialogActions>
+                                                <Button onClick={handleClose} color="primary" autoFocus>
+                                                    YES
+                                                </Button>
+                                                <Button onClick={handleClose} color="primary">
+                                                    NO
+                                                </Button>
+                                                </DialogActions>
+                                            </Dialog>
                                         </td>
                                     </tr>
                                     <tr>
@@ -98,9 +139,23 @@ class DuePayments extends Component {
                                             <Link to="/edit-due">
                                                 <button name="view" value="view" type="submit" className="btn btn-primary ml-1 btnView">VIEW</button>
                                             </Link>
-                                            <Link to="/home-main">
-                                                <button name="delete" value="delete" type="submit" className="btn btn-danger ml-1">DELETE</button>
-                                            </Link>
+                                            <button onClick={handleClickOpen} name="delete" value="delete" type="submit" className="btn btn-danger ml-1">DELETE</button>
+                                            <Dialog
+                                                open={open}
+                                                onClose={handleClose}
+                                                aria-labelledby="alert-dialog-title"
+                                                aria-describedby="alert-dialog-description"
+                                            >
+                                                <DialogTitle id="alert-dialog-title">{"Do you want to delete?"}</DialogTitle>
+                                                <DialogActions>
+                                                <Button onClick={handleClose} color="primary" autoFocus>
+                                                    YES
+                                                </Button>
+                                                <Button onClick={handleClose} color="primary">
+                                                    NO
+                                                </Button>
+                                                </DialogActions>
+                                            </Dialog>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -110,7 +165,7 @@ class DuePayments extends Component {
                 </div>
             </div>
          );
-    }
+    
 }
  
 export default DuePayments;

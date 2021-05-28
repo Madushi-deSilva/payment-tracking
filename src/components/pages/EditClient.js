@@ -179,10 +179,13 @@ function EditClient() {
                                         </div>
                                     </div>
 
-                                    <div className="row form-group mx-3 formGroup">
+                                    <div className="row form-group mt-2 mx-3 formGroup">
                                         <div className='col text-center'>
                                         <Link>
-                                            <button name="Submit" value="Update" type="submit" className="btn btn-primary custom-btn4 btnSubmit">SUBMIT</button>
+                                            <button name="Submit" value="Update" type="submit" className="btn btn-primary custom-btn4 btnUpdate">UPDATE</button>
+                                        </Link>
+                                        <Link>
+                                            <button name="Submit" value="Update" type="submit" className="btn btn-primary custom-btn3 btnAdd" style={{width:'auto'}}>ADD NEW PAYMENT</button>
                                         </Link>
                                         <button name="Cancel" value="Cancel" type="submit" className="btn btn-primary custom-btn5 btnCancel">CANCEL</button>
                                         </div>
