@@ -129,7 +129,7 @@ function Client(){
                                 </Table>
                             </div>
 
-                            {/* ----------add new payments---------------- */}
+                            {/* ----------add new client---------------- */}
                             <div
                             className={toggleState === 2 ? "content  active-content" : "content"}
                             >
