@@ -2,7 +2,7 @@ import React from 'react'
 import './App.css'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
-// import CreditCollector from './components/pages/CreditCollector';
+import CreditCollector from './components/pages/CreditCollector';
 import Navbar from './components/Navbar'
 import Signup from './components/pages/Signup'
 import Edituser from './components/pages/Edituser'
@@ -22,7 +22,7 @@ function App() {
     <>
     <Router>
         <Switch>
-          {/* <Route path='/' exact component={CreditCollector}/> */}
+          <Route path='/credit' exact component={CreditCollector}/>
           <Route path='/home-main' component={Home}/>
           <Route path='/clients' component={Clients}/>
           <Route path='/edit-client' component={EditClient}/>  
@@ -35,7 +35,7 @@ function App() {
           <Route path='/edit-overdue' component={EditOverduepayment}/>
           <Route path='/received-payments' component={ReceivedPayments}/>
           <Route path='/reports' component={Reports}/>
-          <Route path='/edit-user' component={Edituser}/> 
+          <Route path='/edit-user/:id' component={Edituser}/> 
           {/* <Route path='/side-bar' component={Sidebar}/> */}
         </Switch>
     </Router>

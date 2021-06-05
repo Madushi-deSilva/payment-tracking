@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import Axios from 'axios'
 import { Link } from 'react-router-dom'
 import '../../App.css'
 import './Home.css'
@@ -9,11 +10,77 @@ import Sidebar from '../Sidebar'
 
 function Client(){
 
+    // const [ code, setCode] = useState("");
+    const [ company_name, setCompanyName] = useState("");
+    const [ email, setEmail] = useState("");
+    const [ address, setAddress] = useState("");
+    const [ tel_no, setTelNo] = useState(0);
+    const [ payment_mode, setPaymentMode] = useState("");
+    const [ contact_person, setContactPerson] = useState("");
+    const [ personal_email, setPersonalEmail] = useState("");
+    const [ mobile_no, setMobileNo] = useState(0);
+    const [ bank_name, setBankName] = useState("");
+    const [ bank_branch, setBankBranch] = useState("");
+    const [ bank_code, setBankCode] = useState(0);
+    const [ account_no, setAccountNo] = useState();
+
+    const [clientList, setClientList]= useState([]);
+
+    const [ invoice, setInvoice] = useState("");
+    const [ amount, setAmount] = useState("");
+    const [ due_date, setDueDate] = useState(0);
+    const [ note, setNote] = useState("");
+
     const [toggleState, setToggleState] = useState(1);
 
     const toggleTab = (index) => {
         setToggleState(index);
     };
+
+    //add client
+    const addClient = () =>{
+            Axios.post('http://localhost:3001/clients/create', {
+                company_name: company_name,
+                email: email,
+                address: address,
+                tel_no: tel_no,
+                payment_mode: payment_mode,
+                contact_person: contact_person,
+                personal_email: personal_email,
+                mobile_no: mobile_no,
+                bank_name: bank_name,
+                bank_branch: bank_branch,
+                bank_code: bank_code,
+                account_no: account_no,
+            }).then(() => {
+                console.log("success");
+            });
+            Axios.post('http://localhost:3001/duepayments/create', {
+                invoice: invoice,
+                amount: amount,
+                due_date: due_date,
+                note: note,
+            }).then(() => {
+                console.log("success");
+            });
+    };
+
+    //get all clients
+    // const getClients = () => {
+    //     Axios.get('http://localhost:3001/clients/allclients').then((response) => {
+    //       setClientList(response.data);
+    //     });
+    //   };
+
+    useEffect(() => {
+        Axios.get('http://localhost:3001/clients/allclients')
+             .then(response => {
+                 setClientList(response.data)
+             })
+             .catch((error)=>{
+                 console.log(error);
+             })
+    });
 
     return ( 
         <div>
@@ -83,48 +150,24 @@ function Client(){
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    {clientList.map((val,key)=>{
+                                        return(
                                         <tr>
-                                            <td>C001</td>
-                                            <td>John Keels Holdings</td>
-                                            <td>Colombo, Sri Lanka</td>
-                                            <td>011-1832811</td>
-                                            <td>Nihal Perera</td>
-                                            <td>077-3422811</td>
-                                            <td>jkh@gmail.com</td>
+                                            <td>{val.code}</td>
+                                            <td>{val.company_name}</td>
+                                            <td>{val.address}</td>
+                                            <td>{val.tel_no}</td>
+                                            <td>{val.contact_person}</td>
+                                            <td>{val.mobile_no}</td>
+                                            <td>{val.email}</td>
                                             <td>
                                                 <Link to="/edit-client">
                                                     <button name="view" value="view" type="submit" className="btn btn-primary ml-1">VIEW</button>
                                                 </Link>
                                             </td>
-                                        </tr>
-                                        <tr>
-                                            <td>C002</td>
-                                            <td>John Keels Holdings</td>
-                                            <td>Colombo, Sri Lanka</td>
-                                            <td>011-1832811</td>
-                                            <td>Nihal Perera</td>
-                                            <td>077-3422811</td>
-                                            <td>jkh@gmail.com</td>
-                                            <td>
-                                                <Link to="/edit-client">
-                                                    <button name="view" value="view" type="submit" className="btn btn-primary ml-1">VIEW</button>
-                                                </Link>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>C003</td>
-                                            <td>John Keels Holdings</td>
-                                            <td>Colombo, Sri Lanka</td>
-                                            <td>011-1832811</td>
-                                            <td>Nihal Perera</td>
-                                            <td>077-3422811</td>
-                                            <td>jkh@gmail.com</td>
-                                            <td>
-                                                <Link to="/edit-client">
-                                                    <button name="view" value="view" type="submit" className="btn btn-primary ml-1">VIEW</button>
-                                                </Link>
-                                            </td>
-                                        </tr>
+                                        </tr> 
+                                        );
+                                    })} 
                                     </tbody>
                                 </Table>
                             </div>
@@ -136,44 +179,45 @@ function Client(){
                                 <div className="container  bg-white shadow   editContainer">
                                     <div className="card editCard">
                                         <div className="card-body">
-                                            <form className="m-3 row" enctype="multipart/form-data">
+                                            <form className="m-3 row" onSubmit={addClient}>
                                                 <input type="hidden" id="id" name="id" />
 
                                                 <div className="col colunm">
 
-                                                    <div className="form-group row formGroup ">
+                                                    {/* <div className="form-group row formGroup ">
                                                         <label for="name" className="col-12 col-md-4 col-xl-4 lblClient">Code</label>
                                                         <input type="text" className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="code"
-                                                            name="code"required/>
+                                                            name="code"required onChange={(event) => {setCode(event.target.value);}}/>
+                                                    </div> */}
+
+                                                    <div className="form-group row formGroup">
+                                                        <label className="col-12 col-md-4 col-xl-4 lblClient">Company Name</label>
+                                                        <input type="text" className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="company_name"
+                                                            name="companyName" required onChange={(event) => {setCompanyName(event.target.value);}}/>
                                                     </div>
 
                                                     <div className="form-group row formGroup">
-                                                        <label for="name" className="col-12 col-md-4 col-xl-4 lblClient">Company Name</label>
-                                                        <input type="text" className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="companyName"
-                                                            name="companyName" required/>
+                                                        <label className="col-12 col-md-4 col-xl-4 lblClient">Email</label>
+                                                        <input type="email" className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="email"
+                                                            name="email" required onChange={(event) => {setEmail(event.target.value);}}/>
                                                     </div>
 
                                                     <div className="form-group row formGroup">
-                                                        <label for="name" className="col-12 col-md-4 col-xl-4 lblClient">Address</label>
+                                                        <label className="col-12 col-md-4 col-xl-4 lblClient">Address</label>
                                                         <input type="text" className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="address"
-                                                            name="address" required/>
+                                                            name="address" required onChange={(event) => {setAddress(event.target.value);}}/>
                                                     </div>
 
                                                     <div className="form-group row formGroup">
-                                                        <label for="name" className="col-12 col-md-4 col-xl-4 lblClient">Telephone No.</label>
-                                                        <input type="number" className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="telNo"
-                                                            name="telNo" required/>
+                                                        <label className="col-12 col-md-4 col-xl-4 lblClient">Telephone No.</label>
+                                                        <input type="text" className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="tel_no"
+                                                            name="telNo" required onChange={(event) => {setTelNo(event.target.value);}}/>
                                                     </div> 
 
                                                     <div className="form-group row formGroup">
-                                                        <label for="name" className="col-12 col-md-4 col-xl-4 lblClient">Email</label>
-                                                        <input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="email"
-                                                            name="email" required/>
-                                                    </div>
-
-                                                    <div className="form-group row formGroup">
-                                                        <label for="name" className="col-12 col-md-4 col-xl-4 lblClient">Payment Mode</label>
-                                                        <select className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="payment-mode">
+                                                        <label className="col-12 col-md-4 col-xl-4 lblClient">Payment Mode</label>
+                                                        <select className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="payment_mode" onChange={(event) => {setPaymentMode(event.target.value);}}>
+                                                                <option></option>
                                                                 <option value="cash">Cash</option>
                                                                 <option value="cheque">Cheque</option>
                                                         </select>
@@ -181,79 +225,79 @@ function Client(){
 
                                                     <h4 style={{fontFamily:'serif', marginTop:'20px', marginBottom:'20px', color:'grey'}}>Contact Person Details_____</h4>
                                                     <div className="form-group row formGroup">
-                                                        <label for="name" className="col-12 col-md-4 col-xl-4 lblClient">Name</label>
-                                                        <input type="text" className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="name"
-                                                            name="name" required/>
+                                                        <label className="col-12 col-md-4 col-xl-4 lblClient">Name</label>
+                                                        <input type="text" className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="contact_person"
+                                                            name="name" required onChange={(event) => {setContactPerson(event.target.value);}}/>
                                                     </div>
 
                                                     <div className="form-group row formGroup">
-                                                        <label for="name" className="col-12 col-md-4 col-xl-4 lblClient">Mobile No.</label>
-                                                        <input type="number" className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="mobileNo"
-                                                            name="mobileNo" required/>
+                                                        <label className="col-12 col-md-4 col-xl-4 lblClient">Email</label>
+                                                        <input type="email" className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="personal_email"
+                                                            name="personalEmail" required onChange={(event) => {setPersonalEmail(event.target.value);}}/>
+                                                    </div>
+
+                                                    <div className="form-group row formGroup">
+                                                        <label className="col-12 col-md-4 col-xl-4 lblClient">Mobile No.</label>
+                                                        <input type="text" className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="mobile_no"
+                                                            name="mobileNo" required onChange={(event) => {setMobileNo(event.target.value);}}/>
                                                     </div> 
-
-                                                    <div className="form-group row formGroup">
-                                                        <label for="name" className="col-12 col-md-4 col-xl-4 lblClient">Email</label>
-                                                        <input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="personalEmail"
-                                                            name="personalEmail" required/>
-                                                    </div>
                                                 </div>
 
-                                                <div className="col column">
+                                                 <div className="col column">
                                                     <div className="form-group row formGroup">
-                                                        <label for="name" className="col-12 col-md-4 col-xl-4 lblRight">Bank Name</label>
-                                                        <input type="text" className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="bankName"
-                                                            name="bankName" required/>
+                                                        <label className="col-12 col-md-4 col-xl-4 lblRight">Bank Name</label>
+                                                        <input type="text" className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="bank_name"
+                                                            name="bankName" required onChange={(event) => {setBankName(event.target.value);}}/>
                                                     </div>
 
                                                     <div className="form-group row formGroup">
-                                                        <label for="name" className="col-12 col-md-4 col-xl-4 lblRight">Bank code</label>
-                                                        <input type="text" className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="bankCode"
-                                                            name="bankCode" required/>
+                                                        <label className="col-12 col-md-4 col-xl-4 lblRight">Bank Branch</label>
+                                                        <input type="text" className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="bank_branch"
+                                                            name="bankBranch" required onChange={(event) => {setBankBranch(event.target.value);}}/>
                                                     </div>
 
                                                     <div className="form-group row formGroup">
-                                                        <label for="name" className="col-12 col-md-4 col-xl-4 lblRight">Account No.</label>
-                                                        <input type="number" className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="accountNo"
-                                                            name="accountNo" required/>
+                                                        <label className="col-12 col-md-4 col-xl-4 lblRight">Bank code</label>
+                                                        <input type="text" className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="bank_code"
+                                                            name="bankCode" required onChange={(event) => {setBankCode(event.target.value);}}/>
                                                     </div>
 
                                                     <div className="form-group row formGroup">
-                                                        <label for="name" className="col-12 col-md-4 col-xl-4 lblRight">Bank Branch</label>
-                                                        <input type="text" className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="bankBranch"
-                                                            name="bankBranch" required/>
+                                                        <label className="col-12 col-md-4 col-xl-4 lblRight">Account No.</label>
+                                                        <input type="text" className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="account_no"
+                                                            name="accountNo" required onChange={(event) => {setAccountNo(event.target.value);}}/>
                                                     </div>
 
                                                     <div className="form-group row formGroup">
-                                                        <label for="name" className="col-12 col-md-4 col-xl-4  lblRight">Invoice</label>
-                                                        <input type="number" className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="invoice"
-                                                            name="invoice"required/>
+                                                        <label className="col-12 col-md-4 col-xl-4  lblRight">Invoice</label>
+                                                        <input type="text" className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="invoice"
+                                                            name="invoice"required onChange={(event) => {setInvoice(event.target.value);}}/>
                                                     </div>
 
                                                     <div className="form-group row formGroup">
-                                                        <label for="name" className="col-12 col-md-4 col-xl-4 lblRight">Amount</label>
-                                                        <input type="number" className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="amount"
-                                                            name="amount" required/>
+                                                        <label className="col-12 col-md-4 col-xl-4 lblRight">Amount</label>
+                                                        <input type="text" className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="amount"
+                                                            name="amount" required onChange={(event) => {setAmount(event.target.value);}}/>
                                                     </div>
 
                                                     <div className="form-group row formGroup">
-                                                        <label for="name" className="col-12 col-md-4 col-xl-4 lblRight">Due Date</label>
-                                                        <input type="date" className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="dueDate"
-                                                            name="dueDate" required/>
+                                                        <label className="col-12 col-md-4 col-xl-4 lblRight">Due Date</label>
+                                                        <input type="date" className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="due_date"
+                                                            name="dueDate" required onChange={(event) => {setDueDate(event.target.value);}}/>
                                                     </div> 
 
                                                     <div className="form-group row formGroup">
-                                                        <label for="name" className="col-12 col-md-4 col-xl-4 lblRight">Note</label>
-                                                        <textarea type="textarea" rows="3" class="form-control form-control-sm col-12 col-md-8 col-xl-8" id="note"
-                                                            name="note" required></textarea>
+                                                        <label className="col-12 col-md-4 col-xl-4 lblRight">Note</label>
+                                                        <textarea type="textarea" rows="3" className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="note"
+                                                            name="note" required onChange={(event) => {setNote(event.target.value);}}></textarea>
                                                     </div>
                                                 </div>
 
                                                 <div className="row form-group mx-3 formGroup">
                                                     <div className='col text-center'>
-                                                    <Link>
-                                                        <button name="Submit" value="Update" type="submit" className="btn btn-primary custom-btn4 btnSubmit">SUBMIT</button>
-                                                    </Link>
+                                                    {/* <Link to=""> */}
+                                                        <button name="Submit" value="Submit" type="submit" className="btn btn-primary custom-btn4 btnSubmit">SUBMIT</button>
+                                                    {/* </Link> */}
                                                     <button name="Cancel" value="Cancel" type="submit" className="btn btn-primary custom-btn5 btnCancel">CANCEL</button>
                                                     </div>
                                                 </div>

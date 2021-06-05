@@ -29,7 +29,13 @@ video {
   width: 200px;
   font-size: 20px;
   border-radius: 20px;
+  margin-left: 150px;
 }
 .btn-primary.custom-btn:hover {
   background-color: #d453ce;
+}
+@media screen and (max-width: 600px) {
+  .btn-primary.custom-btn {
+    margin-left: 60px;
+  }
 }

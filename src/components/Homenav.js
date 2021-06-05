@@ -53,7 +53,7 @@ function Homenav() {
     <div className="row" style={{ margin: "0px" }}>
       <nav className="navbar navbar-expand-lg navbar-fixed" style={{ backgroundColor: "rgb(28, 27, 27)", color: "white" }}>
         <div className="mx-auto" style={{ display: "flex" }}>
-          <img className='navbar-brand col' src='/images/geoid1.png' style={{width:'300px', height:'60px', alt:"company logo"}}/>
+          <img className='navbar-brand col' src='/images/geoid1.png' style={{width:'300px', height:'60px'}} alt=""/>
         </div>
         <div className="homenavDropdown">
           <Button style={{height:'40px', backgroundColor:'blueviolet'}}
@@ -76,7 +76,7 @@ function Homenav() {
                   onClose={handleClose}
               >
                   <StyledMenuItem>
-                      <Link to="./edit-user">
+                      <Link to="./edit-user/:id">
                           <ListItemText primary="Edit Profile" />
                       </Link>
                   </StyledMenuItem>

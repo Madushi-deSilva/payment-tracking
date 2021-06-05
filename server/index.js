@@ -1,52 +1,39 @@
 const express =  require('express');
+const bodyParser = require('body-parser');
 const app = express();
-const mysql = require('mysql');
+var database = require('./config/database');
 const cors =  require('cors');
+var port =  process.env.PORT || 3001;
 
+//This is to allow our api for cross-origin resource sharing
 app.use(cors());
+
+app.use(bodyParser.urlencoded({extended: true}))
+
+//This is to allow our api for parsing json
 app.use(express.json());
 
-const db = mysql.createConnection({
-    user: 'root',
-    host: 'localhost',
-    password: 'cricket49',
-    database: 'tracker',
+//connect to our database
+database.connect((err) => {
+    if(err) throw err;
 });
 
-app.post(('/create'), (req, res) => {
-    const job_role = req.body.job_role;
-    const name = req.body.name;
-    const username = req.body.username;
-    const password = req.body.password;
-    const conPassword = req.body.conPassword;
-    const conNo = req.body.conNo;
-    const email = req.body.email;
+//Signup routes in the main index.js
+app.use('/signup', [
+    require('./routes/Signup')
+]);
 
-    if(job_role === 'Account Officer'){
-        db.query('INSERT INTO account_officer (job_role, name, username, password, confirm_password, contact_no, email) VALUES (?, ?, ?, ?, ?, ?, ?)', 
-            [job_role, name, username, password, conPassword, conNo, email], (err, result) => {
-                if(err){
-                    console.log(err)
-                }else{
-                    res.send("values inserted")
-                }
-            }
-        );
-    }else{
-        db.query('INSERT INTO credit_collector (job_role, name, username, password, confirm_password, contact_no, email) VALUES (?, ?, ?, ?, ?, ?, ?)', 
-            [job_role, name, username, password, conPassword, conNo, email], (err, result) => {
-                if(err){
-                    console.log(err)
-                }else{
-                    res.send("values inserted")
-                }
-            }
-        );
-    }
+//Client routes in the main index.js
+app.use('/clients', [
+    require('./routes/Client')
+]);
 
-});
+//Due Payments routes in the main index.js
+app.use('/duepayments', [
+    require('./routes/DuePayments')
+]);
 
 
-app.listen(3001, () => {
-    console.log("Server is running on port 3001");
+app.listen(port, () => {
+    console.log(`Listening at http://localhost:${port}`);
 });

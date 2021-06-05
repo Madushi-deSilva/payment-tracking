@@ -1,98 +1,155 @@
-import React, {useState} from 'react'
+import React, {Component} from 'react'
 import Axios from 'axios'
 // import '../../App.css'
 import './Signup.css'
 
-function Signup() { 
-    const [ job_role, setJobRole] = useState("");
-    const [ name, setName] = useState("");
-    const [ username, setUsername] = useState("");
-    const [ password, setPassword] = useState("");
-    const [ conPassword, setConPassword] = useState("");
-    const [ conNo, setConNo] = useState(0);
-    const [ email, setEmail] = useState("");
+class Signup extends Component {
+  constructor(props) {
+    super(props);
+    this.onChangeJobRole = this.onChangeJobRole.bind(this);
+    this.onChangeName = this.onChangeName.bind(this);
+    this.onChangeUsername = this.onChangeUsername.bind(this);
+    this.onChangePassword = this.onChangePassword.bind(this);
+    this.onChangeConPassword = this.onChangeConPassword.bind(this);
+    this.onChangeConNo = this.onChangeConNo.bind(this);
+    this.onChangeEmail = this.onChangeEmail.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
 
-    const addUser = () =>{
-        Axios.post('http://localhost:3001/create', {
-            job_role: job_role, 
-            name: name, 
-            username: username, 
-            password: password, 
-            conPassword: conPassword, 
-            conNo: conNo, 
-            email: email
-        }).then(() => {
-            console.log("success");
+    this.state= {
+        job_role:'',
+        name:'',
+        username: '',
+        password: '',
+        conPassword:"",
+        conNo:0,
+        email:""
+    }
+  }
+
+    onChangeJobRole(e){
+        this.setState({
+            job_role: e.target.value
         });
-    };
+    }
+    onChangeName(e){
+        this.setState({
+            name: e.target.value
+        });
+    }
+    onChangeUsername(e){
+    this.setState({
+        username: e.target.value
+    });
+    }
+    onChangePassword(e){
+        this.setState({
+            password: e.target.value
+        });
+    }
+    onChangeConPassword(e){
+        this.setState({
+            conPassword: e.target.value
+        });
+    }
+    onChangeConNo(e){
+        this.setState({
+            conNo: e.target.value
+        });
+    }
+    onChangeEmail(e){
+        this.setState({
+            email: e.target.value
+        });
+    }
 
+    onSubmit(e){
+        e.preventDefault();
+        if(this.state.password === this.state.conPassword){
+            Axios.post('http://localhost:3001/signup/create', {
+                job_role: this.state.job_role, 
+                name: this.state.name, 
+                username: this.state.username, 
+                password: this.state.password,
+                conNo: this.state.conNo, 
+                email: this.state.email,
+            }).then(() => {
+                console.log("success");
+            });
+        }else{
+            alert("Password is not match");
+        }
+        
+    }
 
-    return(
-        <div class="container  bg-white shadow mt-4 col-9 signupContainer">
-            <div class="card">
-                <div class="card-header bg-white">
-                    <div class="row">
-                        <i class="fas fa-user mx-2 my-auto fa-2x" style={{width:'auto'}}></i>
-                        <h4 class="ml-2 my-auto" style={{width:'auto'}}>User Registration</h4>
+  render() {
+    return (
+        <div className="container  bg-white shadow mt-4 col-9 signupContainer">
+            <div className="card">
+                <div className="card-header bg-white">
+                    <div className="row">
+                        <i className="fas fa-user mx-2 my-auto fa-2x" style={{width:'auto'}}></i>
+                        <h4 className="ml-2 my-auto" style={{width:'auto'}}>User Registration</h4>
                     </div>
                 </div>
-                <div class="card-body">
-                    <form class="m-3" enctype="multipart/form-data">
+                <div className="card-body">
+                    <form className="m-3" onSubmit={this.onSubmit}>
                         <input type="hidden" id="id" name="id" />
-                        <div class="form-group row formGroup">
-                            <label for="name" class="col-12 col-md-2 col-xl-2">Job Role</label>
+                        <div className="form-group row formGroup">
+                            <label  className="col-12 col-md-2 col-xl-2">Job Role</label>
                             <select className="form-control form-control-sm col-12 col-md-10 col-xl-10" id="job_role" 
-                                onChange={(event) => {setJobRole(event.target.value);}}>
+                                value={this.state.job_role} onChange={this.onChangeJobRole}>
+                                    <option ></option>
                                     <option value="Account Officer">Account Officer</option>
                                     <option value="Credit Collector">Credit Collector</option>
                             </select>
                         </div>
 
-                        <div class="form-group row formGroup">
-                            <label for="name" class="col-12 col-md-2 col-xl-2">Name</label>
-                            <input type="text" class="form-control form-control-sm col-12 col-md-10 col-xl-10" id="name"
+                        <div className="form-group row formGroup">
+                            <label  className="col-12 col-md-2 col-xl-2">Name</label>
+                            <input type="text" className="form-control form-control-sm col-12 col-md-10 col-xl-10" id="name"
                                 name="name"required
-                                onChange={(event) => {setName(event.target.value);}}/>
-                        </div>
-
-                        <div class="form-group row formGroup">
-                            <label for="name" class="col-12 col-md-2 col-xl-2">Username</label>
-                            <input type="text" class="form-control form-control-sm col-12 col-md-10 col-xl-10" id="username"
-                                name="username" required
-                                onChange={(event) => {setUsername(event.target.value);}}/>
-                        </div>
-
-                        <div class="form-group row formGroup">
-                            <label for="name" class="col-12 col-md-2 col-xl-2">Password</label>
-                            <input type="password" class="form-control form-control-sm col-12 col-md-10 col-xl-10" id="password"
-                                name="password" required
-                                onChange={(event) => {setPassword(event.target.value);}}/>
+                                value={this.state.name}
+                                onChange={this.onChangeName}/>
                         </div>
 
                         <div className="form-group row formGroup">
-                            <label for="name" className="col-12 col-md-2 col-xl-2">Confirm Password</label>
+                            <label  className="col-12 col-md-2 col-xl-2">Username</label>
+                            <input type="text" className="form-control form-control-sm col-12 col-md-10 col-xl-10" id="username"
+                                name="username" required value={this.state.username}
+                                onChange={this.onChangeUsername}/>
+                        </div>
+
+                        <div className="form-group row formGroup">
+                            <label  className="col-12 col-md-2 col-xl-2">Password</label>
+                            <input type="password" className="form-control form-control-sm col-12 col-md-10 col-xl-10" id="password"
+                                name="password" required value={this.state.password}
+                                onChange={this.onChangePassword}/>
+                        </div>
+
+                        <div className="form-group row formGroup">
+                            <label  className="col-12 col-md-2 col-xl-2">Confirm Password</label>
                             <input type="password" className="form-control form-control-sm col-12 col-md-10 col-xl-10" id="conPassword"
-                                    name="conPassword" required 
-                                    onChange={(event) => {setConPassword(event.target.value);}}/>
+                                    name="conPassword" required value={this.state.conPassword}
+                                    onChange={this.onChangeConPassword}/>
                         </div>
 
                         <div className="form-group row formGroup">
-                            <label for="name" className="col-12 col-md-2 col-xl-2">Contact No.</label>
+                            <label  className="col-12 col-md-2 col-xl-2">Contact No.</label>
                             <input type="text" className="form-control form-control-sm col-12 col-md-10 col-xl-10" id="conNo"
-                                name="conNo" required
-                                onChange={(event) => {setConNo(event.target.value);}} />
+                                name="conNo" required value={this.state.conNo}
+                                onChange={this.onChangeConNo}/>
                         </div>
 
-                        <div class="form-group row formGroup">
-                            <label for="name" class="col-12 col-md-2 col-xl-2">Email</label>
-                            <input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" class="form-control form-control-sm col-12 col-md-10 col-xl-10" id="email"
-                                name="email" required
-                                onChange={(event) => {setEmail(event.target.value);}}/>
+                        <div className="form-group row formGroup">
+                            <label  className="col-12 col-md-2 col-xl-2">Email</label>
+                            <input type="email" className="form-control form-control-sm col-12 col-md-10 col-xl-10" id="email"
+                                name="email" required value={this.state.email}
+                                onChange={this.onChangeEmail}/>
                         </div>
 
                         <div className="row form-group mx-3 formGroup">
                             <div className='col text-center'>
-                                <button onClick={addUser} name="Login" value="Login" type="submit" className="btn btn-primary custom-btn1 ml-1">REGISTER</button>
+                                <button name="Login" value="Login" type="submit" className="btn btn-primary custom-btn1 ml-1">REGISTER</button>
                                 <button name="Login" value="Login" type="submit" className="btn btn-primary custom-btn2 ml-1">CANCEL</button>
                             </div>
                         </div>
@@ -105,7 +162,6 @@ function Signup() {
             </div>
         </div>
     );
+  }
 }
-
-
 export default Signup;
