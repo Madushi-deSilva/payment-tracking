@@ -15,6 +15,7 @@ import Reports from './components/pages/Reports';
 import EditDuepayment from './components/pages/EditDuepayment';
 import EditOverduepayment from './components/pages/EditOverduepayment';
 import EditClient from './components/pages/EditClient';
+import AddNewPayment from './components/pages/AddNewPayment';
 // import Sidebar from './components/Sidebar';
 
 function App() {
@@ -25,12 +26,13 @@ function App() {
           <Route path='/credit' exact component={CreditCollector}/>
           <Route path='/home-main' component={Home}/>
           <Route path='/clients' component={Clients}/>
-          <Route path='/edit-client' component={EditClient}/>  
+          <Route path='/edit-client/:id' component={EditClient}/>  
           <Route path='/' exact component={Navbar}/>
           <Route path='/sign-up' component={Signup} />
           
           <Route path='/due-payments' component={DuePayements}/>
-          <Route path='/edit-due' component={EditDuepayment}/>
+          <Route path='/add-new' component={AddNewPayment}/>
+          <Route path='/edit-due/:id' component={EditDuepayment}/>
           <Route path='/overdue-payments' component={OverduePayments}/>
           <Route path='/edit-overdue' component={EditOverduepayment}/>
           <Route path='/received-payments' component={ReceivedPayments}/>

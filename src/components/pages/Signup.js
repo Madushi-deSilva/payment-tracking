@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import Axios from 'axios'
-// import '../../App.css'
 import './Signup.css'
+import { Link } from 'react-router-dom';
 
 class Signup extends Component {
   constructor(props) {
@@ -21,7 +21,7 @@ class Signup extends Component {
         username: '',
         password: '',
         conPassword:"",
-        conNo:0,
+        conNo:'',
         email:""
     }
   }
@@ -62,6 +62,7 @@ class Signup extends Component {
         });
     }
 
+    // add users
     onSubmit(e){
         e.preventDefault();
         if(this.state.password === this.state.conPassword){
@@ -83,6 +84,7 @@ class Signup extends Component {
 
   render() {
     return (
+        // user registration form 
         <div className="container  bg-white shadow mt-4 col-9 signupContainer">
             <div className="card">
                 <div className="card-header bg-white">
@@ -150,13 +152,13 @@ class Signup extends Component {
                         <div className="row form-group mx-3 formGroup">
                             <div className='col text-center'>
                                 <button name="Login" value="Login" type="submit" className="btn btn-primary custom-btn1 ml-1">REGISTER</button>
-                                <button name="Login" value="Login" type="submit" className="btn btn-primary custom-btn2 ml-1">CANCEL</button>
+                                <Link to="/">
+                                    <button name="Login" value="Login" type="submit" className="btn btn-primary custom-btn2 ml-1">CANCEL</button>
+                                </Link>
                             </div>
                         </div>
 
-                        {/* <div className="row form-group mx-3 text-center"> */}
-                            <p className="text-center" style={{fontSize:'15px'}}>Already registered? <a href='/'>Login Here</a></p>
-                        {/* </div> */}
+                        <p className="text-center" style={{fontSize:'15px'}}>Already registered? <a href='/'>Login Here</a></p>
                     </form>
                 </div>
             </div>

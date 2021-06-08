@@ -33,6 +33,7 @@ class HeroSection extends Component {
         });
     }
 
+    //user login
     onSubmit=(e)=>{
         e.preventDefault();
         Axios.post('http://localhost:3001/signup/login', {
@@ -54,7 +55,7 @@ class HeroSection extends Component {
                     }
                 }
                 else{
-                   alert("wrong") 
+                   alert("Invalid Credentials") 
                 }
             }
         });

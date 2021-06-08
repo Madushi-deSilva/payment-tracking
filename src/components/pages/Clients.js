@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import Axios from 'axios'
 import { Link } from 'react-router-dom'
 import '../../App.css'
-import './Home.css'
+
 import './Client.css'
 import Table from 'react-bootstrap/Table'
 import Homenav from '../Homenav';
@@ -10,12 +10,11 @@ import Sidebar from '../Sidebar'
 
 function Client(){
 
-    // const [ code, setCode] = useState("");
+    const [ code, setCode] = useState("");
     const [ company_name, setCompanyName] = useState("");
     const [ email, setEmail] = useState("");
     const [ address, setAddress] = useState("");
     const [ tel_no, setTelNo] = useState(0);
-    const [ payment_mode, setPaymentMode] = useState("");
     const [ contact_person, setContactPerson] = useState("");
     const [ personal_email, setPersonalEmail] = useState("");
     const [ mobile_no, setMobileNo] = useState(0);
@@ -26,11 +25,6 @@ function Client(){
 
     const [clientList, setClientList]= useState([]);
 
-    const [ invoice, setInvoice] = useState("");
-    const [ amount, setAmount] = useState("");
-    const [ due_date, setDueDate] = useState(0);
-    const [ note, setNote] = useState("");
-
     const [toggleState, setToggleState] = useState(1);
 
     const toggleTab = (index) => {
@@ -40,11 +34,11 @@ function Client(){
     //add client
     const addClient = () =>{
             Axios.post('http://localhost:3001/clients/create', {
+                code: code,
                 company_name: company_name,
                 email: email,
                 address: address,
                 tel_no: tel_no,
-                payment_mode: payment_mode,
                 contact_person: contact_person,
                 personal_email: personal_email,
                 mobile_no: mobile_no,
@@ -55,23 +49,9 @@ function Client(){
             }).then(() => {
                 console.log("success");
             });
-            Axios.post('http://localhost:3001/duepayments/create', {
-                invoice: invoice,
-                amount: amount,
-                due_date: due_date,
-                note: note,
-            }).then(() => {
-                console.log("success");
-            });
     };
 
     //get all clients
-    // const getClients = () => {
-    //     Axios.get('http://localhost:3001/clients/allclients').then((response) => {
-    //       setClientList(response.data);
-    //     });
-    //   };
-
     useEffect(() => {
         Axios.get('http://localhost:3001/clients/allclients')
              .then(response => {
@@ -81,6 +61,7 @@ function Client(){
                  console.log(error);
              })
     });
+
 
     return ( 
         <div>
@@ -150,9 +131,9 @@ function Client(){
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    {clientList.map((val,key)=>{
+                                    {clientList.map(val =>{
                                         return(
-                                        <tr>
+                                        <tr key={val.client_ID}>
                                             <td>{val.code}</td>
                                             <td>{val.company_name}</td>
                                             <td>{val.address}</td>
@@ -161,7 +142,7 @@ function Client(){
                                             <td>{val.mobile_no}</td>
                                             <td>{val.email}</td>
                                             <td>
-                                                <Link to="/edit-client">
+                                                <Link to={`/edit-client/${val.client_ID}`}>
                                                     <button name="view" value="view" type="submit" className="btn btn-primary ml-1">VIEW</button>
                                                 </Link>
                                             </td>
@@ -184,11 +165,11 @@ function Client(){
 
                                                 <div className="col colunm">
 
-                                                    {/* <div className="form-group row formGroup ">
-                                                        <label for="name" className="col-12 col-md-4 col-xl-4 lblClient">Code</label>
+                                                    <div className="form-group row formGroup ">
+                                                        <label className="col-12 col-md-4 col-xl-4 lblClient">Code</label>
                                                         <input type="text" className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="code"
                                                             name="code"required onChange={(event) => {setCode(event.target.value);}}/>
-                                                    </div> */}
+                                                    </div>
 
                                                     <div className="form-group row formGroup">
                                                         <label className="col-12 col-md-4 col-xl-4 lblClient">Company Name</label>
@@ -214,15 +195,6 @@ function Client(){
                                                             name="telNo" required onChange={(event) => {setTelNo(event.target.value);}}/>
                                                     </div> 
 
-                                                    <div className="form-group row formGroup">
-                                                        <label className="col-12 col-md-4 col-xl-4 lblClient">Payment Mode</label>
-                                                        <select className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="payment_mode" onChange={(event) => {setPaymentMode(event.target.value);}}>
-                                                                <option></option>
-                                                                <option value="cash">Cash</option>
-                                                                <option value="cheque">Cheque</option>
-                                                        </select>
-                                                    </div>
-
                                                     <h4 style={{fontFamily:'serif', marginTop:'20px', marginBottom:'20px', color:'grey'}}>Contact Person Details_____</h4>
                                                     <div className="form-group row formGroup">
                                                         <label className="col-12 col-md-4 col-xl-4 lblClient">Name</label>
@@ -244,6 +216,7 @@ function Client(){
                                                 </div>
 
                                                  <div className="col column">
+                                                 <h4 style={{fontFamily:'serif', marginTop:'20px', marginBottom:'20px', color:'grey'}}>Bank Details_____</h4>
                                                     <div className="form-group row formGroup">
                                                         <label className="col-12 col-md-4 col-xl-4 lblRight">Bank Name</label>
                                                         <input type="text" className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="bank_name"
@@ -268,7 +241,7 @@ function Client(){
                                                             name="accountNo" required onChange={(event) => {setAccountNo(event.target.value);}}/>
                                                     </div>
 
-                                                    <div className="form-group row formGroup">
+                                                    {/* <div className="form-group row formGroup">
                                                         <label className="col-12 col-md-4 col-xl-4  lblRight">Invoice</label>
                                                         <input type="text" className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="invoice"
                                                             name="invoice"required onChange={(event) => {setInvoice(event.target.value);}}/>
@@ -290,15 +263,15 @@ function Client(){
                                                         <label className="col-12 col-md-4 col-xl-4 lblRight">Note</label>
                                                         <textarea type="textarea" rows="3" className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="note"
                                                             name="note" required onChange={(event) => {setNote(event.target.value);}}></textarea>
-                                                    </div>
+                                                    </div> */}
                                                 </div>
 
                                                 <div className="row form-group mx-3 formGroup">
                                                     <div className='col text-center'>
-                                                    {/* <Link to=""> */}
                                                         <button name="Submit" value="Submit" type="submit" className="btn btn-primary custom-btn4 btnSubmit">SUBMIT</button>
-                                                    {/* </Link> */}
-                                                    <button name="Cancel" value="Cancel" type="submit" className="btn btn-primary custom-btn5 btnCancel">CANCEL</button>
+                                                    <Link to="/clients">
+                                                        <button name="Cancel" value="Cancel" type="submit" className="btn btn-primary custom-btn5 btnCancel">CANCEL</button>
+                                                    </Link>
                                                     </div>
                                                 </div>
                                             </form>
