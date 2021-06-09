@@ -1,9 +1,6 @@
 import React, {useState,useEffect} from 'react';
 import Axios from 'axios'
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import {useParams} from 'react-router';
 import { Link } from 'react-router-dom'
 // import '../../App.css
 import Table from 'react-bootstrap/Table'
@@ -12,16 +9,17 @@ import Sidebar from '../Sidebar'
 import './Home.css';
 
 function DuePayments() {
-    const [open, setOpen] = useState(false);
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
+//delete payment by id
+const deleteDue = (id) =>{
+    Axios.delete(`http://localhost:3001/duepayments/delete/${id}`).then(() => {
+        console.log("deleted");
+        alert("Duepayment delete successfully");
+    });
+};
 
-  const handleClose = () => {
-    setOpen(false);
-  };
   const [dueList, setDueList]= useState([]);
+  const [filterDate, setDate] = useState([]);
 
   //get all payments
   useEffect(() => {
@@ -52,7 +50,9 @@ function DuePayments() {
                             <div className="form-group row formGroup">
                                     <label className="col-6 col-md-6 col-xl-6 " >Filtered By</label>
                                     <input type="date" className="form-control form-control-sm col-6 col-md-6 col-xl-6" id="dueDate"
-                                        name="dueDate" required/>
+                                        name="dueDate" required onChange={(event) =>{
+                                            setDate(event.target.value);
+                                        }}/>
                                 </div> 
                             </div>
                             <div className="col">
@@ -73,6 +73,7 @@ function DuePayments() {
                                         <th>Due ID</th>
                                         <th>Company Name</th>
                                         <th>Invoice</th>
+                                        <th>Due Date</th>
                                         <th>Telephone No.</th>
                                         <th>Company Email</th>
                                         <th>Amount</th>
@@ -81,12 +82,19 @@ function DuePayments() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                {dueList.map(val=>{
+                                {dueList.filter((val) => {
+                                        if (filterDate === ""){
+                                            return val
+                                        }else if (val.due_date.toLowerCase().includes(filterDate)){
+                                            return val
+                                        }
+                                    }).map(val=>{
                                     return(
                                     <tr key={val.due_ID}>
                                         <td>{val.due_ID}</td>
                                         <td>{val.company_name}</td>
                                         <td>{val.invoice}</td>
+                                        <td>{val.due_date}</td>
                                         <td>{val.tel_no}</td>
                                         <td>{val.email}</td>
                                         <td>{val.amount}</td>
@@ -95,23 +103,7 @@ function DuePayments() {
                                             <Link to={`/edit-due/${val.due_ID}`}>
                                                 <button name="view" value="view" type="submit" className="btn btn-primary ml-1 btnView">VIEW</button>
                                             </Link>
-                                            <button onClick={handleClickOpen} name="delete" value="delete" type="submit" className="btn btn-danger ml-1">DELETE</button>
-                                            <Dialog
-                                                open={open}
-                                                onClose={handleClose}
-                                                aria-labelledby="alert-dialog-title"
-                                                aria-describedby="alert-dialog-description"
-                                            >
-                                                <DialogTitle id="alert-dialog-title">{"Do you want to delete?"}</DialogTitle>
-                                                <DialogActions>
-                                                <Button onClick={handleClose} color="primary" autoFocus>
-                                                    YES
-                                                </Button>
-                                                <Button onClick={handleClose} color="primary">
-                                                    NO
-                                                </Button>
-                                                </DialogActions>
-                                            </Dialog>
+                                            <button onClick={() => deleteDue(val.due_ID)} name="delete" value="delete" type="submit" className="btn btn-danger ml-1">DELETE</button>
                                         </td>
                                     </tr>
                                     );

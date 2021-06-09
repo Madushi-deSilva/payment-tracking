@@ -27,6 +27,8 @@ function AddNewPayment(){
             note: note,
         }).then(() => {
             console.log("success");
+            alert("Duepayment added successfully");
+            window.location.href = 'http://localhost:3000/due-payments';
         });
 };
         return ( 
@@ -64,7 +66,7 @@ function AddNewPayment(){
                                 <div className="form-group row formGroup">
                                     <label className="col-12 col-md-2 col-xl-2">Payment Mode</label>
                                     <select className="form-control form-control-sm col-12 col-md-10 col-xl-10" id="payment_mode" onChange={(event) => {setPaymentMode(event.target.value);}}>
-                                            <option></option>
+                                            <option>Select Payment Mode</option>
                                             <option value="cash">Cash</option>
                                             <option value="cheque">Cheque</option>
                                     </select>

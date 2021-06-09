@@ -86,7 +86,7 @@ class HeroSection extends Component {
                         <label className="col-12 col-md-4 col-xl-4 text-light">JOB ROLE</label>
                         <select className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="job_role"
                             value={this.state.job_role} onChange={this.onChangeJobRole}>
-                                <option></option>
+                                <option>Select Job Role</option>
                                 <option value="Account Officer">Account Officer</option>
                                 <option value="Credit Collector">Credit Collector</option>
                         </select>

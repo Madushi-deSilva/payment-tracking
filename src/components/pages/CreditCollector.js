@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 // import '../../App.css
 import Table from 'react-bootstrap/Table'
-import Homenav from '../Homenav';
+import HomenavCredit from '../HomenavCredit';
 
 class CreditCollector extends Component {
     render() {
         return ( 
             <div>
-                <Homenav/>
+                <HomenavCredit/>
                 <div>
                     <div className="row text-center">
                         <h1 style={{fontFamily:'serif', padding:'10px'}}>DAILY DUE/ OVERDUE PAYMENTS</h1>

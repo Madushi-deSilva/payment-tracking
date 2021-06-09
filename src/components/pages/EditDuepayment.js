@@ -33,6 +33,7 @@ function EditDuepayment(props){
         console.log('Updated due payment', due)
         Axios.put(`http://localhost:3001/duepayments/update/${params.id}`,due).then(() => {
             console.log("success");
+            alert("Duepayment updated successfully");
             window.location.href = 'http://localhost:3000/due-payments';
         });
     };
@@ -145,7 +146,9 @@ function EditDuepayment(props){
                                     <button name="View" value="View" type="" className="btn btn-primary custom-btn3 ml-1">VIEW CLIENT</button>
                                 </Link>
                                 <button  name="Update" value="Update" type="submit" className="btn btn-primary custom-btn4 ml-1">UPDATE</button>
-                                <button name="Cancel" value="Cancel" type="" className="btn btn-primary custom-btn5 ml-1">CANCEL</button>
+                                <Link to="/due-payments">
+                                    <button name="Cancel" value="Cancel" type="" className="btn btn-primary custom-btn5 ml-1">CANCEL</button>
+                                </Link>
                             </div>
                         </div>
 

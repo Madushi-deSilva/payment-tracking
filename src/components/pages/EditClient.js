@@ -45,6 +45,7 @@ function EditClient(props) {
         console.log('Updated Client', client)
         Axios.put(`http://localhost:3001/clients/update/${params.id}`,client).then(() => {
             console.log("success");
+            alert("Client updated successfully");
             window.location.href = 'http://localhost:3000/clients';
         });
     };

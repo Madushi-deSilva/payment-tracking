@@ -29,7 +29,7 @@ app.post(('/create'), (req, res) => {
 //get all due payments
 app.get(('/alldue'),(req, res) => {
     database.query(
-        "SELECT d.due_ID, c.company_name, d.invoice, c.tel_no, c.email, d.amount FROM due_payment d INNER JOIN client c ON c.code = d.company_code",
+        "SELECT d.due_ID, c.company_name, d.invoice, d.due_date, c.tel_no, c.email, d.amount FROM due_payment d INNER JOIN client c ON c.code = d.company_code",
         (err, result) => {
             if(err){
                 console.log(err)
@@ -81,6 +81,23 @@ app.put(('/update/:id'), (req, res) => {
                 console.log(err)
             }else{
                 res.send("values updated")
+            }
+        }
+    );
+    
+
+});
+
+//delete due payment details to the database
+app.delete(('/delete/:id'), (req, res) => {
+    const due_ID = req.params.id;
+
+    database.query(
+        'DELETE FROM due_payment WHERE due_ID = ?', due_ID, (err, result) => {
+            if(err){
+                console.log(err)
+            }else{
+                res.send("values deleted")
             }
         }
     );

@@ -75,6 +75,8 @@ class Signup extends Component {
                 email: this.state.email,
             }).then(() => {
                 console.log("success");
+                alert("Registered Successfully");
+                window.location.href = 'http://localhost:3000/';
             });
         }else{
             alert("Password is not match");
@@ -100,7 +102,7 @@ class Signup extends Component {
                             <label  className="col-12 col-md-2 col-xl-2">Job Role</label>
                             <select className="form-control form-control-sm col-12 col-md-10 col-xl-10" id="job_role" 
                                 value={this.state.job_role} onChange={this.onChangeJobRole}>
-                                    <option ></option>
+                                    <option >Select Job Role</option>
                                     <option value="Account Officer">Account Officer</option>
                                     <option value="Credit Collector">Credit Collector</option>
                             </select>

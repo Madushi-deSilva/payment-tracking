@@ -24,6 +24,7 @@ function Client(){
     const [ account_no, setAccountNo] = useState();
 
     const [clientList, setClientList]= useState([]);
+    const [searchClient, setSearch] = useState([]);
 
     const [toggleState, setToggleState] = useState(1);
 
@@ -48,6 +49,7 @@ function Client(){
                 account_no: account_no,
             }).then(() => {
                 console.log("success");
+                alert("Client added successfully");
             });
     };
 
@@ -111,7 +113,9 @@ function Client(){
                                     <div className="col">
                                         <div className="form-group row ">
                                             <input type="text" className="form-control form-control-sm col-8 col-md-4 col-xl-4" id="client"
-                                                name="client" placeholder="search for client..."/>
+                                                name="client" placeholder="search for client..." onChange={(event) =>{
+                                                    setSearch(event.target.value);
+                                                }}/>
                                             <i className="fas fa-search mx-2 my-auto fa-2x" style={{width:'auto'}}></i>
                                         </div>
                                     </div>
@@ -131,7 +135,13 @@ function Client(){
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    {clientList.map(val =>{
+                                    {clientList.filter((val) => {
+                                        if (searchClient === ""){
+                                            return val
+                                        }else if (val.company_name.toLowerCase().includes(searchClient)){
+                                            return val
+                                        }
+                                    }).map(val =>{
                                         return(
                                         <tr key={val.client_ID}>
                                             <td>{val.code}</td>
@@ -269,7 +279,7 @@ function Client(){
                                                 <div className="row form-group mx-3 formGroup">
                                                     <div className='col text-center'>
                                                         <button name="Submit" value="Submit" type="submit" className="btn btn-primary custom-btn4 btnSubmit">SUBMIT</button>
-                                                    <Link to="/clients">
+                                                    <Link to="/home-main">
                                                         <button name="Cancel" value="Cancel" type="submit" className="btn btn-primary custom-btn5 btnCancel">CANCEL</button>
                                                     </Link>
                                                     </div>
