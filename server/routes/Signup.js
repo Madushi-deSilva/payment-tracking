@@ -73,68 +73,59 @@ app.post('/login', (req, res) => {
 });
 
 //find user by id
-app.get(('/user:id'),(req, res) => {
+app.get(('/:id'),(req, res) => {
     const id = req.params.id
     const job_role = req.body.job_role;
     if(job_role === 'Account Officer'){
         database.query(
-            "SELECT * FROM account_officer WHERE id = ? job_role = 'Account Officer'" [id, job_role], 
+            "SELECT * FROM account_officer WHERE accountOfficer_userID = ? AND  job_role ='Account Officer'" [id, job_role], 
             (err, result) => {
                 if(err){
-                    res.send({err: err})
-                }
-
-                if (result){
-                    res.send(result)
+                    console.log(err)
                 }else{
-                    res.send({message: "No user found"})
-                } 
-            }   
+                    res.send(result)
+                }  
+            } 
         );
     }else{
         database.query(
-            "SELECT * FROM credit_collector WHERE id = ? job_role = 'Credit Collector'" [id, job_role], 
+            "SELECT * FROM credit_collector WHERE creditCollector_userID = ? AND job_role = 'Credit Collector'" [id, job_role], 
             (err, result) => {
                 if(err){
-                    res.send({err: err})
-                }
-
-                if (result){
-                    res.send(result)
+                    console.log(err)
                 }else{
-                    res.send({message: "No user found"})
-                } 
-            }   
-        ); 
+                    res.send(result)
+                }  
+            } 
+        );
     }
 });
 // edit user data and update the database
-app.put('/update', (req, res) => {
+app.put(('/update/:id'), (req, res) => {
     const id = req.body.id
     const job_role = req.body.job_role;
     const name = req.body.name;
     const username = req.body.username;
     const password = req.body.password;
-    const conPassword = req.body.conPassword;
     const conNo = req.body.conNo;
     const email = req.body.email;
     if(job_role === 'Account Officer'){
-        database.query("UPDATE account_officer SET name = ?, username = ?, password = ?, confirm_password = ?, contact_no = ?, email = ?   WHERE id = ? AND job_role = 'Account Officer'", 
-            [name, username,password, conPassword, conNo, email, id, job_role], (err, result) => {
+        database.query("UPDATE account_officer SET name = ?, username = ?, password = ?, contact_no = ?, email = ?   WHERE accountOfficer_userID = ? AND job_role = 'Account Officer'", 
+            [name, username,password, conNo, email, id, job_role], (err, result) => {
                 if(err){
                     res.send(err);
                 }else{
-                    res.send(result);
+                    res.send("values updated");
                 }    
             }
         );
     }else{
-        database.query("UPDATE credit_collector SET name = ?, username = ?, password = ?, confirm_password = ?, contact_no = ?, email = ? WHERE id = ? AND job_role = 'Credit Collector'", 
-            [name, username,password, conPassword, conNo, email, id, job_role], (err, result) => {
+        database.query("UPDATE credit_collector SET name = ?, username = ?, password = ?, contact_no = ?, email = ? WHERE creditCollector_userID = ? AND job_role = 'Credit Collector'", 
+            [name, username,password, conNo, email, id, job_role], (err, result) => {
                 if(err){
                     res.send(err);
                 }else{
-                    res.send(result);
+                    res.send("values updated");
                 }     
             }
         );

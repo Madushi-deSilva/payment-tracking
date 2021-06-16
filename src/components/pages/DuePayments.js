@@ -1,6 +1,6 @@
 import React, {useState,useEffect} from 'react';
+import {Button, Modal} from 'react-bootstrap';
 import Axios from 'axios'
-import {useParams} from 'react-router';
 import { Link } from 'react-router-dom'
 // import '../../App.css
 import Table from 'react-bootstrap/Table'
@@ -9,12 +9,16 @@ import Sidebar from '../Sidebar'
 import './Home.css';
 
 function DuePayments() {
+    const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
 //delete payment by id
 const deleteDue = (id) =>{
     Axios.delete(`http://localhost:3001/duepayments/delete/${id}`).then(() => {
         console.log("deleted");
-        alert("Duepayment delete successfully");
+        window.location.href = 'http://localhost:3000/due-payments';
     });
 };
 
@@ -103,7 +107,15 @@ const deleteDue = (id) =>{
                                             <Link to={`/edit-due/${val.due_ID}`}>
                                                 <button name="view" value="view" type="submit" className="btn btn-primary ml-1 btnView">VIEW</button>
                                             </Link>
-                                            <button onClick={() => deleteDue(val.due_ID)} name="delete" value="delete" type="submit" className="btn btn-danger ml-1">DELETE</button>
+                                            {/* <button onClick={() => deleteDue(val.due_ID)} name="delete" value="delete" type="submit" className="btn btn-danger ml-1">DELETE</button> */}
+                                            <Button variant="danger" onClick={handleShow}> Delete </Button>
+                                            <Modal show={show} onHide={handleClose}>
+                                                <Modal.Body>Are you want to delete?</Modal.Body>
+                                                <Modal.Footer>
+                                                <Button variant="secondary" onClick={handleClose}> No </Button>
+                                                <Button variant="primary" onClick={() => deleteDue(val.due_ID)}> Yes </Button>
+                                                </Modal.Footer>
+                                            </Modal>
                                         </td>
                                     </tr>
                                     );

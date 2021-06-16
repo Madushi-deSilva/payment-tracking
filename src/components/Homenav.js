@@ -1,4 +1,5 @@
-import React from "react";
+import React, {useState} from "react";
+import { Modal} from "react-bootstrap";
 import '../App.css'
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
@@ -49,6 +50,15 @@ function Homenav() {
     setAnchorEl(null);
   };
 
+  const [show, setShow] = useState(false);
+
+  const handleCloseLogout = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const logout = () =>{
+    window.location.href = 'http://localhost:3000/';
+  }
+
   return (
     <div className="row" style={{ margin: "0px" }}>
       <nav className="navbar navbar-expand-lg navbar-fixed" style={{ backgroundColor: "rgb(28, 27, 27)", color: "white" }}>
@@ -81,8 +91,15 @@ function Homenav() {
                       </Link>
                   </StyledMenuItem>
                   <StyledMenuItem>
-                      <Link to="/">
-                          <ListItemText primary="Logout" />
+                      <Link>
+                          <ListItemText onClick={handleShow} primary="Logout" />
+                          <Modal show={show} onHide={handleCloseLogout}>
+                            <Modal.Body>Are you want to logout?</Modal.Body>
+                            <Modal.Footer>
+                            <button className="btn btn-secondary" onClick={handleCloseLogout}> No </button >
+                            <button className="btn btn-primary" onClick={logout}> Yes </button >
+                            </Modal.Footer>
+                        </Modal>
                       </Link>
                   </StyledMenuItem>
               </StyledMenu>

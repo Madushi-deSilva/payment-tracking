@@ -48,6 +48,9 @@ function HomenavCredit() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const logout = () =>{
+    alert("Are you want to exit?")
+  }
 
   return (
     <div className="row" style={{ margin: "0px" }}>
@@ -82,7 +85,7 @@ function HomenavCredit() {
                   </StyledMenuItem>
                   <StyledMenuItem>
                       <Link to="/">
-                          <ListItemText primary="Logout" />
+                          <ListItemText onClick={logout} primary="Logout" />
                       </Link>
                   </StyledMenuItem>
               </StyledMenu>
