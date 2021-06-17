@@ -9,6 +9,10 @@ import './EditPayments.css'
 function EditDuepayment(props){
 
     const [due, setDue]= useState({});
+    const [selectedOption, setselectedOption]= useState("");
+    const onValueChange = (e) => {
+        setselectedOption(e.target.value)
+      }
     // const [radio, setRadio]= useState("");
 
     const onChange = (e) => {
@@ -34,8 +38,9 @@ function EditDuepayment(props){
      //update due payment
      const updateDue = (e) =>{
         e.preventDefault();
-        console.log('Updated due payment', due)
-        Axios.put(`http://localhost:3001/duepayments/update/${params.id}`,due).then(() => {
+        let dueToUpdate = due
+        dueToUpdate.reply_status = selectedOption
+        Axios.put(`http://localhost:3001/duepayments/update/${params.id}`,dueToUpdate).then(() => {
             console.log("success");
             alert("Duepayment updated successfully");
             window.location.href = 'http://localhost:3000/due-payments';
@@ -125,20 +130,23 @@ function EditDuepayment(props){
 
                                             <div className="form-group row formGroup">
                                                 <label className="col-12 col-md-4 col-xl-4 lblRight">Status</label>
-                                                <label className="lblCheck form-control form-control-sm col-12 col-md-8 col-xl-8" id="status" value={due.status} onChange={onChange}>
+                                                <label className="lblCheck form-control form-control-sm col-12 col-md-8 col-xl-8" id="reply_status" >
                                                     <div className="form-check">
                                                         <label className="form-check-label">
-                                                            <input type="radio" className="form-check-input" id="radio1" name="optradio" value="Ready for payment" />Ready for payment
+                                                            <input type="radio" className="form-check-input" id="radio1" name="optradio" value="Ready for payment" 
+                                                            checked={selectedOption === "Ready for payment"} onChange={onValueChange} />Ready for payment
                                                         </label>
                                                     </div>
                                                     <div className="form-check">
                                                         <label className="form-check-label">
-                                                            <input type="radio" className="form-check-input" id="radio2" name="optradio" value="Not replied"/>Not replied
+                                                            <input type="radio" className="form-check-input" id="radio2" name="optradio" value="Not replied"
+                                                            checked={selectedOption === "Not replied"} onChange={onValueChange} />Not replied
                                                         </label>
                                                     </div>
                                                     <div className="form-check">
                                                         <label className="form-check-label">
-                                                            <input type="radio" className="form-check-input" id="radio3" name="optradio" value="Request to extend"/>Request to extend
+                                                            <input type="radio" className="form-check-input" id="radio3" name="optradio" value="Request to extend"
+                                                            checked={selectedOption === "Request to extend"} onChange={onValueChange} />Request to extend
                                                         </label>
                                                     </div>
                                                 </label>
@@ -147,7 +155,7 @@ function EditDuepayment(props){
 
                                         <div className="row form-group mx-3 formGroup">
                                             <div className='col text-center'>
-                                            <Link to="/">
+                                            <Link to={`/edit-client/${due.client_ID}`}>
                                                 <button name="View" value="View" type="" className="btn btn-primary custom-btn3 ml-1">VIEW CLIENT</button>
                                             </Link>
                                             <button  name="Update" value="Update" type="submit" className="btn btn-primary custom-btn4 ml-1">UPDATE</button>

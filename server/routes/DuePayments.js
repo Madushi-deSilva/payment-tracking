@@ -56,7 +56,7 @@ app.get(('/home/alldue'),(req, res) => {
 app.get(('/:id'),(req, res) => {
     const due_ID = req.params.id;
     database.query(
-        "SELECT d.due_ID, c.company_name, c.tel_no, c.email, d.payment_mode, d.invoice, d.amount, d.due_date, d.note, d.reply_status FROM due_payment d INNER JOIN client c ON c.code = d.company_code WHERE due_ID = ?", [due_ID],
+        "SELECT d.due_ID, c.client_ID,  c.company_name, c.tel_no, c.email, d.payment_mode, d.invoice, d.amount, d.due_date, d.note, d.reply_status FROM due_payment d INNER JOIN client c ON c.code = d.company_code WHERE due_ID = ?", [due_ID],
         (err, result) => {
             if(err){
                 console.log(err)
