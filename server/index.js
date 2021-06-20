@@ -33,6 +33,11 @@ app.use('/duepayments', [
     require('./routes/DuePayments')
 ]);
 
+//Overdue Payments routes in the main index.js
+app.use('/overduepayments', [
+    require('./routes/OverduePayments')
+]);
+
 
 app.listen(port, () => {
     console.log(`Listening at http://localhost:${port}`);

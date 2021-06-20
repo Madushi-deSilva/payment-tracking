@@ -15,8 +15,15 @@ function DuePayments() {
   const handleShow = () => setShow(true);
 
 //delete payment by id
-const deleteDue = (id) =>{
-    Axios.delete(`http://localhost:3001/duepayments/delete/${id}`).then(() => {
+const deleteDue = (id, status) =>{
+    console.log("Del id",id)
+    console.log("Del status",status)
+    Axios.delete(`http://localhost:3001/duepayments/delete/${id}`, {
+        data: {
+            status: status
+        }
+        
+    }).then(() => {
         console.log("deleted");
         window.location.href = 'http://localhost:3000/due-payments';
     });
@@ -113,7 +120,7 @@ const deleteDue = (id) =>{
                                                 <Modal.Body>Are you want to delete?</Modal.Body>
                                                 <Modal.Footer>
                                                 <Button variant="secondary" onClick={handleClose}> No </Button>
-                                                <Button variant="primary" onClick={() => deleteDue(val.due_ID)}> Yes </Button>
+                                                <Button variant="primary" onClick={() => deleteDue(val.due_ID, val.reply_status)}> Yes </Button>
                                                 </Modal.Footer>
                                             </Modal>
                                         </td>

@@ -134,19 +134,19 @@ function EditDuepayment(props){
                                                     <div className="form-check">
                                                         <label className="form-check-label">
                                                             <input type="radio" className="form-check-input" id="radio1" name="optradio" value="Ready for payment" 
-                                                            checked={selectedOption === "Ready for payment"} onChange={onValueChange} />Ready for payment
+                                                            checked={selectedOption === "Ready for payment" || due.reply_status === "Ready for payment"} onChange={onValueChange} />Ready for payment
                                                         </label>
                                                     </div>
                                                     <div className="form-check">
                                                         <label className="form-check-label">
                                                             <input type="radio" className="form-check-input" id="radio2" name="optradio" value="Not replied"
-                                                            checked={selectedOption === "Not replied"} onChange={onValueChange} />Not replied
+                                                            checked={selectedOption === "Not replied" || due.reply_status === "Not replied"} onChange={onValueChange} />Not replied
                                                         </label>
                                                     </div>
                                                     <div className="form-check">
                                                         <label className="form-check-label">
                                                             <input type="radio" className="form-check-input" id="radio3" name="optradio" value="Request to extend"
-                                                            checked={selectedOption === "Request to extend"} onChange={onValueChange} />Request to extend
+                                                            checked={selectedOption === "Request to extend" || due.reply_status === "Request to extend"} onChange={onValueChange} />Request to extend
                                                         </label>
                                                     </div>
                                                 </label>

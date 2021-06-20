@@ -34,7 +34,7 @@ function App() {
           <Route path='/add-new' component={AddNewPayment}/>
           <Route path='/edit-due/:id' component={EditDuepayment}/>
           <Route path='/overdue-payments' component={OverduePayments}/>
-          <Route path='/edit-overdue' component={EditOverduepayment}/>
+          <Route path='/edit-overdue/:id' component={EditOverduepayment}/>
           <Route path='/received-payments' component={ReceivedPayments}/>
           <Route path='/reports' component={Reports}/>
           <Route path='/edit-user/:id' component={Edituser}/> 

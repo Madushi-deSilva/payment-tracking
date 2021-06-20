@@ -15,6 +15,7 @@ function Home(){
         setToggleState(index);
     };
     const [dueList, setDueList]= useState([]);
+    const [overdueList, setOverdueList]= useState([]);
 
   //get all payments
   useEffect(() => {
@@ -25,7 +26,18 @@ function Home(){
          .catch((error)=>{
              console.log(error);
          })
-});
+    });
+
+    //get all overdue payments
+  useEffect(() => {
+    Axios.get('http://localhost:3001/overduepayments/home/alloverdue')
+         .then(response => {
+             setOverdueList(response.data)
+         })
+         .catch((error)=>{
+             console.log(error);
+         })
+    });
 
     return ( 
         <div>
@@ -121,48 +133,24 @@ function Home(){
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>OD001</td>
-                                        <td>John Keels Holdings</td>
-                                        <td>001</td>
-                                        <td>Nihal Perera</td>
-                                        <td>077-3422811</td>
-                                        <td>jkh@gmail.com</td>
-                                        <td>30,000.00</td>
+                                {overdueList.map(val=>{
+                                    return(
+                                    <tr key={val.overdue_ID}>
+                                        <td>{val.overdue_ID}</td>
+                                        <td>{val.company_name}</td>
+                                        <td>{val.invoice}</td>
+                                        <td>{val.contact_person}</td>
+                                        <td>{val.mobile_no}</td>
+                                        <td>{val.email}</td>
+                                        <td>{val.amount}</td>
                                         <td>
-                                            <Link to="/edit-overdue">
+                                            <Link to={`/edit-overdue/${val.overdue_ID}`}>
                                                 <button name="view" value="view" type="submit" className="btn btn-primary ml-1 ">VIEW</button>
                                             </Link>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>OD002</td>
-                                        <td>John Keels Holdings</td>
-                                        <td>002</td>
-                                        <td>Nihal Perera</td>
-                                        <td>077-3422811</td>
-                                        <td>jkh@gmail.com</td>
-                                        <td>20,000.00</td>
-                                        <td>
-                                            <Link to="/edit-overdue">
-                                                <button name="view" value="view" type="submit" className="btn btn-primary ml-1 ">VIEW</button>
-                                            </Link>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>OD003</td>
-                                        <td>John Keels Holdings</td>
-                                        <td>005</td>
-                                        <td>Nihal Perera</td>
-                                        <td>077-3422811</td>
-                                        <td>jkh@gmail.com</td>
-                                        <td>23,000.00</td>
-                                        <td>
-                                            <Link to="/edit-overdue">
-                                                <button name="view" value="view" type="submit" className="btn btn-primary ml-1 ">VIEW</button>
-                                            </Link>
-                                        </td>
-                                    </tr>
+                                    );
+                                })}
                                 </tbody>
                             </Table>
                             </div>

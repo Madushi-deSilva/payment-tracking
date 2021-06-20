@@ -20,7 +20,7 @@ app.post(('/create'), (req, res) => {
             if(err){
                 console.log(err)
             }else{
-                res.send("values inserted")
+                res.status(200).send("values inserted")
             }
         }
     );
@@ -29,7 +29,7 @@ app.post(('/create'), (req, res) => {
 //get all due payments
 app.get(('/alldue'),(req, res) => {
     database.query(
-        "SELECT d.due_ID, c.company_name, d.invoice, d.due_date, c.tel_no, c.email, d.amount FROM due_payment d INNER JOIN client c ON c.code = d.company_code",
+        "SELECT d.due_ID, c.company_name, d.invoice, d.due_date, c.tel_no, c.email, d.amount, d.reply_status FROM due_payment d INNER JOIN client c ON c.code = d.company_code",
         (err, result) => {
             if(err){
                 console.log(err)
@@ -91,18 +91,42 @@ app.put(('/update/:id'), (req, res) => {
 //delete due payment details to the database
 app.delete(('/delete/:id'), (req, res) => {
     const due_ID = req.params.id;
+    const reply_status = req.body.status;
+    console.log(req.body)
 
-    database.query(
-        'DELETE FROM due_payment WHERE due_ID = ?', due_ID, (err, result) => {
-            if(err){
-                console.log(err)
-            }else{
-                res.send("values deleted")
+    if(reply_status === "Not replied"){
+        console.log('1')
+        let sql = `INSERT INTO overdue_payment (invoice, amount, payment_mode, due_date, note,reply_status,company_code,due_ID) SELECT invoice, amount, payment_mode, due_date, note,reply_status, company_code, due_ID FROM due_payment d WHERE d.reply_status = "Not replied"`;
+        database.query(sql,(err, result) => {
+                if(err){
+                    console.log(err)
+                    console.log('2')
+                }else{
+                    console.log('3')
+                    database.query(
+                        'DELETE FROM due_payment WHERE due_ID = ? AND reply_status = "Not replied"', [due_ID, reply_status], (err, result) => {
+                            if(err){
+                                console.log(err)
+                            }else{
+                                res.send("values deleted")
+                            }
+                        }
+                    );
+                }
             }
-        }
-    );
-    
-
+        );
+    }else{
+        console.log('4')
+        database.query(
+            'DELETE FROM due_payment WHERE due_ID = ?', due_ID, (err, result) => {
+                if(err){
+                    console.log(err)
+                }else{
+                    res.send("values deleted")
+                }
+            }
+        );
+    }
 });
 
 module.exports = app;
