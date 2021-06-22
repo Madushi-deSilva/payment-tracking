@@ -5,7 +5,7 @@ var database = require('../config/database');
 //get all overdue payments
 app.get(('/alloverdue'),(req, res) => {
     database.query(
-        "SELECT o.overdue_ID, c.company_name, o.invoice, c.tel_no, c.email, o.amount FROM overdue_payment o INNER JOIN client c ON c.code = o.company_code",
+        "SELECT o.overdue_ID, c.company_name, o.invoice, c.tel_no, c.email, o.amount FROM overdue_payment o INNER JOIN client c ON c.code = o.company_code ORDER BY o.overdue_ID ASC",
         (err, result) => {
             if(err){
                 console.log(err)
@@ -18,7 +18,7 @@ app.get(('/alloverdue'),(req, res) => {
     //get all overdue payments to home
 app.get(('/home/alloverdue'),(req, res) => {
     database.query(
-        "SELECT o.overdue_ID, c.company_name, o.invoice, c.contact_person, c.mobile_no, c.email, o.amount FROM overdue_payment o INNER JOIN client c ON c.code = o.company_code",
+        "SELECT o.overdue_ID, c.company_name, o.invoice, c.contact_person, c.mobile_no, c.email, o.amount FROM overdue_payment o INNER JOIN client c ON c.code = o.company_code WHERE o.due_date = CURDATE() AND o.reply_status = 'Replied' ORDER BY o.overdue_ID ASC",
         (err, result) => {
             if(err){
                 console.log(err)
@@ -27,6 +27,7 @@ app.get(('/home/alloverdue'),(req, res) => {
             }
     });
 });
+
 
 //get overdue payment by id
 app.get(('/:id'),(req, res) => {

@@ -1,4 +1,5 @@
 import React, {useState,useEffect} from 'react';
+import {Button, Modal} from 'react-bootstrap';
 import { Link } from 'react-router-dom'
 import Axios from 'axios'
 // import '../../App.css
@@ -8,6 +9,26 @@ import Table from 'react-bootstrap/Table'
 import './Home.css';
 
 function OverduePayments() {
+    const [show, setShow] = useState(false);
+    const [deleteID, setdeleteID] = useState('');
+
+  const handleClose = () => setShow(false);
+//   const handleShow = () => setShow(true);
+const handleShow = (id) => {
+    setShow(true);
+    setdeleteID(id)
+
+}
+//delete payment by id
+const deleteOverdue = (id) =>{
+    console.log("Del id",id)
+    console.log("Del status")
+    Axios.delete(`http://localhost:3001/overduepayments/delete/${id}`).then(() => {
+        console.log("deleted");
+        window.location.href = 'http://localhost:3000/overdue-payments';
+    });
+};
+
     const [overdueList, setOverdueList]= useState([]);
   
     //get all overdue payments
@@ -61,9 +82,17 @@ function OverduePayments() {
                                             <Link to={`/edit-overdue/${val.overdue_ID}`}>
                                                 <button name="view" value="view" type="submit" className="btn btn-primary ml-1 btnView">VIEW</button>
                                             </Link>
-                                            <Link to="/home-main">
+                                            {/* <Link to="/home-main">
                                                 <button name="delete" value="delete" type="submit" className="btn btn-danger ml-1">DELETE</button>
-                                            </Link>
+                                            </Link> */}
+                                            <Button variant="danger" onClick={() => handleShow(val.overdue_ID)}> Delete </Button>
+                                            <Modal show={show} onHide={handleClose}>
+                                                <Modal.Body>Are you want to delete?</Modal.Body>
+                                                <Modal.Footer>
+                                                <Button variant="secondary" onClick={handleClose}> No </Button>
+                                                <Button variant="primary" onClick={() => deleteOverdue(deleteID)}> Yes </Button>
+                                                </Modal.Footer>
+                                            </Modal>
                                         </td>
                                     </tr>
                                   );

@@ -113,7 +113,7 @@ function EditOverduepayment(props) {
                                 <div className="form-group row formGroup">
                                     <label for="name" className="col-12 col-md-4 col-xl-4 lblRight">Due Date</label>
                                     <input type="date" className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="due_date"
-                                        name="dueDate" required value = {overdue.due_date}/>
+                                        name="dueDate" required value = {overdue.due_date} onChange={onChange}/>
                                 </div> 
 
                                 <div className="form-group row formGroup">
