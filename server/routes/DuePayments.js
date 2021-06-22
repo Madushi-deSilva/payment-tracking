@@ -29,7 +29,7 @@ app.post(('/create'), (req, res) => {
 //get all due payments
 app.get(('/alldue'),(req, res) => {
     database.query(
-        "SELECT d.due_ID, c.company_name, d.invoice, d.due_date, c.tel_no, c.email, d.amount, d.reply_status FROM due_payment d INNER JOIN client c ON c.code = d.company_code",
+        "SELECT d.due_ID, c.company_name, d.invoice, d.due_date, c.tel_no, c.email, d.amount, d.reply_status FROM due_payment d INNER JOIN client c ON c.code = d.company_code ORDER BY d.due_ID ASC",
         (err, result) => {
             if(err){
                 console.log(err)
@@ -42,7 +42,7 @@ app.get(('/alldue'),(req, res) => {
 //get all due payments to home
 app.get(('/home/alldue'),(req, res) => {
     database.query(
-        "SELECT d.due_ID, c.company_name, d.invoice, c.contact_person, c.mobile_no, c.email, d.amount FROM due_payment d INNER JOIN client c ON c.code = d.company_code",
+        "SELECT d.due_ID, c.company_name, d.invoice, c.contact_person, c.mobile_no, c.email, d.amount FROM due_payment d INNER JOIN client c ON c.code = d.company_code WHERE d.due_date = CURDATE() AND d.reply_status = 'Ready for payment' ORDER BY d.due_ID ASC",
         (err, result) => {
             if(err){
                 console.log(err)

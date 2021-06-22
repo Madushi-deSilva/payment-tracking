@@ -10,10 +10,17 @@ import './Home.css';
 
 function DuePayments() {
     const [show, setShow] = useState(false);
+    const [deleteID, setdeleteID] = useState('');
+    const [replyStatus, setreplyStatus] = useState('');
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+//   const handleShow = () => setShow(true);
+const handleShow = (id, status) => {
+    setShow(true);
+    setdeleteID(id)
+    setreplyStatus(status)
 
+}
 //delete payment by id
 const deleteDue = (id, status) =>{
     console.log("Del id",id)
@@ -115,12 +122,12 @@ const deleteDue = (id, status) =>{
                                                 <button name="view" value="view" type="submit" className="btn btn-primary ml-1 btnView">VIEW</button>
                                             </Link>
                                             {/* <button onClick={() => deleteDue(val.due_ID)} name="delete" value="delete" type="submit" className="btn btn-danger ml-1">DELETE</button> */}
-                                            <Button variant="danger" onClick={handleShow}> Delete </Button>
+                                            <Button variant="danger" onClick={() => handleShow(val.due_ID, val.reply_status)}> Delete </Button>
                                             <Modal show={show} onHide={handleClose}>
                                                 <Modal.Body>Are you want to delete?</Modal.Body>
                                                 <Modal.Footer>
                                                 <Button variant="secondary" onClick={handleClose}> No </Button>
-                                                <Button variant="primary" onClick={() => deleteDue(val.due_ID, val.reply_status)}> Yes </Button>
+                                                <Button variant="primary" onClick={() => deleteDue(deleteID, replyStatus)}> Yes </Button>
                                                 </Modal.Footer>
                                             </Modal>
                                         </td>
