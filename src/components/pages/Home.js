@@ -17,7 +17,7 @@ function Home(){
     const [dueList, setDueList]= useState([]);
     const [overdueList, setOverdueList]= useState([]);
 
-  //get all payments
+  //get all due payments
   useEffect(() => {
     Axios.get('http://localhost:3001/duepayments/home/alldue')
          .then(response => {
@@ -26,7 +26,7 @@ function Home(){
          .catch((error)=>{
              console.log(error);
          })
-    });
+    },[]);
 
     //get all overdue payments
   useEffect(() => {
@@ -37,7 +37,7 @@ function Home(){
          .catch((error)=>{
              console.log(error);
          })
-    });
+    },[]);
 
     return ( 
         <div>

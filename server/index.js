@@ -38,6 +38,11 @@ app.use('/overduepayments', [
     require('./routes/OverduePayments')
 ]);
 
+//Received Payments routes in the main index.js
+// app.use('/receivedpayments', [
+//     require('./routes/ReceivedPayment')
+// ]);
+
 
 app.listen(port, () => {
     console.log(`Listening at http://localhost:${port}`);
