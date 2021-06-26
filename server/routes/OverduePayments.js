@@ -15,7 +15,7 @@ app.get(('/alloverdue'),(req, res) => {
     });
 });
 
-    //get all overdue payments to home
+    //get all overdue payments that should settle today to home page
 app.get(('/home/alloverdue'),(req, res) => {
     database.query(
         "SELECT o.overdue_ID, c.company_name, o.invoice, c.contact_person, c.mobile_no, c.email, o.amount FROM overdue_payment o INNER JOIN client c ON c.code = o.company_code WHERE o.due_date = CURDATE() AND o.reply_status = 'Replied' ORDER BY o.overdue_ID ASC",
@@ -28,6 +28,33 @@ app.get(('/home/alloverdue'),(req, res) => {
     });
 });
 
+//get all overdue payments that should settle today to credit collector page
+app.get(('/credit/alloverdue'),(req, res) => {
+    database.query(
+        "SELECT o.overdue_ID, o.invoice, c.company_name, c.address, c.tel_no, c.contact_person, c.mobile_no, o.amount, o.credit_collected_status FROM overdue_payment o INNER JOIN client c ON c.code = o.company_code WHERE o.due_date = CURDATE() AND o.reply_status = 'Replied' ORDER BY o.overdue_ID ASC",
+        (err, result) => {
+            if(err){
+                console.log(err)
+            }else{
+                res.send(result)
+            }
+    });
+});
+
+//update overdue payment details according to credit collector
+app.put(('/credit/update/:id'), (req, res) => {
+    const overdue_ID = req.params.id;
+    database.query(
+        'UPDATE overdue_payment SET credit_collected_status = ? WHERE overdue_ID = ?', 
+        [1, overdue_ID], (err, result) => {
+            if(err){
+                console.log(err)
+            }else{
+                res.send("values updated")
+            }
+        }
+    );
+});
 
 //get overdue payment by id
 app.get(('/:id'),(req, res) => {
@@ -46,14 +73,14 @@ app.get(('/:id'),(req, res) => {
 //update overdue payment details to the database
 app.put(('/update/:id'), (req, res) => {
     const overdue_ID = req.params.id;
-    // const due_date = req.body.due_date;
+    const due_date = req.body.due_date;
     const reply_status = req.body.reply_status;
     // const collected_status = req.body.collected_status;
     const note = req.body.note;
 
     database.query(
-        'UPDATE overdue_payment SET reply_status = ?, note = ? WHERE overdue_ID = ?', 
-        [reply_status, note, overdue_ID], (err, result) => {
+        'UPDATE overdue_payment SET due_date = ?, reply_status = ?, note = ? WHERE overdue_ID = ?', 
+        [due_date, reply_status, note, overdue_ID], (err, result) => {
             if(err){
                 console.log(err)
             }else{

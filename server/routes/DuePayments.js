@@ -39,7 +39,7 @@ app.get(('/alldue'),(req, res) => {
     });
 });
 
-//get all due payments to home
+//get all due payments that should settle today to home page
 app.get(('/home/alldue'),(req, res) => {
     database.query(
         "SELECT d.due_ID, c.company_name, d.invoice, c.contact_person, c.mobile_no, c.email, d.amount FROM due_payment d INNER JOIN client c ON c.code = d.company_code WHERE d.due_date = CURDATE() AND d.reply_status = 'Ready for payment' ORDER BY d.due_ID ASC",
@@ -50,6 +50,34 @@ app.get(('/home/alldue'),(req, res) => {
                 res.send(result)
             }
     });
+});
+
+//get all due payments that should settle today to credit collector page
+app.get(('/credit/alldue'),(req, res) => {
+    database.query(
+        "SELECT d.due_ID, d.invoice, c.company_name, c.address, c.tel_no, c.contact_person, c.mobile_no, d.amount, d.credit_collected_status FROM due_payment d INNER JOIN client c ON c.code = d.company_code WHERE d.due_date = CURDATE() AND d.reply_status = 'Ready for payment' ORDER BY d.due_ID ASC",
+        (err, result) => {
+            if(err){
+                console.log(err)
+            }else{
+                res.send(result);
+            }
+    });
+});
+
+//update due payment details according to credit collector
+app.put(('/credit/update/:id'), (req, res) => {
+    const due_ID = req.params.id;
+    database.query(
+        'UPDATE due_payment SET credit_collected_status = ? WHERE due_ID = ?', 
+        [1, due_ID], (err, result) => {
+            if(err){
+                console.log(err)
+            }else{
+                res.send("values updated")
+            }
+        }
+    );
 });
 
 //get due payment by id
