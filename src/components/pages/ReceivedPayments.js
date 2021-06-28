@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 import { Link } from 'react-router-dom'
 // import '../../App.css
 import Homenav from '../Homenav';
@@ -6,8 +6,14 @@ import Sidebar from '../Sidebar'
 import Table from 'react-bootstrap/Table'
 import './Home.css';
 
-class ReceivedPayments extends Component {
-    render() {
+function ReceivedPayments(){
+    const [toggleState, setToggleState] = useState(1);
+
+    const toggleTab = (index) => {
+        setToggleState(index);
+    };
+    // const [dueList, setDueList]= useState([]);
+    // const [overdueList, setOverdueList]= useState([]);
         return ( 
             <div>
                 <Homenav/>
@@ -20,7 +26,93 @@ class ReceivedPayments extends Component {
                             <h1 style={{fontFamily:'serif', padding:'10px'}}>RECEIVED PAYMENTS</h1>
                         </div>
                         <div className="row" style={{margin:'10px'}}>
+                        <div className="bloc-tabs">
+                            <button
+                            className={toggleState === 1 ? "tabs active-tabs" : "tabs"}
+                            onClick={() => toggleTab(1)}
+                            >
+                            <h3>Due Payments</h3>
+                            </button>
+                            <button
+                            className={toggleState === 2 ? "tabs active-tabs" : "tabs"}
+                            onClick={() => toggleTab(2)}
+                            >
+                            <h3>Overdue Payments</h3>
+                            </button>
+                            
+                        </div>
+                        {/* ----------tab content---------------- */}
+                        <div className="content-tabs">
+
+                            {/* --------- due payments---------------- */}
+                            <div
+                            className={toggleState === 1 ? "content  active-content" : "content"}
+                            >
                             <Table responsive>
+                                <thead style={{backgroundColor:'pink', borderTop:'2px solid black'}}> 
+                                    <tr>
+                                        <th>Due ID</th>
+                                        <th>Company Name</th>
+                                        <th>Invoice</th>
+                                        <th>Telephone No.</th>
+                                        <th>Company Email</th>
+                                        <th>Amount</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>001</td>
+                                        <td>John Keels Holdings</td>
+                                        <td>001</td>
+                                        <td>011-1832811</td>
+                                        <td>jkh@gmail.com</td>
+                                        <td>30,000.00</td>
+                                        <td>
+                                            <Link>
+                                                <button name="view" value="view" type="submit" className="btn btn-primary ml-1 ">UPDATE</button>
+                                            </Link>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </Table>
+                            </div>
+
+                            {/* ---------- overdue payments---------------- */}
+                            <div
+                            className={toggleState === 2 ? "content  active-content" : "content"}
+                            >
+                            <Table responsive>
+                                <thead style={{backgroundColor:'pink', borderTop:'2px solid black'}}> 
+                                    <tr>
+                                        <th>Overdue ID</th>
+                                        <th>Company Name</th>
+                                        <th>Invoice</th>
+                                        <th>Telephone No.</th>
+                                        <th>Company Email</th>
+                                        <th>Amount</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>001</td>
+                                        <td>John Keels Holdings</td>
+                                        <td>001</td>
+                                        <td>011-1832811</td>
+                                        <td>jkh@gmail.com</td>
+                                        <td>30,000.00</td>
+                                        <td>
+                                            <Link>
+                                                <button name="view" value="view" type="submit" className="btn btn-primary ml-1 ">UPDATE</button>
+                                            </Link>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </Table>
+                            </div>
+                        </div>
+                            {/* <Table responsive>
                                 <thead style={{backgroundColor:'pink', borderTop:'2px solid black'}}> 
                                     <tr>
                                         <th>Received ID</th>
@@ -77,7 +169,7 @@ class ReceivedPayments extends Component {
                                         </td>
                                     </tr>
                                 </tbody>
-                            </Table>
+                            </Table> */}
                         </div> 
                         <div className="row" style={{margin:'10px'}}>
                             <div className="col">
@@ -92,7 +184,6 @@ class ReceivedPayments extends Component {
                 </div>
             </div>
          );
-    }
 }
  
 export default ReceivedPayments;
