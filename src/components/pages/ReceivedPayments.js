@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import Axios from 'axios'
 import { Link } from 'react-router-dom'
 // import '../../App.css
 import Homenav from '../Homenav';
@@ -12,8 +13,30 @@ function ReceivedPayments(){
     const toggleTab = (index) => {
         setToggleState(index);
     };
-    // const [dueList, setDueList]= useState([]);
+    const [dueList, setDueList]= useState([]);
     // const [overdueList, setOverdueList]= useState([]);
+
+    //get all received payments
+    useEffect(() => {
+        Axios.get('http://localhost:3001/receivedpayments/allreceiveddue')
+            .then(response => {
+                setDueList(response.data)
+            })
+            .catch((error)=>{
+                console.log(error);
+            })
+    });
+
+    const update=(id)=>{
+        Axios.put(`http://localhost:3001/receivedpayments/receiveddue/update/${id}`)
+            .then(response => {
+                // setDueList(response.data)
+            })
+            .catch((error)=>{
+                console.log(error);
+            })
+    }
+
         return ( 
             <div>
                 <Homenav/>
@@ -48,10 +71,10 @@ function ReceivedPayments(){
                             <div
                             className={toggleState === 1 ? "content  active-content" : "content"}
                             >
-                            <Table responsive>
+                            <Table responsive hover>
                                 <thead style={{backgroundColor:'pink', borderTop:'2px solid black'}}> 
                                     <tr>
-                                        <th>Due ID</th>
+                                        <th>Received ID</th>
                                         <th>Company Name</th>
                                         <th>Invoice</th>
                                         <th>Telephone No.</th>
@@ -61,19 +84,23 @@ function ReceivedPayments(){
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>001</td>
-                                        <td>John Keels Holdings</td>
-                                        <td>001</td>
-                                        <td>011-1832811</td>
-                                        <td>jkh@gmail.com</td>
-                                        <td>30,000.00</td>
+                                {dueList.map(val=>{
+                                    return(
+                                    <tr  key={val.receivedDue_ID}>
+                                        <td>{val.receivedDue_ID}</td>
+                                        <td>{val.company_name}</td>
+                                        <td>{val.invoice}</td>
+                                        <td>{val.tel_no}</td>
+                                        <td>{val.email}</td>
+                                        <td>{val.amount}</td>
                                         <td>
                                             <Link>
-                                                <button name="view" value="view" type="submit" className="btn btn-primary ml-1 ">UPDATE</button>
+                                                <button name="view" onClick={() => update(val.due_ID)} value="view" type="submit" className="btn btn-primary ml-1 ">UPDATE</button>
                                             </Link>
                                         </td>
                                     </tr>
+                                    );
+                                })}
                                 </tbody>
                             </Table>
                             </div>
@@ -82,7 +109,7 @@ function ReceivedPayments(){
                             <div
                             className={toggleState === 2 ? "content  active-content" : "content"}
                             >
-                            <Table responsive>
+                            <Table responsive hover>
                                 <thead style={{backgroundColor:'pink', borderTop:'2px solid black'}}> 
                                     <tr>
                                         <th>Overdue ID</th>
