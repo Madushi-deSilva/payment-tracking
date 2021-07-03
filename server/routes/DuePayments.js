@@ -29,7 +29,7 @@ app.post(('/create'), (req, res) => {
 //get all due payments
 app.get(('/alldue'),(req, res) => {
     database.query(
-        "SELECT d.due_ID, c.company_name, d.invoice, d.due_date, c.tel_no, c.email, d.amount, d.reply_status FROM due_payment d INNER JOIN client c ON c.code = d.company_code ORDER BY d.due_ID ASC",
+        "SELECT d.due_ID, c.company_name, d.invoice, d.due_date, c.tel_no, c.email, d.amount, d.reply_status, d.collected_status FROM due_payment d INNER JOIN client c ON c.code = d.company_code ORDER BY d.due_ID ASC",
         (err, result) => {
             if(err){
                 console.log(err)
@@ -68,13 +68,24 @@ app.get(('/credit/alldue'),(req, res) => {
 //update due payment details according to credit collector
 app.put(('/credit/update/:id'), (req, res) => {
     const due_ID = req.params.id;
-    database.query(
-        'UPDATE due_payment SET credit_collected_status = ? WHERE due_ID = ?', 
-        [1, due_ID], (err, result) => {
+    console.log('1')
+    let sql = `UPDATE due_payment SET credit_collected_status = ? WHERE due_ID = ?`;
+    database.query(sql, [1, due_ID], (err, result) => {
             if(err){
                 console.log(err)
+                console.log('2')
             }else{
-                res.send("values updated")
+                //insert collected payment to received payments table
+                console.log('3')
+                database.query(
+                    'INSERT IGNORE INTO received_due_payments (company_code, invoice, amount, due_ID) SELECT company_code, invoice, amount, due_ID FROM due_payment d WHERE d.due_date = CURDATE() AND d.credit_collected_status = "1"',(err, result) => {
+                        if(err){
+                            console.log(err)
+                        }else{
+                            res.send("values inserted")
+                        }
+                    }
+                );
             }
         }
     );
