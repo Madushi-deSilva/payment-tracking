@@ -50,10 +50,10 @@ function CreditCollector(){
         let checked = selected;
         if (checked.includes(id)) {
         let filtered = checked.filter((i) => {
-            if (i != id) return true;
+            if (i !== id) return true;
         });
         setselected(filtered);
-        } else if (selected.length == 0) {
+        } else if (selected.length === 0) {
         setselected([id]);
         } else {
         setselected([...selected, id]);
@@ -75,10 +75,10 @@ function CreditCollector(){
         let checked = selected;
         if (checked.includes(id)) {
         let filtered = checked.filter((i) => {
-            if (i != id) return true;
+            if (i !== id) return true;
         });
         setselected(filtered);
-        } else if (selected.length == 0) {
+        } else if (selected.length === 0) {
         setselected([id]);
         } else {
         setselected([...selected, id]);
@@ -127,7 +127,7 @@ function CreditCollector(){
                             <div
                             className={toggleState === 1 ? "content  active-content" : "content"}
                             >
-                                <Table responsive>
+                                <Table responsive hover>
                                     <thead style={{backgroundColor:'pink', borderTop:'2px solid black'}}> 
                                         <tr>
                                             <th>Invoice</th>
@@ -163,7 +163,7 @@ function CreditCollector(){
                             <div
                             className={toggleState === 2 ? "content  active-content" : "content"}
                             >
-                                <Table responsive>
+                                <Table responsive hover>
                                     <thead style={{backgroundColor:'pink', borderTop:'2px solid black'}}> 
                                         <tr>
                                         <th>Invoice</th>
