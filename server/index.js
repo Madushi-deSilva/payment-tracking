@@ -39,9 +39,9 @@ app.use('/overduepayments', [
 ]);
 
 //Received Payments routes in the main index.js
-// app.use('/receivedpayments', [
-//     require('./routes/ReceivedPayment')
-// ]);
+app.use('/receivedpayments', [
+    require('./routes/ReceivedPayments')
+]);
 
 
 app.listen(port, () => {
