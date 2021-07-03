@@ -79,7 +79,7 @@ function Home(){
                             <div
                             className={toggleState === 1 ? "content  active-content" : "content"}
                             >
-                            <Table responsive>
+                            <Table responsive hover>
                                 <thead style={{backgroundColor:'pink', borderTop:'2px solid black'}}> 
                                     <tr>
                                         <th>Due ID</th>
@@ -119,7 +119,7 @@ function Home(){
                             <div
                             className={toggleState === 2 ? "content  active-content" : "content"}
                             >
-                            <Table responsive>
+                            <Table responsive hover>
                                 <thead style={{backgroundColor:'pink', borderTop:'2px solid black'}}> 
                                     <tr>
                                         <th>Overdue ID</th>

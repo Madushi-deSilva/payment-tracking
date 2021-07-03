@@ -121,7 +121,7 @@ function Client(){
                                     </div>
                                 </div>
                                 {/* ----------all client details---------------- */}
-                                <Table responsive>
+                                <Table responsive hover>
                                     <thead style={{backgroundColor:'pink', borderTop:'2px solid black'}}> 
                                         <tr>
                                             <th>Code</th>

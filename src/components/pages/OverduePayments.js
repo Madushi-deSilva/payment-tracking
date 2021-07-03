@@ -54,7 +54,7 @@ const deleteOverdue = (id) =>{
                             <h1 style={{fontFamily:'serif', padding:'10px'}}>OVERDUE PAYMENTS</h1>
                         </div>
                         <div className="row" style={{margin:'10px'}}>
-                            <Table responsive>
+                            <Table responsive hover>
                                 <thead style={{backgroundColor:'pink', borderTop:'2px solid black'}}> 
                                     <tr>
                                         <th>Overdue ID</th>
