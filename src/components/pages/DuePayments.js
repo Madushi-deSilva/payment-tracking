@@ -85,7 +85,7 @@ const deleteDue = (id, status) =>{
                             </div>
                         </div>
                         <div className="row" style={{margin:'10px'}}>
-                            <Table responsive>
+                            <Table responsive hover>
                                 <thead style={{backgroundColor:'pink', borderTop:'2px solid black'}}> 
                                     <tr>
                                         <th>Due ID</th>
@@ -116,7 +116,7 @@ const deleteDue = (id, status) =>{
                                         <td>{val.tel_no}</td>
                                         <td>{val.email}</td>
                                         <td>{val.amount}</td>
-                                        <td><input type="checkbox" id="" name="" style={{width:'20px', height:'20px'}}/>{val.collected_status}</td>
+                                        <td><input type="checkbox" id="" name="" checked={val.collected_status} style={{width:'20px', height:'20px'}}/></td>
                                         <td>
                                             <Link to={`/edit-due/${val.due_ID}`}>
                                                 <button name="view" value="view" type="submit" className="btn btn-primary ml-1 btnView">VIEW</button>
