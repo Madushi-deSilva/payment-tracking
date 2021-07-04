@@ -62,7 +62,7 @@ function Client(){
              .catch((error)=>{
                  console.log(error);
              })
-    });
+    },[]);
 
 
     return ( 
