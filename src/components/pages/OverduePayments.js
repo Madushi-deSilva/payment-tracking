@@ -40,7 +40,7 @@ const deleteOverdue = (id) =>{
            .catch((error)=>{
                console.log(error);
            })
-  });
+  },[]);
 
         return ( 
             <div>
@@ -77,7 +77,7 @@ const deleteOverdue = (id) =>{
                                         <td>{val.tel_no}</td>
                                         <td>{val.email}</td>
                                         <td>{val.amount}</td>
-                                        <td><input type="checkbox" id="" name="" style={{width:'20px', height:'20px'}}/>{val.collected_status}</td>
+                                        <td><input type="checkbox" checked={val.collected_status} id="" name="" style={{width:'20px', height:'20px'}}/></td>
                                         <td>
                                             <Link to={`/edit-overdue/${val.overdue_ID}`}>
                                                 <button name="view" value="view" type="submit" className="btn btn-primary ml-1 btnView">VIEW</button>
