@@ -30,4 +30,33 @@ app.put(('/receiveddue/update/:id'), (req, res) => {
     );
 });
 
+
+//get all received overdue payments
+app.get(('/allreceivedoverdue'),(req, res) => {
+    database.query(
+        "SELECT r.receivedOverdue_ID, c.company_name, r.invoice,c.tel_no, c.email, r.amount, r.overdue_ID FROM received_overdue_payments r INNER JOIN client c ON c.code = r.company_code ORDER BY r.receivedOverdue_ID ASC",
+        (err, result) => {
+            if(err){
+                console.log(err)
+            }else{
+                res.send(result)
+            }
+    });
+});
+
+//update overdue payment table when clicking the update button in  received payments page
+app.put(('/receivedoverdue/update/:id'), (req, res) => {
+    console.log('Req ok', req.params.id)
+    const overdue_ID = req.params.id;
+    let sql = `UPDATE overdue_payment SET collected_status = ? WHERE overdue_ID = ?`;
+    database.query(sql, [1, overdue_ID], (err, result) => {
+            if(err){
+                console.log(err)
+            }else{
+                res.send("values updated")
+            }
+        }
+    );
+});
+
 module.exports = app;
