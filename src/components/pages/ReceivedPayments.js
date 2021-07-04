@@ -14,9 +14,9 @@ function ReceivedPayments(){
         setToggleState(index);
     };
     const [dueList, setDueList]= useState([]);
-    // const [overdueList, setOverdueList]= useState([]);
+    const [overdueList, setOverdueList]= useState([]);
 
-    //get all received payments
+    //get all received due payments
     useEffect(() => {
         Axios.get('http://localhost:3001/receivedpayments/allreceiveddue')
             .then(response => {
@@ -25,12 +25,35 @@ function ReceivedPayments(){
             .catch((error)=>{
                 console.log(error);
             })
-    });
+    },[]);
 
-    const update=(id)=>{
+    //get all received overdue payments
+    useEffect(() => {
+        Axios.get('http://localhost:3001/receivedpayments/allreceivedoverdue')
+            .then(response => {
+                setOverdueList(response.data)
+            })
+            .catch((error)=>{
+                console.log(error);
+            })
+    },[]);
+
+    //update button in received due payments
+    const updateDue=(id)=>{
         Axios.put(`http://localhost:3001/receivedpayments/receiveddue/update/${id}`)
             .then(response => {
                 // setDueList(response.data)
+            })
+            .catch((error)=>{
+                console.log(error);
+            })
+    }
+
+    //update button in received overdue payments
+    const updateOverdue=(id)=>{
+        Axios.put(`http://localhost:3001/receivedpayments/receivedoverdue/update/${id}`)
+            .then(response => {
+                // setOverdueList(response.data)
             })
             .catch((error)=>{
                 console.log(error);
@@ -95,7 +118,7 @@ function ReceivedPayments(){
                                         <td>{val.amount}</td>
                                         <td>
                                             <Link>
-                                                <button name="view" onClick={() => update(val.due_ID)} value="view" type="submit" className="btn btn-primary ml-1 ">UPDATE</button>
+                                                <button name="view" onClick={() => updateDue(val.due_ID)} value="view" type="submit" className="btn btn-primary ml-1 ">UPDATE</button>
                                             </Link>
                                         </td>
                                     </tr>
@@ -112,91 +135,37 @@ function ReceivedPayments(){
                             <Table responsive hover>
                                 <thead style={{backgroundColor:'pink', borderTop:'2px solid black'}}> 
                                     <tr>
-                                        <th>Overdue ID</th>
-                                        <th>Company Name</th>
-                                        <th>Invoice</th>
-                                        <th>Telephone No.</th>
-                                        <th>Company Email</th>
-                                        <th>Amount</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>001</td>
-                                        <td>John Keels Holdings</td>
-                                        <td>001</td>
-                                        <td>011-1832811</td>
-                                        <td>jkh@gmail.com</td>
-                                        <td>30,000.00</td>
-                                        <td>
-                                            <Link>
-                                                <button name="view" value="view" type="submit" className="btn btn-primary ml-1 ">UPDATE</button>
-                                            </Link>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </Table>
-                            </div>
-                        </div>
-                            {/* <Table responsive>
-                                <thead style={{backgroundColor:'pink', borderTop:'2px solid black'}}> 
-                                    <tr>
                                         <th>Received ID</th>
                                         <th>Company Name</th>
                                         <th>Invoice</th>
                                         <th>Telephone No.</th>
                                         <th>Company Email</th>
                                         <th>Amount</th>
-                                        <th>Due/ Overdue</th>
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>R001</td>
-                                        <td>John Keels Holdings</td>
-                                        <td>001</td>
-                                        <td>011-1832811</td>
-                                        <td>jkh@gmail.com</td>
-                                        <td>30,000.00</td>
-                                        <td>Due</td>
+                                {overdueList.map(val=>{
+                                    return(
+                                    <tr key={val.receivedOverdue_ID}>
+                                        <td>{val.receivedOverdue_ID}</td>
+                                        <td>{val.company_name}</td>
+                                        <td>{val.invoice}</td>
+                                        <td>{val.tel_no}</td>
+                                        <td>{val.email}</td>
+                                        <td>{val.amount}</td>
                                         <td>
                                             <Link>
-                                                <button name="view" value="view" type="submit" className="btn btn-primary ml-1 ">UPDATE</button>
+                                                <button name="view" onClick={() => updateOverdue(val.overdue_ID)} value="view" type="submit" className="btn btn-primary ml-1 ">UPDATE</button>
                                             </Link>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>R002</td>
-                                        <td>John Keels Holdings</td>
-                                        <td>002</td>
-                                        <td>011-1832811</td>
-                                        <td>jkh@gmail.com</td>
-                                        <td>20,000.00</td>
-                                        <td>Overdue</td>
-                                        <td>
-                                            <Link>
-                                                <button name="view" value="view" type="submit" className="btn btn-primary ml-1 ">UPDATE</button>
-                                            </Link>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>R003</td>
-                                        <td>John Keels Holdings</td>
-                                        <td>005</td>
-                                        <td>011-1832811</td>
-                                        <td>jkh@gmail.com</td>
-                                        <td>23,000.00</td>
-                                        <td>Due</td>
-                                        <td>
-                                            <Link>
-                                                <button name="view" value="view" type="submit" className="btn btn-primary ml-1 ">UPDATE</button>
-                                            </Link>
-                                        </td>
-                                    </tr>
+                                    );
+                                })}
                                 </tbody>
-                            </Table> */}
+                            </Table>
+                            </div>
+                        </div>
                         </div> 
                         <div className="row" style={{margin:'10px'}}>
                             <div className="col">
