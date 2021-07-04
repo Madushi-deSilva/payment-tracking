@@ -5,7 +5,7 @@ var database = require('../config/database');
 //get all overdue payments
 app.get(('/alloverdue'),(req, res) => {
     database.query(
-        "SELECT o.overdue_ID, c.company_name, o.invoice, c.tel_no, c.email, o.amount FROM overdue_payment o INNER JOIN client c ON c.code = o.company_code ORDER BY o.overdue_ID ASC",
+        "SELECT o.overdue_ID, c.company_name, o.invoice, c.tel_no, c.email, o.amount, o.collected_status FROM overdue_payment o INNER JOIN client c ON c.code = o.company_code ORDER BY o.overdue_ID ASC",
         (err, result) => {
             if(err){
                 console.log(err)
@@ -44,13 +44,21 @@ app.get(('/credit/alloverdue'),(req, res) => {
 //update overdue payment details according to credit collector
 app.put(('/credit/update/:id'), (req, res) => {
     const overdue_ID = req.params.id;
-    database.query(
-        'UPDATE overdue_payment SET credit_collected_status = ? WHERE overdue_ID = ?', 
-        [1, overdue_ID], (err, result) => {
+    let sql = `UPDATE overdue_payment SET credit_collected_status = ? WHERE overdue_ID = ?`;
+    database.query(sql, [1, overdue_ID], (err, result) => {
             if(err){
                 console.log(err)
             }else{
-                res.send("values updated")
+                //insert collected payment to received  overdue payments table
+                database.query(
+                    'INSERT IGNORE INTO received_overdue_payments (company_code, invoice, amount, overdue_ID) SELECT company_code, invoice, amount, overdue_ID FROM overdue_payment o WHERE o.due_date = CURDATE() AND o.credit_collected_status = "1"',(err, result) => {
+                        if(err){
+                            console.log(err)
+                        }else{
+                            res.send("values inserted")
+                        }
+                    }
+                );
             }
         }
     );
