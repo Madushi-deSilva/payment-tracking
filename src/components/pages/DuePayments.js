@@ -48,7 +48,7 @@ const deleteDue = (id, status) =>{
          .catch((error)=>{
              console.log(error);
          })
-});
+},[]);
     
         return ( 
             <div>
