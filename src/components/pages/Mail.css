@@ -1,0 +1,76 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.mailcontainer {
+  background-color: lightseagreen;
+  margin: 100px auto;
+  width: 90%;
+  height: 450px;
+  box-shadow: 1px 1px 4px 1px lightgray;
+}
+
+.mailcontainer form {
+  width: 100%;
+  padding: 10px;
+}
+
+.mailcontainer label {
+  display: block;
+  letter-spacing: 0.1rem;
+  font-style: italic;
+  margin-bottom: 3px;
+}
+
+.btnSend {
+  width: 100%;
+  text-align: center;
+}
+
+.btnSend button {
+  background-color: #6835ff;
+  border-radius: 5px;
+  width: 150px;
+  font-size: 18px;
+  letter-spacing: 0.2rem;
+  padding: 5px 10px;
+  border: none;
+  position: relative;
+  margin-top: 5px;
+}
+
+.btnSend button:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.msg {
+  text-align: center;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  letter-spacing: 0.2rem;
+  font-style: italic;
+  width: 340;
+  padding: 3px;
+  font-size: 16px;
+  font-weight: bold;
+  color: rgb(5, 110, 5);
+  background-color: #fff;
+  border-radius: 5px;
+  display: none;
+}
+
+.msgAppear {
+  display: block;
+}
+
+@media screen and (min-width: 986px) {
+  .mailcontainer {
+    width: 40%;
+  }
+  .mailcard {
+    margin-top: 0;
+  }
+}

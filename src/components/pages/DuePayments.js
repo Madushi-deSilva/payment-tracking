@@ -79,7 +79,9 @@ const deleteDue = (id, status) =>{
                                     <Link to="/add-new">
                                         <button name="send" value="send" type="submit" className="btn btn-primary ml-1">Add New Payment</button>
                                     </Link>
+                                    <Link to="/due-mail">
                                         <button name="send" value="send" type="submit" className="btn btn-success ml-1">Send Notification</button>
+                                    </Link>
                                     </div>
                                 </div>
                             </div>
