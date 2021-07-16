@@ -183,8 +183,8 @@ app.post('/duemail', (req, res) => {
     });
 
     let mailOptions = {
-        from: 'mdsi.desilva@gmail.com',
-        to: data.email,
+        from: data.from,
+        to: data.to,
         subject: 'Regarding the Due Payment',
         html: `
 
