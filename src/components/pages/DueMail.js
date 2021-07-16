@@ -6,16 +6,23 @@ import './Mail.css';
 
 class DueMail extends Component {
     state = {
-        email: '',
+        from:'',
+        to: '',
         amount: '',
         duedate: '',
         sent: false
     }
 
     //handle inputs
-    handleEmail = (e) => {
+    handleFrom = (e) => {
         this.setState({
-            email: e.target.value
+            from: e.target.value
+        })
+    }
+
+    handleTo = (e) => {
+        this.setState({
+            to: e.target.value
         })
     }
 
@@ -35,7 +42,8 @@ class DueMail extends Component {
     formSubmit = (e) => {
         e.preventDefault();
         let data = {
-            email: this.state.email,
+            from: this.state.from,
+            to: this.state.to,
             amount: this.state.amount,
             duedate: this.state.duedate
         }
@@ -54,7 +62,8 @@ class DueMail extends Component {
     //for resetting initial data
     resetForm = () => {
         this.setState({
-            email: '',
+            from:'',
+            to: '',
             amount: '',
             duedate: ''
         })
@@ -77,32 +86,38 @@ class DueMail extends Component {
                         <div className="card mt-4 mailcard">
                             <div className="card-header bg-white">
                                 <div className="row">
-                                    <i className="fas fa-user mx-2 my-auto fa-2x" style={{width:'auto'}}></i>
-                                    <h3 className="ml-2 my-auto" style={{width:'auto'}}>Edit Client</h3>
+                                    <i className="fa fa-envelope mx-2 my-auto fa-2x" style={{width:'auto'}}></i>
+                                    <h3 className="ml-2 my-auto" style={{width:'auto'}}>Send Due Payment Notification</h3>
                                 </div>
                             </div>
                             <div className="card-body">
                                 <form className="m-3 row" onSubmit={this.formSubmit}>
                                     
-                                        <div className="form-group row formGroup ">
-                                            <label className="col-12 col-md-4 col-xl-4">Email</label>
-                                            <input type="email" className="form-control  col-12 col-md-8 col-xl-8" id="email"
-                                                name="email" value={this.state.email} onChange={this.handleEmail} required/>
-                                        
-                                        </div>
+                                    <div className="form-group row formGroup ">
+                                        <label className="col-12 col-md-4 col-xl-4">From</label>
+                                        <input type="email" className="form-control  col-12 col-md-8 col-xl-8" id="from"
+                                            name="from" value={this.state.from} onChange={this.handleFrom} required/>
+                                    
+                                    </div>
+                                    <div className="form-group row formGroup ">
+                                        <label className="col-12 col-md-4 col-xl-4">To</label>
+                                        <input type="email" className="form-control  col-12 col-md-8 col-xl-8" id="to"
+                                            name="to" value={this.state.to} onChange={this.handleTo} required/>
+                                    
+                                    </div>
 
-                                        <div className="form-group row formGroup">
-                                            <label className="col-12 col-md-4 col-xl-4">Amount</label>
-                                                <input type="text" className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="amount"
-                                                name="amount" value={this.state.amount} onChange={this.handleAmount}
-                                                />
-                                        </div>
+                                    <div className="form-group row formGroup">
+                                        <label className="col-12 col-md-4 col-xl-4">Amount</label>
+                                            <input type="text" className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="amount"
+                                            name="amount" value={this.state.amount} onChange={this.handleAmount}
+                                            />
+                                    </div>
 
-                                        <div className="form-group row formGroup">
-                                            <label className="col-12 col-md-4 col-xl-4">Due Date</label>
-                                            <input type="date" className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="duedate"
-                                                name="duedate" value={this.state.duedate} onChange={this.handleDuedate}/>
-                                        </div>
+                                    <div className="form-group row formGroup">
+                                        <label className="col-12 col-md-4 col-xl-4">Due Date</label>
+                                        <input type="date" className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="duedate"
+                                            name="duedate" value={this.state.duedate} onChange={this.handleDuedate}/>
+                                    </div>
                                     <div className="row form-group mx-3 formGroup">
                                     <div className={this.state.sent ? 'msg msgAppear' : 'msg'}>Message has been sent</div>
                                         <div className="btn btnSend">
