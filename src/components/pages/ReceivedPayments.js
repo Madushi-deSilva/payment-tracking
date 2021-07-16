@@ -97,6 +97,7 @@ function ReceivedPayments(){
                             <Table responsive hover>
                                 <thead style={{backgroundColor:'pink', borderTop:'2px solid black'}}> 
                                     <tr>
+                                        <th></th>
                                         <th>Received ID</th>
                                         <th>Company Name</th>
                                         <th>Invoice</th>
@@ -110,6 +111,7 @@ function ReceivedPayments(){
                                 {dueList.map(val=>{
                                     return(
                                     <tr  key={val.receivedDue_ID}>
+                                        <td><input type="checkbox" id="" name="" style={{width:'20px', height:'20px'}}/></td>
                                         <td>{val.receivedDue_ID}</td>
                                         <td>{val.company_name}</td>
                                         <td>{val.invoice}</td>
@@ -135,6 +137,7 @@ function ReceivedPayments(){
                             <Table responsive hover>
                                 <thead style={{backgroundColor:'pink', borderTop:'2px solid black'}}> 
                                     <tr>
+                                        <th></th>
                                         <th>Received ID</th>
                                         <th>Company Name</th>
                                         <th>Invoice</th>
@@ -148,6 +151,7 @@ function ReceivedPayments(){
                                 {overdueList.map(val=>{
                                     return(
                                     <tr key={val.receivedOverdue_ID}>
+                                        <td><input type="checkbox" id="" name="" style={{width:'20px', height:'20px'}}/></td>
                                         <td>{val.receivedOverdue_ID}</td>
                                         <td>{val.company_name}</td>
                                         <td>{val.invoice}</td>

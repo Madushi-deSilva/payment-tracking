@@ -90,6 +90,7 @@ const deleteDue = (id, status) =>{
                             <Table responsive hover>
                                 <thead style={{backgroundColor:'pink', borderTop:'2px solid black'}}> 
                                     <tr>
+                                        <th></th>
                                         <th>Due ID</th>
                                         <th>Company Name</th>
                                         <th>Invoice</th>
@@ -111,6 +112,7 @@ const deleteDue = (id, status) =>{
                                     }).map(val=>{
                                     return(
                                     <tr key={val.due_ID}>
+                                        <td><input type="checkbox" id="" name="" style={{width:'20px', height:'20px'}}/></td>
                                         <td>{val.due_ID}</td>
                                         <td>{val.company_name}</td>
                                         <td>{val.invoice}</td>

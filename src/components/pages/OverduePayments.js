@@ -57,6 +57,7 @@ const deleteOverdue = (id) =>{
                             <Table responsive hover>
                                 <thead style={{backgroundColor:'pink', borderTop:'2px solid black'}}> 
                                     <tr>
+                                        <th></th>
                                         <th>Overdue ID</th>
                                         <th>Company Name</th>
                                         <th>Invoice</th>
@@ -71,6 +72,7 @@ const deleteOverdue = (id) =>{
                                 {overdueList.map(val=>{
                                     return(
                                     <tr key={val.overdue_ID}>
+                                        <td><input type="checkbox" id="" name="" style={{width:'20px', height:'20px'}}/></td>
                                         <td>{val.overdue_ID}</td>
                                         <td>{val.company_name}</td>
                                         <td>{val.invoice}</td>
