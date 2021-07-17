@@ -60,6 +60,34 @@ app.put(('/receivedoverdue/update/:id'), (req, res) => {
     );
 });
 
+//view received due payment by id in email
+app.get(('/receivedmail/due/:id'),(req, res) => {
+    const receivedDue_ID = req.params.id;
+    database.query(
+        "SELECT c.email, r.amount FROM received_due_payments r INNER JOIN client c ON c.code = r.company_code WHERE receivedDue_ID = ?", [receivedDue_ID],
+        (err, result) => {
+            if(err){
+                console.log(err)
+            }else{
+                res.send(result)
+            }
+    });
+});
+
+//view received overdue payment by id in email
+app.get(('/receivedmail/overdue/:id'),(req, res) => {
+    const receivedOverdue_ID = req.params.id;
+    database.query(
+        "SELECT c.email, r.amount FROM received_overdue_payments r INNER JOIN client c ON c.code = r.company_code WHERE receivedOverdue_ID = ?", [receivedOverdue_ID],
+        (err, result) => {
+            if(err){
+                console.log(err)
+            }else{
+                res.send(result)
+            }
+    });
+});
+
 //email sending
 app.post('/receivedmail', (req, res) => {
 

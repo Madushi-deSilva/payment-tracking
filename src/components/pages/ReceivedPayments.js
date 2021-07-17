@@ -99,7 +99,6 @@ function ReceivedPayments(){
                             <Table responsive hover>
                                 <thead style={{backgroundColor:'pink', borderTop:'2px solid black'}}> 
                                     <tr>
-                                        <th></th>
                                         <th>Received ID</th>
                                         <th>Company Name</th>
                                         <th>Invoice</th>
@@ -113,7 +112,6 @@ function ReceivedPayments(){
                                 {dueList.map(val=>{
                                     return(
                                     <tr  key={val.receivedDue_ID}>
-                                        <td><input type="checkbox" id="" name="" style={{width:'20px', height:'20px'}}/></td>
                                         <td>{val.receivedDue_ID}</td>
                                         <td>{val.company_name}</td>
                                         <td>{val.invoice}</td>
@@ -122,7 +120,10 @@ function ReceivedPayments(){
                                         <td>{val.amount}</td>
                                         <td>
                                             <Link>
-                                                <button name="view" onClick={() => updateDue(val.due_ID)} value="view" type="submit" className="btn btn-primary ml-1 ">UPDATE</button>
+                                                <button name="view" onClick={() => updateDue(val.due_ID)} value="view" type="submit" className="btn btn-primary ml-1 "><i class="fas fa-edit" data-toggle="tooltip" data-placement="top" title="Update"></i></button>
+                                            </Link>
+                                            <Link to={`/received-mail/${val.receivedDue_ID}`}>
+                                            <button name="view" value="view" type="submit" className="btn btn-success ml-1 btnView"><i class="fas fa-envelope" data-toggle="tooltip" data-placement="top" title="Send Email"></i></button>
                                             </Link>
                                         </td>
                                     </tr>
@@ -139,7 +140,6 @@ function ReceivedPayments(){
                             <Table responsive hover>
                                 <thead style={{backgroundColor:'pink', borderTop:'2px solid black'}}> 
                                     <tr>
-                                        <th></th>
                                         <th>Received ID</th>
                                         <th>Company Name</th>
                                         <th>Invoice</th>
@@ -153,7 +153,6 @@ function ReceivedPayments(){
                                 {overdueList.map(val=>{
                                     return(
                                     <tr key={val.receivedOverdue_ID}>
-                                        <td><input type="checkbox" id="" name="" style={{width:'20px', height:'20px'}}/></td>
                                         <td>{val.receivedOverdue_ID}</td>
                                         <td>{val.company_name}</td>
                                         <td>{val.invoice}</td>
@@ -162,7 +161,10 @@ function ReceivedPayments(){
                                         <td>{val.amount}</td>
                                         <td>
                                             <Link>
-                                                <button name="view" onClick={() => updateOverdue(val.overdue_ID)} value="view" type="submit" className="btn btn-primary ml-1 ">UPDATE</button>
+                                                <button name="view" onClick={() => updateOverdue(val.overdue_ID)} value="view" type="submit" className="btn btn-primary ml-1 "><i class="fas fa-edit" data-toggle="tooltip" data-placement="top" title="Update"></i></button>
+                                            </Link>
+                                            <Link to={`/received-mail/${val.receivedOverdue_ID}`}>
+                                            <button name="view" value="view" type="submit" className="btn btn-success ml-1 btnView"><i class="fas fa-envelope" data-toggle="tooltip" data-placement="top" title="Send Email"></i></button>
                                             </Link>
                                         </td>
                                     </tr>
@@ -172,15 +174,6 @@ function ReceivedPayments(){
                             </Table>
                             </div>
                         </div>
-                        </div> 
-                        <div className="row" style={{margin:'10px'}}>
-                            <div className="col">
-                                <div className="row form-group mx-3 formGroup">
-                                    <Link to="/received-mail">
-                                        <button name="send" value="send" type="submit" className="btn btn-success ml-1">Send Thanking Note</button>
-                                    </Link>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
