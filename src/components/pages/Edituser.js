@@ -76,6 +76,7 @@ class Edituser extends Component{
     }
 
     render(){
+        console.log("user ID", this.props.match.params.id)
         return(
             <div className="container jumbotron bg-white shadow mt-4 col-9 editContainer">
                 <div className="card">

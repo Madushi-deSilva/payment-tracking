@@ -86,7 +86,7 @@ function Homenav() {
                   onClose={handleClose}
               >
                   <StyledMenuItem>
-                      <Link to="./edit-user/:id">
+                      <Link to={`/edit-user/${localStorage.getItem("user")}`}>
                           <ListItemText primary="Edit Profile" />
                       </Link>
                   </StyledMenuItem>
