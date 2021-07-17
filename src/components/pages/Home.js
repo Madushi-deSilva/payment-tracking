@@ -105,7 +105,7 @@ function Home(){
                                         <td>{val.amount}</td>
                                         <td>
                                             <Link to={`/edit-due/${val.due_ID}`}>
-                                                <button name="view" value="view" type="submit" className="btn btn-primary ml-1">VIEW</button>
+                                                <button name="view" value="view" type="submit" className="btn btn-primary ml-1"><i class="fas fa-eye" data-toggle="tooltip" data-placement="top" title="View"></i></button>
                                             </Link>
                                         </td>
                                     </tr>
@@ -145,7 +145,7 @@ function Home(){
                                         <td>{val.amount}</td>
                                         <td>
                                             <Link to={`/edit-overdue/${val.overdue_ID}`}>
-                                                <button name="view" value="view" type="submit" className="btn btn-primary ml-1 ">VIEW</button>
+                                                <button name="view" value="view" type="submit" className="btn btn-primary ml-1 "><i class="fas fa-eye" data-toggle="tooltip" data-placement="top" title="View"></i></button>
                                             </Link>
                                         </td>
                                     </tr>
