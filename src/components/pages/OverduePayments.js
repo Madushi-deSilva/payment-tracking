@@ -57,7 +57,6 @@ const deleteOverdue = (id) =>{
                             <Table responsive hover>
                                 <thead style={{backgroundColor:'pink', borderTop:'2px solid black'}}> 
                                     <tr>
-                                        <th></th>
                                         <th>Overdue ID</th>
                                         <th>Company Name</th>
                                         <th>Invoice</th>
@@ -65,14 +64,13 @@ const deleteOverdue = (id) =>{
                                         <th>Company Email</th>
                                         <th>Amount</th>
                                         <th>Collected</th>
-                                        <th></th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 {overdueList.map(val=>{
                                     return(
                                     <tr key={val.overdue_ID}>
-                                        <td><input type="checkbox" id="" name="" style={{width:'20px', height:'20px'}}/></td>
                                         <td>{val.overdue_ID}</td>
                                         <td>{val.company_name}</td>
                                         <td>{val.invoice}</td>
@@ -82,12 +80,12 @@ const deleteOverdue = (id) =>{
                                         <td><input type="checkbox" checked={val.collected_status} id="" name="" style={{width:'20px', height:'20px'}}/></td>
                                         <td>
                                             <Link to={`/edit-overdue/${val.overdue_ID}`}>
-                                                <button name="view" value="view" type="submit" className="btn btn-primary ml-1 btnView">VIEW</button>
+                                                <button name="view" value="view" type="submit" className="btn btn-primary ml-1 btnView"><i class="fas fa-eye" data-toggle="tooltip" data-placement="top" title="View"></i></button>
                                             </Link>
-                                            {/* <Link to="/home-main">
-                                                <button name="delete" value="delete" type="submit" className="btn btn-danger ml-1">DELETE</button>
-                                            </Link> */}
-                                            <Button variant="danger" onClick={() => handleShow(val.overdue_ID)}> Delete </Button>
+                                            <Link to={`/overdue-mail/${val.overdue_ID}`}>
+                                                <button name="view" value="view" type="submit" className="btn btn-success ml-1 btnView"><i class="fas fa-envelope" data-toggle="tooltip" data-placement="top" title="Send Email"></i></button>
+                                            </Link>
+                                            <Button variant="danger" onClick={() => handleShow(val.overdue_ID)}> <i class="fas fa-trash-alt" data-toggle="tooltip" data-placement="top" title="Delete"></i> </Button>
                                             <Modal show={show} onHide={handleClose}>
                                                 <Modal.Body>Are you want to delete?</Modal.Body>
                                                 <Modal.Footer>
@@ -101,15 +99,6 @@ const deleteOverdue = (id) =>{
                                 })} 
                                 </tbody>
                             </Table>
-                        </div> 
-                        <div className="row" style={{margin:'10px'}}>
-                            <div className="col">
-                                <div className="row form-group mx-3 formGroup">
-                                    <Link to="/overdue-mail">
-                                        <button name="send" value="send" type="submit" className="btn btn-success ml-1">Send Notification</button>
-                                    </Link>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>

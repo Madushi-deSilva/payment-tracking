@@ -118,6 +118,20 @@ app.delete(('/delete/:id'), (req, res) => {
 
 });
 
+//view overdue payment by id in email
+app.get(('/overduemail/:id'),(req, res) => {
+    const overdue_ID = req.params.id;
+    database.query(
+        "SELECT c.email, o.amount, o.due_date FROM overdue_payment o INNER JOIN client c ON c.code = o.company_code WHERE overdue_ID = ?", [overdue_ID],
+        (err, result) => {
+            if(err){
+                console.log(err)
+            }else{
+                res.send(result)
+            }
+    });
+});
+
 //email sending
 app.post('/overduemail', (req, res) => {
 

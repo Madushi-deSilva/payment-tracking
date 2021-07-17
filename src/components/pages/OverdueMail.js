@@ -1,80 +1,54 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import {useParams} from 'react-router';
 import Homenav from '../Homenav'
 import Sidebar from '../Sidebar'
 import './Mail.css';
 
-class OverdueMail extends Component {
-    state = {
-        from:'',
-        to: '',
-        amount: '',
-        duedate: '',
-        sent: false
-    }
+function OverdueMail() {
+    const [overdue, setOverdue]= useState({});
+    const [ from, setFrom] = useState("");
+    const [ to, setTo] = useState("");
+    const [ amount, setAmount] = useState(0);
+    const [ duedate, setDueDate] = useState(0);
 
-    //handle inputs
-    handleFrom = (e) => {
-        this.setState({
-            from: e.target.value
-        })
-    }
+    let params = useParams();
 
-    handleTo = (e) => {
-        this.setState({
-            to: e.target.value
-        })
-    }
-
-    handleAmount = (e) => {
-        this.setState({
-            amount: e.target.value
-        })
-    }
-
-    handleDuedate = (e) => {
-        this.setState({
-            duedate: e.target.value
-        })
-    }
+    //view overdue payment by id
+    useEffect(() => {
+        console.log("id", params.id)
+        axios.get(`http://localhost:3001/overduepayments/overduemail/${params.id}`)
+             .then(response => {                
+                 console.log("E data",response.data)
+                 setOverdue(response.data[0])
+                 setTo(response.data[0].email);
+                 setAmount(response.data[0].amount);
+                 setDueDate(response.data[0].due_date);
+             })
+             .catch((error)=>{
+                 console.log(error);
+             })
+    },[]);
 
     //form submit - end of handel inputs
-    formSubmit = (e) => {
+    const formSubmit = (e) => {
         e.preventDefault();
         let data = {
-            from: this.state.from,
-            to: this.state.to,
-            amount: this.state.amount,
-            duedate: this.state.duedate
+            from: from,
+            to: to,
+            amount:amount,
+            duedate:duedate
         }
 
         axios.post('http://localhost:3001/overduepayments/overduemail', data)
-            .then(res => {
-                this.setState({
-                    sent: true,
-                }, this.resetForm())
-            })
+        .then(() => {
+            alert("Message has been sent");
+            window.location.href = 'http://localhost:3000/overdue-payments';
+        })
             .catch(() => {
                 console.log("message not sent");
             })
     }
-
-    //for resetting initial data
-    resetForm = () => {
-        this.setState({
-            from:'',
-            to: '',
-            amount: '',
-            duedate: ''
-        })
-        setTimeout(() => {
-            this.setState({
-                sent: false,
-            })
-        }, 1000)
-    }
-
-    render() {
         return (
             <div>
             {/* ---------home navigation componenet---------- */}
@@ -91,35 +65,34 @@ class OverdueMail extends Component {
                                 </div>
                             </div>
                             <div className="card-body">
-                                <form className="m-3 row" onSubmit={this.formSubmit}>
+                                <form className="m-3 row" onSubmit={formSubmit}>
                                     
                                     <div className="form-group row formGroup ">
                                         <label className="col-12 col-md-4 col-xl-4">From</label>
                                         <input type="email" className="form-control  col-12 col-md-8 col-xl-8" id="from"
-                                            name="from" value={this.state.from} onChange={this.handleFrom} required/>
+                                            name="from" value={from} onChange={(event) => {setFrom(event.target.value);}} required/>
                                     
                                     </div>
                                     <div className="form-group row formGroup ">
                                         <label className="col-12 col-md-4 col-xl-4">To</label>
                                         <input type="email" className="form-control  col-12 col-md-8 col-xl-8" id="to"
-                                            name="to" value={this.state.to} onChange={this.handleTo} required/>
+                                            name="to" value={to} onChange={(event) => {setTo(event.target.value);}} required/>
                                     
                                     </div>
 
                                     <div className="form-group row formGroup">
                                         <label className="col-12 col-md-4 col-xl-4">Amount</label>
                                             <input type="text" className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="amount"
-                                            name="amount" value={this.state.amount} onChange={this.handleAmount}
+                                            name="amount" value={amount} onChange={(event) => {setAmount(event.target.value);}}
                                             />
                                     </div>
 
                                     <div className="form-group row formGroup">
                                         <label className="col-12 col-md-4 col-xl-4">Due Date</label>
                                         <input type="date" className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="duedate"
-                                            name="duedate" value={this.state.duedate} onChange={this.handleDuedate}/>
+                                            name="duedate" value={duedate} onChange={(event) => {setDueDate(event.target.value);}}/>
                                     </div>
                                     <div className="row form-group mx-3 formGroup">
-                                    <div className={this.state.sent ? 'msg msgAppear' : 'msg'}>Message has been sent</div>
                                         <div className="btn btnSend">
                                             <button type="submit">Send Email</button>
                                         </div>
@@ -131,7 +104,7 @@ class OverdueMail extends Component {
                 </div>
             </div>
         );
-    }
+
 }
 
 export default OverdueMail;
