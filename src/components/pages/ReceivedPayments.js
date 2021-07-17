@@ -42,7 +42,8 @@ function ReceivedPayments(){
     const updateDue=(id)=>{
         Axios.put(`http://localhost:3001/receivedpayments/receiveddue/update/${id}`)
             .then(response => {
-                // setDueList(response.data)
+                alert("Duepayment updated successfully");
+                window.location.href = 'http://localhost:3000/due-payments';
             })
             .catch((error)=>{
                 console.log(error);
@@ -53,7 +54,8 @@ function ReceivedPayments(){
     const updateOverdue=(id)=>{
         Axios.put(`http://localhost:3001/receivedpayments/receivedoverdue/update/${id}`)
             .then(response => {
-                // setOverdueList(response.data)
+                alert("Overduepayment updated successfully");
+                window.location.href = 'http://localhost:3000/overdue-payments';
             })
             .catch((error)=>{
                 console.log(error);
@@ -174,7 +176,7 @@ function ReceivedPayments(){
                         <div className="row" style={{margin:'10px'}}>
                             <div className="col">
                                 <div className="row form-group mx-3 formGroup">
-                                    <Link>
+                                    <Link to="/received-mail">
                                         <button name="send" value="send" type="submit" className="btn btn-success ml-1">Send Thanking Note</button>
                                     </Link>
                                 </div>
