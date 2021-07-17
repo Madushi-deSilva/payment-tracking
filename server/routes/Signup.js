@@ -42,7 +42,7 @@ app.post('/login', (req, res) => {
     const password = req.body.password;
 
     if(job_role === 'Account Officer'){
-        database.query("SELECT username, password, job_role FROM account_officer WHERE username = ? AND password = ? AND job_role = 'Account Officer'", 
+        database.query("SELECT accountOfficer_userID, username, password, job_role FROM account_officer WHERE username = ? AND password = ? AND job_role = 'Account Officer'", 
             [username, password, job_role], (err, result) => {
                 if(err){
                     res.send({err: err})
@@ -56,7 +56,7 @@ app.post('/login', (req, res) => {
             }
         );
     }else{
-        database.query("SELECT username, password, job_role FROM credit_collector WHERE username = ? AND password = ? AND job_role = 'Credit Collector'", 
+        database.query("SELECT creditCollector_userID, username, password, job_role FROM credit_collector WHERE username = ? AND password = ? AND job_role = 'Credit Collector'", 
             [username, password, job_role], (err, result) => {
                 if(err){
                     res.send({err: err})
