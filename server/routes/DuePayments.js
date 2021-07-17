@@ -92,7 +92,7 @@ app.put(('/credit/update/:id'), (req, res) => {
     );
 });
 
-//get due payment by id
+//view due payment by id
 app.get(('/:id'),(req, res) => {
     const due_ID = req.params.id;
     database.query(
@@ -167,6 +167,20 @@ app.delete(('/delete/:id'), (req, res) => {
             }
         );
     }
+});
+
+//view due payment by id in email
+app.get(('/duemail/:id'),(req, res) => {
+    const due_ID = req.params.id;
+    database.query(
+        "SELECT c.email, d.amount, d.due_date FROM due_payment d INNER JOIN client c ON c.code = d.company_code WHERE due_ID = ?", [due_ID],
+        (err, result) => {
+            if(err){
+                console.log(err)
+            }else{
+                res.send(result)
+            }
+    });
 });
 
 //email sending

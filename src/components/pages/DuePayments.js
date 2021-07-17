@@ -79,9 +79,9 @@ const deleteDue = (id, status) =>{
                                     <Link to="/add-new">
                                         <button name="send" value="send" type="submit" className="btn btn-primary ml-1">Add New Payment</button>
                                     </Link>
-                                    <Link to="/due-mail">
+                                    {/* <Link to="/due-mail">
                                         <button name="send" value="send" type="submit" className="btn btn-success ml-1">Send Notification</button>
-                                    </Link>
+                                    </Link> */}
                                     </div>
                                 </div>
                             </div>
@@ -90,7 +90,6 @@ const deleteDue = (id, status) =>{
                             <Table responsive hover>
                                 <thead style={{backgroundColor:'pink', borderTop:'2px solid black'}}> 
                                     <tr>
-                                        <th></th>
                                         <th>Due ID</th>
                                         <th>Company Name</th>
                                         <th>Invoice</th>
@@ -99,7 +98,7 @@ const deleteDue = (id, status) =>{
                                         <th>Company Email</th>
                                         <th>Amount</th>
                                         <th>Collected</th>
-                                        <th></th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -112,7 +111,6 @@ const deleteDue = (id, status) =>{
                                     }).map(val=>{
                                     return(
                                     <tr key={val.due_ID}>
-                                        <td><input type="checkbox" id="" name="" style={{width:'20px', height:'20px'}}/></td>
                                         <td>{val.due_ID}</td>
                                         <td>{val.company_name}</td>
                                         <td>{val.invoice}</td>
@@ -123,10 +121,13 @@ const deleteDue = (id, status) =>{
                                         <td><input type="checkbox" id="" name="" checked={val.collected_status} style={{width:'20px', height:'20px'}}/></td>
                                         <td>
                                             <Link to={`/edit-due/${val.due_ID}`}>
-                                                <button name="view" value="view" type="submit" className="btn btn-primary ml-1 btnView">VIEW</button>
+                                                <button name="view" value="view" type="submit" className="btn btn-primary ml-1 btnView"><i class="fas fa-edit"></i></button>
+                                            </Link>
+                                            <Link to={`/due-mail/${val.due_ID}`}>
+                                                <button name="view" value="view" type="submit" className="btn btn-success ml-1 btnView"><i class="fas fa-envelope"></i></button>
                                             </Link>
                                             {/* <button onClick={() => deleteDue(val.due_ID)} name="delete" value="delete" type="submit" className="btn btn-danger ml-1">DELETE</button> */}
-                                            <Button variant="danger" onClick={() => handleShow(val.due_ID, val.reply_status)}> Delete </Button>
+                                            <Button variant="danger" onClick={() => handleShow(val.due_ID, val.reply_status)}> <i class="fas fa-trash-alt"></i> </Button>
                                             <Modal show={show} onHide={handleClose}>
                                                 <Modal.Body>Are you want to delete?</Modal.Body>
                                                 <Modal.Footer>
