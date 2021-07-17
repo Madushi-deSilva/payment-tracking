@@ -16,10 +16,14 @@ function DueMail() {
 
     //view due payment by id
     useEffect(() => {
+        console.log("id", params.id)
         axios.get(`http://localhost:3001/duepayments/duemail/${params.id}`)
-             .then(response => {
-                 console.log(response.data)
+             .then(response => {                
+                 console.log("E data",response.data)
                  setDue(response.data[0])
+                 setTo(response.data[0].email);
+                 setAmount(response.data[0].amount);
+                 setDueDate(response.data[0].due_date);
              })
              .catch((error)=>{
                  console.log(error);
@@ -67,27 +71,27 @@ function DueMail() {
                                     <div className="form-group row formGroup ">
                                         <label className="col-12 col-md-4 col-xl-4">From</label>
                                         <input type="email" className="form-control  col-12 col-md-8 col-xl-8" id="from"
-                                            name="from" onChange={(event) => {setFrom(event.target.value);}} required/>
+                                            name="from" value={from} onChange={(event) => {setFrom(event.target.value);}} required/>
                                     
                                     </div>
                                     <div className="form-group row formGroup ">
                                         <label className="col-12 col-md-4 col-xl-4">To</label>
                                         <input type="email" className="form-control  col-12 col-md-8 col-xl-8" id="to"
-                                            name="to" onChange={(event) => {setTo(event.target.value);}} required/>
+                                            name="to" value={to} onChange={(event) => {setTo(event.target.value);}} required/>
                                     
                                     </div>
 
                                     <div className="form-group row formGroup">
                                         <label className="col-12 col-md-4 col-xl-4">Amount</label>
                                             <input type="text" className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="amount"
-                                            name="amount" onChange={(event) => {setAmount(event.target.value);}}
+                                            name="amount" value={amount} onChange={(event) => {setAmount(event.target.value);}}
                                             />
                                     </div>
 
                                     <div className="form-group row formGroup">
                                         <label className="col-12 col-md-4 col-xl-4">Due Date</label>
                                         <input type="date" className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="duedate"
-                                            name="duedate" onChange={(event) => {setDueDate(event.target.value);}}/>
+                                            name="duedate" value={duedate} onChange={(event) => {setDueDate(event.target.value);}}/>
                                     </div>
                                     <div className="row form-group mx-3 formGroup">
                                         <div className="btn btnSend">

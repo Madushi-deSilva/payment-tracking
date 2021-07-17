@@ -121,13 +121,13 @@ const deleteDue = (id, status) =>{
                                         <td><input type="checkbox" id="" name="" checked={val.collected_status} style={{width:'20px', height:'20px'}}/></td>
                                         <td>
                                             <Link to={`/edit-due/${val.due_ID}`}>
-                                                <button name="view" value="view" type="submit" className="btn btn-primary ml-1 btnView"><i class="fas fa-edit"></i></button>
+                                                <button name="view" value="view" type="submit" className="btn btn-primary ml-1 btnView"><i class="fas fa-eye" data-toggle="tooltip" data-placement="top" title="View"></i></button>
                                             </Link>
                                             <Link to={`/due-mail/${val.due_ID}`}>
-                                                <button name="view" value="view" type="submit" className="btn btn-success ml-1 btnView"><i class="fas fa-envelope"></i></button>
+                                                <button name="view" value="view" type="submit" className="btn btn-success ml-1 btnView"><i class="fas fa-envelope" data-toggle="tooltip" data-placement="top" title="Send Email"></i></button>
                                             </Link>
                                             {/* <button onClick={() => deleteDue(val.due_ID)} name="delete" value="delete" type="submit" className="btn btn-danger ml-1">DELETE</button> */}
-                                            <Button variant="danger" onClick={() => handleShow(val.due_ID, val.reply_status)}> <i class="fas fa-trash-alt"></i> </Button>
+                                            <Button variant="danger" onClick={() => handleShow(val.due_ID, val.reply_status)}> <i class="fas fa-trash-alt" data-toggle="tooltip" data-placement="top" title="Delete"></i> </Button>
                                             <Modal show={show} onHide={handleClose}>
                                                 <Modal.Body>Are you want to delete?</Modal.Body>
                                                 <Modal.Footer>
