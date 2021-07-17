@@ -35,13 +35,13 @@ function App() {
           
           <Route path='/due-payments' component={DuePayements}/>
           <Route path='/add-new' component={AddNewPayment}/>
-          <Route path='/due-mail' component={DueMail}/>
+          <Route path='/due-mail/:id' component={DueMail}/>
           <Route path='/edit-due/:id' component={EditDuepayment}/>
           <Route path='/overdue-payments' component={OverduePayments}/>
-          <Route path='/overdue-mail' component={OverdueMail}/>
+          <Route path='/overdue-mail/:id' component={OverdueMail}/>
           <Route path='/edit-overdue/:id' component={EditOverduepayment}/>
           <Route path='/received-payments' component={ReceivedPayments}/>
-          <Route path='/received-mail' component={ReceivedMail}/>
+          <Route path='/received-mail/:id' component={ReceivedMail}/>
           <Route path='/reports' component={Reports}/>
           <Route path='/edit-user/:id' component={Edituser}/> 
           {/* <Route path='/side-bar' component={Sidebar}/> */}
