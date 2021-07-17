@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+const nodemailer = require('nodemailer');
 var database = require('../config/database');
 
 //get all overdue payments
@@ -116,5 +117,46 @@ app.delete(('/delete/:id'), (req, res) => {
     
 
 });
+
+//email sending
+app.post('/overduemail', (req, res) => {
+
+    let data = req.body
+    let smtpTransport = nodemailer.createTransport({
+        service: 'Gmail',
+        port: 465,
+        auth: {
+            user: 'mdsi.desilva@gmail.com',
+            pass: 'mdsi123+*'
+        }
+    });
+
+    let mailOptions = {
+        from: data.from,
+        to: data.to,
+        subject: 'Regarding the Overdue Payment',
+        html: `
+
+        <p>Dear Sir/ Madam,</p>
+        <p>You have an overdue payment of Rs.${data.amount} which was due on ${data.duedate}. Please consider about this matter and settle the payment as soon as possible. We are expecting a response within today.</p>
+        <p>Thank & Regards<br>
+        Madushi De Silva<br>
+        GEOID Information Technologies (Pvt)Ltd.<br>
+        Kandy Road, Dalugama, Sri Lanka <br>
+        Contact: 0773422811</p>
+
+        `
+    };
+
+    smtpTransport.sendMail(mailOptions, (error, response) => {
+        if (error) {
+            res.send(error)
+        } else {
+            res.send("Success")
+        }
+    })
+
+    smtpTransport.close();
+})
 
 module.exports = app;

@@ -17,6 +17,8 @@ import EditOverduepayment from './components/pages/EditOverduepayment';
 import EditClient from './components/pages/EditClient';
 import AddNewPayment from './components/pages/AddNewPayment';
 import DueMail from './components/pages/DueMail';
+import OverdueMail from './components/pages/OverdueMail';
+import ReceivedMail from './components/pages/ReceivedMail';
 // import Sidebar from './components/Sidebar';
 
 function App() {
@@ -36,8 +38,10 @@ function App() {
           <Route path='/due-mail' component={DueMail}/>
           <Route path='/edit-due/:id' component={EditDuepayment}/>
           <Route path='/overdue-payments' component={OverduePayments}/>
+          <Route path='/overdue-mail' component={OverdueMail}/>
           <Route path='/edit-overdue/:id' component={EditOverduepayment}/>
           <Route path='/received-payments' component={ReceivedPayments}/>
+          <Route path='/received-mail' component={ReceivedMail}/>
           <Route path='/reports' component={Reports}/>
           <Route path='/edit-user/:id' component={Edituser}/> 
           {/* <Route path='/side-bar' component={Sidebar}/> */}

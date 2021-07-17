@@ -105,7 +105,7 @@ const deleteOverdue = (id) =>{
                         <div className="row" style={{margin:'10px'}}>
                             <div className="col">
                                 <div className="row form-group mx-3 formGroup">
-                                    <Link>
+                                    <Link to="/overdue-mail">
                                         <button name="send" value="send" type="submit" className="btn btn-success ml-1">Send Notification</button>
                                     </Link>
                                 </div>
