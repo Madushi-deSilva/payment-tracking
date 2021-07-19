@@ -52,7 +52,7 @@ app.put(('/credit/update/:id'), (req, res) => {
             }else{
                 //insert collected payment to received  overdue payments table
                 database.query(
-                    'INSERT IGNORE INTO received_overdue_payments (company_code, invoice, amount, overdue_ID) SELECT company_code, invoice, amount, overdue_ID FROM overdue_payment o WHERE o.due_date = CURDATE() AND o.credit_collected_status = "1"',(err, result) => {
+                    'INSERT IGNORE INTO received_overdue_payments (company_code, invoice, amount, overdue_ID, received_date) SELECT company_code, invoice, amount, overdue_ID, due_date FROM overdue_payment o WHERE o.due_date = CURDATE() AND o.credit_collected_status = "1"',(err, result) => {
                         if(err){
                             console.log(err)
                         }else{
