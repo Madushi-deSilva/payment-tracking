@@ -130,4 +130,5 @@ app.post('/receivedmail', (req, res) => {
 })
 
 module.exports = app;
-module.exports = app;
+
+// SELECT c.company_name, d.invoice, d.amount, d.due_date, r.received_date FROM due_payment d JOIN received_due_payments r ON d.invoice=r.invoice JOIN client c ON c.code=d.company_code WHERE c.company_name = ?, [company_name];

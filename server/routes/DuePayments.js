@@ -79,7 +79,7 @@ app.put(('/credit/update/:id'), (req, res) => {
                 //insert collected payment to received payments table
                 console.log('3')
                 database.query(
-                    'INSERT IGNORE INTO received_due_payments (company_code, invoice, amount, due_ID) SELECT company_code, invoice, amount, due_ID FROM due_payment d WHERE d.due_date = CURDATE() AND d.credit_collected_status = "1"',(err, result) => {
+                    'INSERT IGNORE INTO received_due_payments (company_code, invoice, amount, due_ID, received_date) SELECT company_code, invoice, amount, due_ID, due_date FROM due_payment d WHERE d.due_date = CURDATE() AND d.credit_collected_status = "1"',(err, result) => {
                         if(err){
                             console.log(err)
                         }else{
