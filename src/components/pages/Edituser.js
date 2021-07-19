@@ -12,20 +12,8 @@ function Edituser(props){
         setUser({...user, [e.target.id]: e.target.value})
     }
     let params = useParams();
-
-    //view accountofficer by id
-    // useEffect(() => {
-    //     Axios.get(`http://localhost:3001/signup/accountofficer/${params.id}`)
-    //          .then(response => {
-    //              console.log(response.data)
-    //              setUser(response.data[0])
-    //          })
-    //          .catch((error)=>{
-    //              console.log(error);
-    //          })
-    // },[]);
-
-    //view credit collector by id
+    
+    //view user by id
     useEffect(() => {
         let type = localStorage.getItem("type")
         if(type == "AO") {
@@ -52,14 +40,15 @@ function Edituser(props){
         
     },[]);
 
+    //update user details
     const updateUser = (e) =>{
         e.preventDefault();
         console.log('Updated user', user)
         Axios.put(`http://localhost:3001/signup/update/${params.id}`,user)
             .then(() => {
             console.log("success");
-            // alert("User updated successfully");
-            // window.location.href = 'http://localhost:3000/';
+            alert("User updated successfully");
+            window.location.href = 'http://localhost:3000/';
         });
     };
 
