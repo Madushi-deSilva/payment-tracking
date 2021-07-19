@@ -7,7 +7,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import { Link } from "react-router-dom";
 
-  const StyledMenu = withStyles({
+// style the navigation bar    
+const StyledMenu = withStyles({
     paper: {
       border: "1px solid #d3d4d5"
     }
@@ -37,8 +38,11 @@ import { Link } from "react-router-dom";
       }
     }
   }))(MenuItem);
+  //------end the style----------
 
 function HomenavCredit() {
+
+  //handing the dropdown
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -48,6 +52,8 @@ function HomenavCredit() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  //logout function
   const logout = () =>{
     alert("Are you want to exit?")
   }

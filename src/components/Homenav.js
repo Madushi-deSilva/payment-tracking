@@ -1,5 +1,4 @@
-import React, {useState} from "react";
-import { Modal} from "react-bootstrap";
+import React from "react";
 import '../App.css'
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
@@ -8,7 +7,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import { Link } from "react-router-dom";
 
-  const StyledMenu = withStyles({
+// style the navigation bar  
+const StyledMenu = withStyles({
     paper: {
       border: "1px solid #d3d4d5"
     }
@@ -38,8 +38,11 @@ import { Link } from "react-router-dom";
       }
     }
   }))(MenuItem);
+  //------end the style----------
 
 function Homenav() {
+  
+  //handing the dropdown
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -50,13 +53,9 @@ function Homenav() {
     setAnchorEl(null);
   };
 
-  const [show, setShow] = useState(false);
-
-  const handleCloseLogout = () => setShow(false);
-  const handleShow = () => setShow(true);
-
+  //logout function
   const logout = () =>{
-    window.location.href = 'http://localhost:3000/';
+    alert("Are you want to exit?")
   }
 
   return (
@@ -91,15 +90,8 @@ function Homenav() {
                       </Link>
                   </StyledMenuItem>
                   <StyledMenuItem>
-                      <Link>
-                          <ListItemText onClick={handleShow} primary="Logout" />
-                          <Modal show={show} onHide={handleCloseLogout}>
-                            <Modal.Body>Are you want to logout?</Modal.Body>
-                            <Modal.Footer>
-                            <button className="btn btn-secondary" onClick={handleCloseLogout}> No </button >
-                            <button className="btn btn-primary" onClick={logout}> Yes </button >
-                            </Modal.Footer>
-                        </Modal>
+                      <Link to="/">
+                          <ListItemText onClick={logout} primary="Logout" />
                       </Link>
                   </StyledMenuItem>
               </StyledMenu>
