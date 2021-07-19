@@ -51,9 +51,11 @@ class HeroSection extends Component {
                     if(response.data[0].job_role === 'Account Officer'){
                         window.location.href = 'http://localhost:3000/home-main';
                         localStorage.setItem("user", response.data[0].accountOfficer_userID)
+                        localStorage.setItem("type", "AO")
                         // this.props.history.push('/home-main');
                     }else if(response.data[0].job_role === 'Credit Collector'){
                         localStorage.setItem("user", response.data[0].creditCollector_userID)
+                        localStorage.setItem("type", "CC")
                         window.location.href = 'http://localhost:3000/credit';
                         // this.props.history.push('/credit');
                     }
