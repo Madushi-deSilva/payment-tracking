@@ -117,10 +117,8 @@ app.put(('/update/:id'), (req, res) => {
             [name, username,password, conNo, email, id], (err, result) => {
                 if(err){
                     res.send(err);
-                    console.log("not user")
                 }else{
                     res.send("values updated");
-                    console.log("account", result)
                 }    
             }
         );
@@ -129,10 +127,8 @@ app.put(('/update/:id'), (req, res) => {
             [name, username,password, conNo, email, id], (err, result) => {
                 if(err){
                     res.send(err);
-                    console.log("not credit")
                 }else{
                     res.send("values updated");
-                    console.log("credut",result)
                 }     
             }
         );
