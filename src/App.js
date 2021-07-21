@@ -19,6 +19,11 @@ import AddNewPayment from './components/pages/AddNewPayment';
 import DueMail from './components/pages/DueMail';
 import OverdueMail from './components/pages/OverdueMail';
 import ReceivedMail from './components/pages/ReceivedMail';
+import DuePaymentsReport from './components/reports/duepayments';
+import ClientReport from './components/reports/clientreport';
+import OverduePaymentsReport from './components/reports/overduepayments';
+import ReceivedPaymentsReport from './components/reports/receivedpayments';
+import OverallReport from './components/reports/overall';
 // import Sidebar from './components/Sidebar';
 
 function App() {
@@ -44,6 +49,11 @@ function App() {
           <Route path='/received-mail/:id' component={ReceivedMail}/>
           <Route path='/reports' component={Reports}/>
           <Route path='/edit-user/:id' component={Edituser}/> 
+          <Route path='/client-report' component={ClientReport}/>
+          <Route path='/due-report' component={DuePaymentsReport}/>
+          <Route path='/overdue-report' component={OverduePaymentsReport}/>
+          <Route path='/received-report' component={ReceivedPaymentsReport}/>
+          <Route path='/overall-report' component={OverallReport}/>
           {/* <Route path='/side-bar' component={Sidebar}/> */}
         </Switch>
     </Router>
