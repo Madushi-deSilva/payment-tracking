@@ -65,9 +65,6 @@ button {
 .btnView {
   margin-right: 10px;
 }
-.btnPreview {
-  margin-top: 300px;
-}
 
 @media screen and (max-width: 600px) {
   .homeDiv {
@@ -75,9 +72,6 @@ button {
   }
   .btnView {
     margin-bottom: 10px;
-  }
-  .btnPreview {
-    margin-top: 100px;
   }
   .reportCol {
     margin-left: 10px;
