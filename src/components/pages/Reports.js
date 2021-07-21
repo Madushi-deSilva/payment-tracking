@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import {Card, CardGroup } from 'react-bootstrap'
+import { Link } from "react-router-dom";
 // import '../../App.css'
 import Homenav from '../Homenav';
 import Sidebar from '../Sidebar'
@@ -20,46 +21,43 @@ class Reports extends Component {
                         <div className="row">
                             <h1 style={{fontFamily:'serif', padding:'10px'}}>REPORTS</h1>
                         </div>
-                        <div className="row" style={{margin:'10px'}}>
-                        <CardGroup>
-                            <Card className="mr-2 ml-2" style={{border:'1px', borderRadius:'5px', backgroundColor:'lightblue'}}>
-                                <Card.Body>
-                                    <Card.Link href="/client-report" style={{color:'black', fontFamily:'Georgia', fontSize:'20px'}}>Client Payment Report</Card.Link>
-                                </Card.Body>
-                            </Card>
-                            <Card className="mr-2" style={{border:'1px', borderRadius:'5px', backgroundColor:'lightgreen'}}>
-                                <Card.Body>
-                                    <Card.Link href="/due-report" style={{color:'black', fontFamily:'Georgia', fontSize:'20px'}}>Due Payments Report</Card.Link>
-                                </Card.Body>
-                            </Card>
-                            <Card className="mr-2" style={{border:'1px', borderRadius:'5px', backgroundColor:'yellow'}}>
-                                <Card.Body>
-                                    <Card.Link href="/overdue-report" style={{color:'black', fontFamily:'Georgia', fontSize:'20px'}}>Overdue Payments Report</Card.Link>
-                                </Card.Body>
-                            </Card>
-                            <Card className="mr-2" style={{border:'1px', borderRadius:'5px', backgroundColor:'violet'}}>
-                                <Card.Body>
-                                    <Card.Link href="/received-report" style={{color:'black', fontFamily:'Georgia', fontSize:'20px'}}>Received Payments Report</Card.Link>
-                                </Card.Body>
-                            </Card>
-                            <Card className="mr-2" style={{border:'1px', borderRadius:'5px', backgroundColor:'orange'}}>
-                                <Card.Body>
-                                    <Card.Link href="/overall-report" style={{color:'black', fontFamily:'Georgia', fontSize:'20px'}}>Overall Analysis Report</Card.Link>
-                                </Card.Body>
-                            </Card>
+                        <div className="row" style={{marginLeft:'10px', marginRight:'10px'}}>
+                            <CardGroup>
+                                <Card className="mr-2 ml-2" style={{border:'1px', borderRadius:'5px', backgroundColor:'skyblue'}}>
+                                    <Card.Body>
+                                        <Card.Link href="/client-report" style={{color:'black', fontFamily:'Georgia', fontSize:'20px'}}>Client Payment Report</Card.Link>
+                                    </Card.Body>
+                                </Card>
+                                <Card className="mr-2" style={{border:'1px', borderRadius:'5px', backgroundColor:'lightgreen'}}>
+                                    <Card.Body>
+                                        <Card.Link href="/due-report" style={{color:'black', fontFamily:'Georgia', fontSize:'20px'}}>Due Payments Report</Card.Link>
+                                    </Card.Body>
+                                </Card>
+                                <Card className="mr-2" style={{border:'1px', borderRadius:'5px', backgroundColor:'yellow'}}>
+                                    <Card.Body>
+                                        <Card.Link href="/overdue-report" style={{color:'black', fontFamily:'Georgia', fontSize:'20px'}}>Overdue Payments Report</Card.Link>
+                                    </Card.Body>
+                                </Card>
+                                <Card className="mr-2" style={{border:'1px', borderRadius:'5px', backgroundColor:'violet'}}>
+                                    <Card.Body>
+                                        <Card.Link href="/received-report" style={{color:'black', fontFamily:'Georgia', fontSize:'20px'}}>Received Payments Report</Card.Link>
+                                    </Card.Body>
+                                </Card>
+                                <Card className="mr-2" style={{border:'1px', borderRadius:'5px', backgroundColor:'orange'}}>
+                                    <Card.Body>
+                                        <Card.Link href="/reports" style={{color:'black', fontFamily:'Georgia', fontSize:'20px'}}>Overall Analysis Report</Card.Link>
+                                    </Card.Body>
+                                </Card>
                             </CardGroup>
-                            {/* <div className="col">
-                            <div className="form-group row formGroup">
-                                    <label for="name" className="col-12 col-md-4 col-xl-4 lblRight">Category</label>
-                                    <select className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="category">
-                                            <option value="client" href="/due-payments">Client payment report</option>
-                                            <option value="due">Due payments</option>
-                                            <option value="overdue">Overdue payments</option>
-                                            <option value="received">Received payments</option>
-                                            <option value="overall">Overall analysis</option>
-                                    </select>
+                            <iframe className="mt-3" width="1200" height="550" src="https://app.powerbi.com/reportEmbed?reportId=5c5866ba-ee23-4c28-a43d-dd967eef36ff&autoAuth=true&ctid=aa232db2-7a78-4414-a529-33db9124cba7&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLXNvdXRoLWVhc3QtYXNpYS1yZWRpcmVjdC5hbmFseXNpcy53aW5kb3dzLm5ldC8ifQ%3D%3D" frameborder="0" allowFullScreen="true"></iframe>
+                            <div className="row form-group mx-3 mt-2 formGroup">
+                                <div className='col text-center'>
+                                    <button name="Save" value="Save" type="submit" className="btn btn-primary custom-btn1 ml-1">SAVE</button>
+                                    <Link to="/reports">
+                                        <button name="Cancel" value="Cancel" type="submit" className="btn btn-primary custom-btn2 ml-1">CANCEL</button>
+                                    </Link>
                                 </div>
-                            </div> */}
+                            </div>
                         
                         </div>
                     </div>
