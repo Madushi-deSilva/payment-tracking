@@ -1,20 +1,21 @@
 import React, { Component } from "react";
 import {Card, CardGroup } from 'react-bootstrap'
 import { Link } from "react-router-dom";
-// import '../../App.css'
 import Homenav from '../Homenav';
 import Sidebar from '../Sidebar'
 import './Home.css';
 
 class Reports extends Component {
     render() {
-    
-    
         return ( 
             <div>
+                {/* ----------navigation bar inserted---------------- */}
                 <Homenav/>
+
                 <div className="row" style={{maxWidth:'100%'}}>
+                    {/* ----------sidebar inserted---------------- */}
                     <Sidebar/>
+
                     {/* ---------------reports page------------ */}
                     
                     <div className="homeDiv col-10 text-center" style={{height:'88vh'}}>
@@ -49,15 +50,19 @@ class Reports extends Component {
                                     </Card.Body>
                                 </Card>
                             </CardGroup>
+
+                            {/* ---------overall report import from power bi --------- */}
                             <iframe className="mt-3" width="1200" height="550" src="https://app.powerbi.com/reportEmbed?reportId=5c5866ba-ee23-4c28-a43d-dd967eef36ff&autoAuth=true&ctid=aa232db2-7a78-4414-a529-33db9124cba7&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLXNvdXRoLWVhc3QtYXNpYS1yZWRpcmVjdC5hbmFseXNpcy53aW5kb3dzLm5ldC8ifQ%3D%3D" frameborder="0" allowFullScreen="true"></iframe>
-                            <div className="row form-group mx-3 mt-2 formGroup">
+                            
+                            {/*------- button group -------- */}
+                            {/* <div className="row form-group mx-3 mt-2 formGroup">
                                 <div className='col text-center'>
                                     <button name="Save" value="Save" type="submit" className="btn btn-primary custom-btn1 ml-1">SAVE</button>
                                     <Link to="/reports">
                                         <button name="Cancel" value="Cancel" type="submit" className="btn btn-primary custom-btn2 ml-1">CANCEL</button>
                                     </Link>
                                 </div>
-                            </div>
+                            </div> */}
                         
                         </div>
                     </div>
