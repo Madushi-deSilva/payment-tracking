@@ -32,7 +32,7 @@ function Client(){
         setToggleState(index);
     };
 
-    //add client
+    //add client function
     const addClient = () =>{
             Axios.post('http://localhost:3001/clients/create', {
                 code: code,
@@ -53,7 +53,7 @@ function Client(){
             });
     };
 
-    //get all clients
+    //get all clients function
     useEffect(() => {
         Axios.get('http://localhost:3001/clients/allclients')
              .then(response => {
@@ -226,8 +226,8 @@ function Client(){
                                                     </div> 
                                                 </div>
 
-                                                 <div className="col column">
-                                                 <h4 style={{fontFamily:'serif', marginTop:'20px', marginBottom:'20px', color:'grey'}}>Bank Details_____</h4>
+                                                <div className="col column">
+                                                    <h4 style={{fontFamily:'serif', marginTop:'20px', marginBottom:'20px', color:'grey'}}>Bank Details_____</h4>
                                                     <div className="form-group row formGroup">
                                                         <label className="col-12 col-md-4 col-xl-4 lblRight">Bank Name</label>
                                                         <input type="text" className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="bank_name"
@@ -251,30 +251,6 @@ function Client(){
                                                         <input type="text" className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="account_no"
                                                             name="accountNo" required onChange={(event) => {setAccountNo(event.target.value);}}/>
                                                     </div>
-
-                                                    {/* <div className="form-group row formGroup">
-                                                        <label className="col-12 col-md-4 col-xl-4  lblRight">Invoice</label>
-                                                        <input type="text" className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="invoice"
-                                                            name="invoice"required onChange={(event) => {setInvoice(event.target.value);}}/>
-                                                    </div>
-
-                                                    <div className="form-group row formGroup">
-                                                        <label className="col-12 col-md-4 col-xl-4 lblRight">Amount</label>
-                                                        <input type="text" className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="amount"
-                                                            name="amount" required onChange={(event) => {setAmount(event.target.value);}}/>
-                                                    </div>
-
-                                                    <div className="form-group row formGroup">
-                                                        <label className="col-12 col-md-4 col-xl-4 lblRight">Due Date</label>
-                                                        <input type="date" className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="due_date"
-                                                            name="dueDate" required onChange={(event) => {setDueDate(event.target.value);}}/>
-                                                    </div> 
-
-                                                    <div className="form-group row formGroup">
-                                                        <label className="col-12 col-md-4 col-xl-4 lblRight">Note</label>
-                                                        <textarea type="textarea" rows="3" className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="note"
-                                                            name="note" required onChange={(event) => {setNote(event.target.value);}}></textarea>
-                                                    </div> */}
                                                 </div>
 
                                                 <div className="row form-group mx-3 formGroup">
