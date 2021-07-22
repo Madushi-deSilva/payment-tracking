@@ -14,7 +14,7 @@ function DueMail() {
 
     let params = useParams();
 
-    //view due payment by id
+    //view email, amount and due date of due payment by id
     useEffect(() => {
         console.log("id", params.id)
         axios.get(`http://localhost:3001/duepayments/duemail/${params.id}`)
@@ -30,7 +30,7 @@ function DueMail() {
              })
     },[]);
 
-    //form submit - end of handel inputs
+    //form submit
     const formSubmit = (e) => {
         e.preventDefault();
         let data = {
@@ -50,61 +50,64 @@ function DueMail() {
             })
     }
 
-        return (
-            <div>
+    return (
+        <div>
             {/* ---------home navigation componenet---------- */}
             <Homenav/>
-                <div className="row" style={{maxWidth:'100%'}}>
+
+            <div className="row" style={{maxWidth:'100%'}}>
+
                 {/* -------------sidebar componenet------------ */}
                 <Sidebar/>
-                    <div className="container shadow mt-6 col-6 mailcontainer">
-                        <div className="card mt-4 mailcard">
-                            <div className="card-header bg-white">
-                                <div className="row">
-                                    <i className="fa fa-envelope mx-2 my-auto fa-2x" style={{width:'auto'}}></i>
-                                    <h3 className="ml-2 my-auto" style={{width:'auto'}}>Send Due Payment Notification</h3>
+                
+                <div className="container shadow mt-6 col-6 mailcontainer">
+                    <div className="card mt-4 mailcard">
+                        <div className="card-header bg-white">
+                            <div className="row">
+                                <i className="fa fa-envelope mx-2 my-auto fa-2x" style={{width:'auto'}}></i>
+                                <h3 className="ml-2 my-auto" style={{width:'auto'}}>Send Due Payment Notification</h3>
+                            </div>
+                        </div>
+                        <div className="card-body">
+                            <form className="m-3 row" onSubmit={formSubmit}>
+                                
+                                <div className="form-group row formGroup ">
+                                    <label className="col-12 col-md-4 col-xl-4">From</label>
+                                    <input type="email" className="form-control  col-12 col-md-8 col-xl-8" id="from"
+                                        name="from" value={from} onChange={(event) => {setFrom(event.target.value);}} required/>
+                                
                                 </div>
-                            </div>
-                            <div className="card-body">
-                                <form className="m-3 row" onSubmit={formSubmit}>
-                                    
-                                    <div className="form-group row formGroup ">
-                                        <label className="col-12 col-md-4 col-xl-4">From</label>
-                                        <input type="email" className="form-control  col-12 col-md-8 col-xl-8" id="from"
-                                            name="from" value={from} onChange={(event) => {setFrom(event.target.value);}} required/>
-                                    
-                                    </div>
-                                    <div className="form-group row formGroup ">
-                                        <label className="col-12 col-md-4 col-xl-4">To</label>
-                                        <input type="email" className="form-control  col-12 col-md-8 col-xl-8" id="to"
-                                            name="to" value={to} onChange={(event) => {setTo(event.target.value);}} required/>
-                                    
-                                    </div>
+                                <div className="form-group row formGroup ">
+                                    <label className="col-12 col-md-4 col-xl-4">To</label>
+                                    <input type="email" className="form-control  col-12 col-md-8 col-xl-8" id="to"
+                                        name="to" value={to} onChange={(event) => {setTo(event.target.value);}} required/>
+                                
+                                </div>
 
-                                    <div className="form-group row formGroup">
-                                        <label className="col-12 col-md-4 col-xl-4">Amount</label>
-                                            <input type="text" className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="amount"
-                                            name="amount" value={amount} onChange={(event) => {setAmount(event.target.value);}}
-                                            />
-                                    </div>
+                                <div className="form-group row formGroup">
+                                    <label className="col-12 col-md-4 col-xl-4">Amount</label>
+                                        <input type="text" className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="amount"
+                                        name="amount" value={amount} onChange={(event) => {setAmount(event.target.value);}}
+                                        />
+                                </div>
 
-                                    <div className="form-group row formGroup">
-                                        <label className="col-12 col-md-4 col-xl-4">Due Date</label>
-                                        <input type="date" className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="duedate"
-                                            name="duedate" value={duedate} onChange={(event) => {setDueDate(event.target.value);}}/>
+                                <div className="form-group row formGroup">
+                                    <label className="col-12 col-md-4 col-xl-4">Due Date</label>
+                                    <input type="date" className="form-control form-control-sm col-12 col-md-8 col-xl-8" id="duedate"
+                                        name="duedate" value={duedate} onChange={(event) => {setDueDate(event.target.value);}}/>
+                                </div>
+                                <div className="row form-group mx-3 formGroup">
+                                    <div className="btn btnSend">
+                                        <button type="submit">Send Email</button>
                                     </div>
-                                    <div className="row form-group mx-3 formGroup">
-                                        <div className="btn btnSend">
-                                            <button type="submit">Send Email</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
-        );
-    }
+        </div>
+    );
+}
 
 export default DueMail;
