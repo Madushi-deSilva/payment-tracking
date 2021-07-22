@@ -23,7 +23,6 @@ import DuePaymentsReport from './components/reports/duepayments';
 import ClientReport from './components/reports/clientreport';
 import OverduePaymentsReport from './components/reports/overduepayments';
 import ReceivedPaymentsReport from './components/reports/receivedpayments';
-// import Sidebar from './components/Sidebar';
 
 function App() {
   return (
@@ -36,7 +35,6 @@ function App() {
           <Route path='/edit-client/:id' component={EditClient}/>  
           <Route path='/' exact component={Navbar}/>
           <Route path='/sign-up' component={Signup} />
-          
           <Route path='/due-payments' component={DuePayements}/>
           <Route path='/add-new' component={AddNewPayment}/>
           <Route path='/due-mail/:id' component={DueMail}/>
@@ -52,7 +50,6 @@ function App() {
           <Route path='/due-report' component={DuePaymentsReport}/>
           <Route path='/overdue-report' component={OverduePaymentsReport}/>
           <Route path='/received-report' component={ReceivedPaymentsReport}/>
-          {/* <Route path='/side-bar' component={Sidebar}/> */}
         </Switch>
     </Router>
         
