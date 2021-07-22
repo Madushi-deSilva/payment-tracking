@@ -45,7 +45,7 @@ function ClientReport() {
                             </Card>
                         </CardGroup>
 
-                        {/* ---------received payments report import from power bi --------- */}
+                        {/* ---------client payments report import from power bi --------- */}
                         <iframe className="mt-3" width="1200" height="550" src="https://app.powerbi.com/reportEmbed?reportId=2bf71ba9-f9ac-4be9-ba4d-0402e6e758db&autoAuth=true&ctid=aa232db2-7a78-4414-a529-33db9124cba7&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLXNvdXRoLWVhc3QtYXNpYS1yZWRpcmVjdC5hbmFseXNpcy53aW5kb3dzLm5ldC8ifQ%3D%3D" frameborder="0" allowFullScreen="true"></iframe>
                         
                         {/*------- button group -------- */}

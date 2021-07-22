@@ -45,7 +45,7 @@ function OverduePaymentsReport() {
                             </Card>
                         </CardGroup>
 
-                        {/* ---------received payments report import from power bi --------- */}
+                        {/* ---------overude payments report import from power bi --------- */}
                         <iframe className="mt-3" width="1200" height="550" src="https://app.powerbi.com/reportEmbed?reportId=354dfb30-426e-46b4-8033-2f4ffed766c9&autoAuth=true&ctid=aa232db2-7a78-4414-a529-33db9124cba7&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLXNvdXRoLWVhc3QtYXNpYS1yZWRpcmVjdC5hbmFseXNpcy53aW5kb3dzLm5ldC8ifQ%3D%3D" frameborder="0" allowFullScreen="true"></iframe>
                         
                         {/*------- button group -------- */}
