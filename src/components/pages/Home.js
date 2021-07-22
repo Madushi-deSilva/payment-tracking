@@ -17,26 +17,26 @@ function Home(){
     const [dueList, setDueList]= useState([]);
     const [overdueList, setOverdueList]= useState([]);
 
-  //get all due payments
-  useEffect(() => {
-    Axios.get('http://localhost:3001/duepayments/home/alldue')
-         .then(response => {
-             setDueList(response.data)
-         })
-         .catch((error)=>{
-             console.log(error);
-         })
+  //get all daily due payments
+    useEffect(() => {
+        Axios.get('http://localhost:3001/duepayments/home/alldue')
+            .then(response => {
+                setDueList(response.data)
+            })
+            .catch((error)=>{
+                console.log(error);
+            })
     },[]);
 
-    //get all overdue payments
-  useEffect(() => {
-    Axios.get('http://localhost:3001/overduepayments/home/alloverdue')
-         .then(response => {
-             setOverdueList(response.data)
-         })
-         .catch((error)=>{
-             console.log(error);
-         })
+    //get all daily overdue payments
+    useEffect(() => {
+        Axios.get('http://localhost:3001/overduepayments/home/alloverdue')
+            .then(response => {
+                setOverdueList(response.data)
+            })
+            .catch((error)=>{
+                console.log(error);
+            })
     },[]);
 
     return ( 
