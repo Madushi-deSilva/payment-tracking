@@ -46,26 +46,6 @@
   cursor: pointer;
 }
 
-.msg {
-  text-align: center;
-  margin: 0 auto;
-  margin-bottom: 10px;
-  letter-spacing: 0.2rem;
-  font-style: italic;
-  width: 340;
-  padding: 3px;
-  font-size: 16px;
-  font-weight: bold;
-  color: rgb(5, 110, 5);
-  background-color: #fff;
-  border-radius: 5px;
-  display: none;
-}
-
-.msgAppear {
-  display: block;
-}
-
 @media screen and (min-width: 986px) {
   .mailcontainer {
     width: 40%;
