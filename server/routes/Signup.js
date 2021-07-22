@@ -42,7 +42,7 @@ app.post('/login', (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
 
-    
+    // check whether the user is an account officer or a credit collector by using the job role and check the user credentials are matched with the user input data
     if(job_role === 'Account Officer'){
         database.query("SELECT accountOfficer_userID, username, password, job_role FROM account_officer WHERE username = ? AND password = ? AND job_role = 'Account Officer'", 
             [username, password, job_role], (err, result) => {
@@ -74,7 +74,7 @@ app.post('/login', (req, res) => {
     }
 });
 
-//get accountofficer by id
+//view accountofficer by id
 app.get(('/accountofficer/:id'),(req, res) => {
     const accountOfficer_userID = req.params.id;
     database.query(
@@ -88,7 +88,7 @@ app.get(('/accountofficer/:id'),(req, res) => {
     });
 });
 
-//get creditcollector by id
+//view creditcollector by id
 app.get(('/creditcollector/:id'),(req, res) => {
     const creditCollector_userID = req.params.id;
     database.query(
@@ -103,7 +103,7 @@ app.get(('/creditcollector/:id'),(req, res) => {
 });
 
 
-// edit user data and update the database
+//update user details in the database according to the job role
 app.put(('/update/:id'), (req, res) => {
     const id = req.params.id
     const job_role = req.body.job_role;

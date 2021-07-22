@@ -3,7 +3,7 @@ var app = express();
 const nodemailer = require('nodemailer');
 var database = require('../config/database');
 
-//get all overdue payments
+//get all overdue payments from the database and send to frontend
 app.get(('/alloverdue'),(req, res) => {
     database.query(
         "SELECT o.overdue_ID, c.company_name, o.invoice, c.tel_no, c.email, o.amount, o.collected_status FROM overdue_payment o INNER JOIN client c ON c.code = o.company_code ORDER BY o.overdue_ID ASC",
@@ -16,7 +16,7 @@ app.get(('/alloverdue'),(req, res) => {
     });
 });
 
-    //get all overdue payments that should settle today to home page
+//get all overdue payments that should settle today from the database(CONDITION -> DUE DATE = DATE OF TODAY AND REPLY STATUS = REPLIED) and send to home page
 app.get(('/home/alloverdue'),(req, res) => {
     database.query(
         "SELECT o.overdue_ID, c.company_name, o.invoice, c.contact_person, c.mobile_no, c.email, o.amount FROM overdue_payment o INNER JOIN client c ON c.code = o.company_code WHERE o.due_date = CURDATE() AND o.reply_status = 'Replied' ORDER BY o.overdue_ID ASC",
@@ -29,7 +29,7 @@ app.get(('/home/alloverdue'),(req, res) => {
     });
 });
 
-//get all overdue payments that should settle today to credit collector page
+//get all overdue payments that should settle today from the database(CONDITION -> DUE DATE = DATE OF TODAY AND REPLY STATUS = REPLIED) and send to credit collector page
 app.get(('/credit/alloverdue'),(req, res) => {
     database.query(
         "SELECT o.overdue_ID, o.invoice, c.company_name, c.address, c.tel_no, c.contact_person, c.mobile_no, o.amount, o.credit_collected_status FROM overdue_payment o INNER JOIN client c ON c.code = o.company_code WHERE o.due_date = CURDATE() AND o.reply_status = 'Replied' ORDER BY o.overdue_ID ASC",
@@ -79,12 +79,11 @@ app.get(('/:id'),(req, res) => {
     });
 });
 
-//update overdue payment details to the database
+//update overdue payment details in the database
 app.put(('/update/:id'), (req, res) => {
     const overdue_ID = req.params.id;
     const due_date = req.body.due_date;
     const reply_status = req.body.reply_status;
-    // const collected_status = req.body.collected_status;
     const note = req.body.note;
 
     database.query(
@@ -101,7 +100,7 @@ app.put(('/update/:id'), (req, res) => {
 
 });
 
-//delete overdue payment details to the database
+//delete overdue payment details in the database
 app.delete(('/delete/:id'), (req, res) => {
     const overdue_ID = req.params.id;
 
@@ -118,7 +117,7 @@ app.delete(('/delete/:id'), (req, res) => {
 
 });
 
-//view overdue payment by id in email
+//view overdue payment by id in email form
 app.get(('/overduemail/:id'),(req, res) => {
     const overdue_ID = req.params.id;
     database.query(
@@ -132,7 +131,7 @@ app.get(('/overduemail/:id'),(req, res) => {
     });
 });
 
-//email sending
+//send reminder email to client
 app.post('/overduemail', (req, res) => {
 
     let data = req.body
@@ -140,14 +139,14 @@ app.post('/overduemail', (req, res) => {
         service: 'Gmail',
         port: 465,
         auth: {
-            user: 'mdsi.desilva@gmail.com',
-            pass: 'mdsi123+*'
+            user: 'mdsi.desilva@gmail.com', //email address of the sender
+            pass: 'mdsi123+*' //password of the sender
         }
     });
 
     let mailOptions = {
-        from: data.from,
-        to: data.to,
+        from: data.from, //get the data from the user
+        to: data.to, //get the data from the user
         subject: 'Regarding the Overdue Payment',
         html: `
 

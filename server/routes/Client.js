@@ -31,7 +31,7 @@ app.post(('/create'), (req, res) => {
 
 });
 
-//get all clients
+//get all clients from the databse and send to frontend
 app.get(('/allclients'),(req, res) => {
     database.query(
         "SELECT * FROM client", 
@@ -44,7 +44,7 @@ app.get(('/allclients'),(req, res) => {
     });
 });
 
-//get client by id
+//view client by id
 app.get(('/:id'),(req, res) => {
     const client_ID = req.params.id;
     database.query(
@@ -58,7 +58,7 @@ app.get(('/:id'),(req, res) => {
     });
 });
 
-//update client details to the database
+//update client details in the database
 app.put(('/update/:id'), (req, res) => {
     const client_ID = req.params.id;
     const code = req.body.code;

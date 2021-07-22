@@ -3,7 +3,7 @@ var app = express();
 const nodemailer = require('nodemailer');
 var database = require('../config/database');
 
-//get all received due payments
+//get all received due payments from the databse and send to frontend
 app.get(('/allreceiveddue'),(req, res) => {
     database.query(
         "SELECT r.receivedDue_ID, c.company_name, r.invoice,c.tel_no, c.email, r.amount, r.due_ID FROM received_due_payments r INNER JOIN client c ON c.code = r.company_code ORDER BY r.receivedDue_ID ASC",
@@ -18,7 +18,7 @@ app.get(('/allreceiveddue'),(req, res) => {
 
 //update due payment table when clicking the update button in  received payments page
 app.put(('/receiveddue/update/:id'), (req, res) => {
-    console.log('Req ok', req.params.id)
+    console.log('Req ok', req.params.id) //cosole log to check the updated due payment id is correct
     const due_ID = req.params.id;
     let sql = `UPDATE due_payment SET collected_status = ? WHERE due_ID = ?`;
     database.query(sql, [1, due_ID], (err, result) => {
@@ -32,7 +32,7 @@ app.put(('/receiveddue/update/:id'), (req, res) => {
 });
 
 
-//get all received overdue payments
+//get all received overdue payments from the databse and send to frontend
 app.get(('/allreceivedoverdue'),(req, res) => {
     database.query(
         "SELECT r.receivedOverdue_ID, c.company_name, r.invoice,c.tel_no, c.email, r.amount, r.overdue_ID FROM received_overdue_payments r INNER JOIN client c ON c.code = r.company_code ORDER BY r.receivedOverdue_ID ASC",
@@ -47,7 +47,7 @@ app.get(('/allreceivedoverdue'),(req, res) => {
 
 //update overdue payment table when clicking the update button in  received payments page
 app.put(('/receivedoverdue/update/:id'), (req, res) => {
-    console.log('Req ok', req.params.id)
+    console.log('Req ok', req.params.id) //cosole log to check the updated overdue payment id is correct
     const overdue_ID = req.params.id;
     let sql = `UPDATE overdue_payment SET collected_status = ? WHERE overdue_ID = ?`;
     database.query(sql, [1, overdue_ID], (err, result) => {
@@ -60,7 +60,7 @@ app.put(('/receivedoverdue/update/:id'), (req, res) => {
     );
 });
 
-//view received due payment by id in email
+//view received due payment by id in email form
 app.get(('/receivedmail/due/:id'),(req, res) => {
     const receivedDue_ID = req.params.id;
     database.query(
@@ -74,7 +74,7 @@ app.get(('/receivedmail/due/:id'),(req, res) => {
     });
 });
 
-//view received overdue payment by id in email
+//view received overdue payment by id in email form
 app.get(('/receivedmail/overdue/:id'),(req, res) => {
     const receivedOverdue_ID = req.params.id;
     database.query(
@@ -96,14 +96,14 @@ app.post('/receivedmail', (req, res) => {
         service: 'Gmail',
         port: 465,
         auth: {
-            user: 'mdsi.desilva@gmail.com',
-            pass: 'mdsi123+*'
+            user: 'mdsi.desilva@gmail.com', //email address of the sender
+            pass: 'mdsi123+*' //password of the sender
         }
     });
 
     let mailOptions = {
-        from: data.from,
-        to: data.to,
+        from: data.from, //get the data from the user
+        to: data.to, //get the data from the user
         subject: 'Regarding the Settled Payment',
         html: `
 
